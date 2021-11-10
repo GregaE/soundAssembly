@@ -2,35 +2,35 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const AccountSchema = new Schema({
-  account: {
-    artists: {
-      items: [
+  username: String,
+  artists: [
+    {
+      external_urls: {
+        spotify: String,
+      },
+      followers: {
+        href: Schema.Types.Mixed,
+        total: Number,
+      },
+      genres: [String],
+      href: String,
+      id: String,
+      images: [
         {
-          external_urls: {
-            spotify: String,
-          },
-          followers: {
-            href: Schema.Types.Mixed,
-            total: Number,
-          },
-          genres: [String],
-          href: String,
-          id: String,
-          images: [
-            {
-              height: Number,
-              url: String,
-              width: Number,
-            }
-          ],
-          name: String,
-          popularity: Number,
-          type: String,
-          uri: String,
-        },
-      ]
-    }
-  }
-});
+          height: Number,
+          url: String,
+          width: Number,
+        }
+      ],
+      name: String,
+      popularity: Number,
+      type: String,
+      uri: String,
+    },
+  ]
+},
+// Necessary for mongoose not to try to convert object type into string
+{ typeKey: '$type' }
+);
 
 module.exports = mongoose.model('Account', AccountSchema)
