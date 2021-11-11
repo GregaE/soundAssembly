@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 function Artist(props) {
 
   return (
-    <div className="artist" >
+    <div className="item" >
       <Link to={{
         state: { debug: 'debug'},
         pathname: `/artist/${props.artist.id}`
         }}>
         <div>
           <img src={props.artist.images[0].url} alt={props.artist.name} />
-          <div className="artist-name">
+          <div className="item-name">
             {props.artist.name}
           </div>
         </div>

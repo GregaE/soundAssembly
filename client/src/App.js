@@ -10,7 +10,6 @@ function App() {
   const [artistList, setArtistlist] = useState([]);
   const [username, setUsername] = useState("");
 
-
   return (
     <div className="App">
       <header>

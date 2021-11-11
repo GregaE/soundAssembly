@@ -3,19 +3,19 @@ import { Outlet } from 'react-router';
 import { getAccountInfo } from '../../ApiService';
 // import ArtistList  from './artistList.js';
 
-function Dashboard(props) {
+function Dashboard({setArtistlist, setUsername, username}) {
 
   useEffect(() => {
     getAccountInfo().then(account => {
-      props.setArtistlist(account.artists);
-      props.setUsername(account.username)
+      setArtistlist(account.artists);
+      setUsername(account.username)
     })
-  },[props])
+  },[setArtistlist, setUsername])
 
   return (
     <div className="dashboard">
       <h2>My Dashboard</h2>
-      <div>Username: {props.username}</div>
+      <div>Username: {username}</div>
       <div>
         <button>Update library</button>
       </div>

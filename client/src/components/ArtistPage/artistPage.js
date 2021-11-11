@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import { getAlbums } from '../../ApiService';
+import { getAlbums, getArtist } from '../../ApiService';
 import AlbumList from './albumList';
+import ArtistDetails from './artistDetails';
 
 function ArtistPage(props) {
 
@@ -13,14 +14,15 @@ function ArtistPage(props) {
   useEffect(() => {
     getAlbums(artistId).then(albums => {
       setAlbumlist([...albums.items])
+    });
+    getArtist(artistId).then(artist => {
+      setArtistInfo(artist)
     })
   },[artistId])
 
   return (
     <div className="artistPage">
-      <div>
-        Artist ID: {artistId}
-      </div>
+      <ArtistDetails artistInfo={artistInfo}></ArtistDetails>
       <AlbumList albumList={albumList}></AlbumList>
     </div>
   );

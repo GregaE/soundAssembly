@@ -21,16 +21,17 @@ const getAccountInfo = () => {
 
 // Requests directly to Spotify API
 
-const access_token = "BQCAP2D4w1SF7fsRJppX9TB8OgcDeyd0CSdu6SQX0kTXFqCR6qHq2idMTrKKzXjnfaHJTrOSe_MxSyD1RPQuOgiQn9--50XkgvnOXZBP0CS_48jncyYOIprPAp8N86EP0SB0WZ_GLL2VDkgTjeswYOdGxJzUPxweuqiorw";
+const access_token = "BQAiHiTJ95ymh0qgGVmVWbmdT0hzu0rdTiCIZTLD7VIwnoU2w-izaeFM3p-8zLVqR4OcL602b_kemP_W_zck2bz2IfbNQCnet93_I3YhfmpZTCJreJ9RVOzTcm_jM22zg3jNrBLHmifnEsDAVkpJMGq6pOZ2hhTRxIuBYQ";
 
-function fetchArtists(req, res) {
-  const response = fetch('https://api.spotify.com/v1/me/following?type=artist&limit=20', {
+async function getArtist(artistId, req, res) {
+  const response = await fetch(`https://api.spotify.com/v1/artists/${artistId}`, {
       method: 'get',
       headers: {
         'Authorization': 'Bearer ' + access_token
       }
   });
-  return response
+  const details = await response.json();
+  return details;
 }
 
 async function getAlbums(artistId, req, res) {
@@ -46,4 +47,4 @@ async function getAlbums(artistId, req, res) {
 
 
 
-export { authorize, getAccountInfo, getAlbums };
+export { authorize, getAccountInfo, getAlbums, getArtist };
