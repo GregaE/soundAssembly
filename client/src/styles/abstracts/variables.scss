@@ -1,0 +1,46 @@
+// VARIABLES
+
+// fonts
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,600;1,400&display=swap');
+
+$Poppins: 'Poppins', sans-serif;
+
+// colors
+
+$dark: #601ED7;
+$light: #ffffff;
+$bg: #601ED7;
+$action: #1ed760;
+
+// border-radius
+
+$border-radius: 500px;
+
+// MIXINS
+
+@mixin btn($bg, $color) {
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  font-weight: 600;
+  border-radius: $border-radius;
+  display: inline-block;
+  border: none;
+  padding: 14px 32px;
+  margin: 0;
+  text-decoration: none;
+  color: $color;
+  font-family: inherit;
+  line-height: 1.4rem;
+  cursor: pointer;
+  text-align: center;
+  background: $bg;
+  letter-spacing: 2px;
+  &:hover {
+    background:darken($bg,8%);
+    transition: all 0.3s ease;
+  }
+  &:active {
+    background:darken($bg,25%);
+  }
+}
