@@ -1,7 +1,7 @@
 const axios = require('axios');
 const Account = require('../model/accountSchema.js');
 
-const access_token = "BQAgIkH0nrohr_-4MzORRbVjSZw2VTk0UnVCykCHqPxYo0qzUiWmipOJLF_i66fO1w4sXLn_f4j4kVU-naFUsOt0hgBjfImZ-DnBc-kRhiubbx0nHyhQDvlD74G2Bu9Z0RQ2lZJMupKxn82bYlRmA_WVx3qMfdCbXE6tnw"; // static token before full authorization module is complete
+const access_token = "BQBhHf-wTRSPgcVcFOkNab53X2YlpQhSDPi8QVExKaOeVPJefaqHLNVURNL7lknpK-uS5Rzr0GeoRBIDRK3E0jk4UOPNu8qJ_FbzeamdxXcZ0isAkYaaiyLo7_shKfqRSsgkdihauTrSivA2NZi_qXuXeK-WtFByUHOTIg"; // static token before full authorization module is complete
 
 exports.getArtists = async (req, res) => {
   // TO DO:
@@ -23,7 +23,7 @@ exports.getArtists = async (req, res) => {
 }
 
 function fetchArtists(req, res) {
-  const response = axios('https://api.spotify.com/v1/me/following?type=artist&limit=5', {
+  const response = axios('https://api.spotify.com/v1/me/following?type=artist&limit=20', {
       method: 'get',
       headers: {
         'Authorization': 'Bearer ' + access_token
