@@ -2,6 +2,7 @@
 @forward "./variables.scss" as var*;
 
 @import '../components/artistList';
+@import '../components/albumList';
 
 html {
   font-family: $Poppins;

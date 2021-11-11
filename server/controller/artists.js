@@ -1,7 +1,7 @@
 const axios = require('axios');
 const Account = require('../model/accountSchema.js');
 
-const access_token = "BQBhHf-wTRSPgcVcFOkNab53X2YlpQhSDPi8QVExKaOeVPJefaqHLNVURNL7lknpK-uS5Rzr0GeoRBIDRK3E0jk4UOPNu8qJ_FbzeamdxXcZ0isAkYaaiyLo7_shKfqRSsgkdihauTrSivA2NZi_qXuXeK-WtFByUHOTIg"; // static token before full authorization module is complete
+const access_token = "BQCAP2D4w1SF7fsRJppX9TB8OgcDeyd0CSdu6SQX0kTXFqCR6qHq2idMTrKKzXjnfaHJTrOSe_MxSyD1RPQuOgiQn9--50XkgvnOXZBP0CS_48jncyYOIprPAp8N86EP0SB0WZ_GLL2VDkgTjeswYOdGxJzUPxweuqiorw"; // static token before full authorization module is complete
 
 exports.getArtists = async (req, res) => {
   // TO DO:

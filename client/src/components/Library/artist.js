@@ -1,4 +1,3 @@
-import { getAlbums } from '../../ApiService.js';
 import { Link } from "react-router-dom";
 
 function Artist(props) {
@@ -7,7 +6,7 @@ function Artist(props) {
     <div className="artist" >
       <Link to={{
         state: { debug: 'debug'},
-        pathname: `/dashboard/${props.artist.id}`
+        pathname: `/artist/${props.artist.id}`
         }}>
         <div>
           <img src={props.artist.images[0].url} alt={props.artist.name} />

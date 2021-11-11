@@ -17,16 +17,16 @@ function App() {
         <h1>Sound Assembly</h1>
       </header>
         <Routes>
-          <Route path="/" exact element={<Login/>} />
-          <Route path="/dashboard" exact element={<Dashboard
+          <Route path="/login" exact element={<Login/>} />
+          <Route path="/" exact element={<Dashboard
           setArtistlist={setArtistlist}
           setUsername={setUsername}
           username={username}
           />}>
-          <Route path="/dashboard/" exact element={<ArtistList
+          <Route path="/" exact element={<ArtistList
           artistList={artistList}
           />} />
-            <Route path="/dashboard/:artistId" exact element={<ArtistPage/>} />
+            <Route path="/artist/:artistId" exact element={<ArtistPage/>} />
           </Route>
         </Routes>
     </div>
