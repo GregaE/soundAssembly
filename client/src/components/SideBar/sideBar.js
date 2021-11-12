@@ -1,10 +1,10 @@
 import TagList from './tagList'
 
-function SideBar() {
+function SideBar(props) {
 
   return (
     <div className="sideBar">
-      <TagList/>
+      <TagList tags={props.tags} setTags={props.setTags} />
     </div>
   );
 }

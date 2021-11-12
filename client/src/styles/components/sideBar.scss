@@ -1,13 +1,17 @@
 .sideBar {
-  min-width: 300px;
+  min-width: 350px;
   height: 100%;
-  border: 1px solid red;
+  background-color: $bg-dark;
+  border: 1px solid $bg-dark;
 
   .tagList {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
-
+    background-color: $bg;
+    margin: 20px 20px;
+    padding: 8px 8px;
+    border-radius: 5px;
 
     .tag {
       background-color: $action;
@@ -16,6 +20,25 @@
       line-height: 3rem;
       border-radius: $border-radius;
       padding: 2px 12px;
+      margin: 2px 0px;
+    }
+
+    input, input:hover, input:active, input:focus  {
+      border: none;
+      background-color: $bg;
+      height: 3rem;
+      line-height: 3rem;
+      font-size: 1.8rem;
+      border-radius: $border-radius;
+      padding: 2px 5px;
+      color: $light;
+      outline: none;
+      min-width: 100px;
+    }
+
+    ::placeholder {
+      color: $light;
+      opacity: 1;
     }
   }
 }

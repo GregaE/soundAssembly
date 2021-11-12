@@ -2,7 +2,7 @@ const querystring = require('querystring');
 
 const client_id = '8804a75f7e7b47aea04216646cbd5612';
 const client_secret = '1d15a0a679b44546aff8de6e09ae09fa';
-const redirect_uri = 'http://localhost:8889/callback/';
+const redirect_uri = 'http://localhost:3000/';
 
 exports.authorize = async (req, res) => {
   try {
@@ -17,6 +17,7 @@ exports.authorize = async (req, res) => {
         client_id: client_id,
         scope: scope,
         redirect_uri: redirect_uri,
+        mode: 'no-cors',
         // state: state
       })
     );

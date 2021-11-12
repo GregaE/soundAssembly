@@ -1,8 +1,8 @@
-function Tag() {
+function Tag(props) {
 
   return (
     <div className="tag">
-      Hello
+      {props.tag}
     </div>
   );
 }

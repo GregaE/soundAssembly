@@ -1,8 +1,9 @@
 const axios = require('axios');
 const Library = require('../model/librarySchema.js');
-const getFollowedArtists = require('./artists');
 
-const access_token = "BQAWUlMSP8IWAZmDO4V5mcUDyuXCsaS1bl7HqoaS5bsIQCVDHjtvqkBL5F-txCWkc8UUe8ZYB5ufTeiHPEc8XlpTdCDitvVziZ5jugB9UqrSuVfObpcUXa7gtRUaVkvhkc69XymRX83L0t08wE6odRh5bwP8rLrZxCj9wQ"; // static token before full authorization module is complete
+const access_token = "BQB6tX7NLQJkjwl6rDp59f9AiOmAuLUiWpyWNyamgRYJfo5h-Jh_JO9rgdt7OmPkrXmlKc_MA6R8Wl_hr37TGquTEx-gfQsnXxJv_cKv3AgzosQQi1ztgJ5kyu45h3haj4BoV-c58keE45x6BgfbVRe0OWxWH2pW0rcmmA"; // static token before full authorization module is complete
+
+// Fetch existing library from db
 
 exports.getLibrary = async (req, res) => {
   try {
@@ -14,10 +15,9 @@ exports.getLibrary = async (req, res) => {
   }
 }
 
+// Fetch list of items from API and send them to db
 
 exports.importLibrary = async (req, res) => {
-  // TO DO:
-  // if account created, just update the existing list
   try {
     // fetch followed artists for the specific account
     const artistFetch = await fetchArtists();
@@ -27,8 +27,9 @@ exports.importLibrary = async (req, res) => {
     // fetch profile id for the specific account
     const profileData = await fetchProfile();
     const username = profileData.data.id;
+    console.log(taggedArtists)
     // create account with followed artists in the DB
-    const event = await Library.create({username: username, artists: taggedArtists})
+    const event = await Library.create({username: username, tags: taggedArtists.tags, artists: taggedArtists.artistList})
     res.send(event);
   } catch (error) {
     console.error(error);
@@ -61,31 +62,36 @@ function fetchProfile (req, res) {
 // Helper functions
 
 function populateTags(artistList) {
+  // All existing tags on account
+  const tags = [];
 
   for (const artist in artistList) {
-    const tags = [];
+    // All tags on the specific artist
+    const artistTags = [];
 
-    if (artistList[artist].genres.some(genre => genre.includes("rock"))) {
-      tags.push("rock")
-    }
-    if (artistList[artist].genres.some(genre => (genre.includes("rap") || genre.includes("hip hop")))) {
-      tags.push("hip-hop")
-    }
-    if (artistList[artist].genres.some(genre => genre.includes("metal"))) {
-      tags.push("metal")
-    }
-    if (artistList[artist].genres.some(genre => genre.includes("punk"))) {
-      tags.push("punk")
-    }
-    if (artistList[artist].genres.some(genre => genre.includes("jazz"))) {
-      tags.push("jazz")
-    }
-    if (artistList[artist].genres.some(genre => (genre.includes("edm") || genre.includes("idm") || genre.includes("electro") || genre.includes("electronic")))) {
-      tags.push("electronic")
-    }
+    // List of genres for filtering
+    const genreList = ["rock","metal","punk","jazz","ska","reggae","hip hop","EDM"]
 
-    artistList[artist].tags = tags;
+    genreList.forEach(item => {
+      if (artistList[artist].genres.some(genre => genre.includes(item))) {
+        artistTags.push(item);
+        if (!tags.includes(item)) {
+          tags.push(item)
+        }
+      }
+    })
+    // TO DO: improve genre logic -- example:
+    // if (artistList[artist].genres.some(genre => (genre.includes("rap") || genre.includes("hip hop")))) {
+    //   artistTags.push("hip-hop")
+    // }
+
+    // if (artistList[artist].genres.some(genre => (genre.includes("edm") || genre.includes("idm") || genre.includes("electro") || genre.includes("electronic")))) {
+    //   artistTags.push("electronic")
+    // }
+
+    artistList[artist].artistTags = artistTags;
   }
 
-  return artistList
+
+  return {artistList: artistList, tags: tags}
 }

@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const LibrarySchema = new Schema({
   username: String,
+  tags: [String],
   artists: [
     {
       external_urls: {
@@ -26,12 +27,12 @@ const LibrarySchema = new Schema({
       popularity: Number,
       type: String,
       uri: String,
-      tags: [String],
+      artistTags: [String],
     },
   ]
 },
 // Necessary for mongoose not to try to convert object type into string
-{ typeKey: '$type' }
+  { typeKey: '$type' }
 );
 
 module.exports = mongoose.model('Account', LibrarySchema)

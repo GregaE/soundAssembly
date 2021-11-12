@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 function App() {
   const [artistList, setArtistlist] = useState([]);
   const [username, setUsername] = useState("");
+  const [tags, setTags] = useState([]);
 
   return (
     <div className="App">
@@ -20,7 +21,9 @@ function App() {
         <Route path="/" exact element={<Dashboard
           setArtistlist={setArtistlist}
           setUsername={setUsername}
+          setTags={setTags}
           username={username}
+          tags={tags}
           />}>
             <Route path="/" exact element={<ArtistList
             artistList={artistList}

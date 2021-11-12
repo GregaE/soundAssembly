@@ -27,9 +27,21 @@ const getLibrary = () => {
   return fetchRequest('/getLibrary')
 }
 
+// Create tag
+
+const createTag = (body) => {
+  return fetchRequest('/tags', {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(body)
+  })
+}
+
 // Requests directly to Spotify API
 
-const access_token = "BQAWUlMSP8IWAZmDO4V5mcUDyuXCsaS1bl7HqoaS5bsIQCVDHjtvqkBL5F-txCWkc8UUe8ZYB5ufTeiHPEc8XlpTdCDitvVziZ5jugB9UqrSuVfObpcUXa7gtRUaVkvhkc69XymRX83L0t08wE6odRh5bwP8rLrZxCj9wQ";
+const access_token = "BQCr1SGEbKC_Eh1c6FVR4_-3dVBFmthRy3cm_BC2GhHOv2ubo0NB9b2JOydJ89psz-t7AgQpLzPrP7M9U2SX6PLM1fDBLW18u2PIJnOD2vYGI5GsUOd4pqiRawzn0gGPCkjxD8pswShCKIMqXW12yDDoe7gRTuPdsVlSdw";
 
 async function getArtist(artistId, req, res) {
   const response = await fetch(`https://api.spotify.com/v1/artists/${artistId}`, {
@@ -55,4 +67,4 @@ async function getAlbums(artistId, req, res) {
 
 
 
-export { authorize, importLibrary, getLibrary, getAlbums, getArtist };
+export { authorize, importLibrary, getLibrary, getAlbums, getArtist, createTag };
