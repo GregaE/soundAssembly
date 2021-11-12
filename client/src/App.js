@@ -28,7 +28,6 @@ function App() {
             <Route path="/artist/:artistId" exact element={<ArtistPage/>} />
         </Route>
       </Routes>
-
     </div>
   );
 }

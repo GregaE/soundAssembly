@@ -1,5 +1,21 @@
 .sideBar {
-  width: 100px;
-  height: 100px;
+  min-width: 300px;
+  height: 100%;
   border: 1px solid red;
+
+  .tagList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+
+
+    .tag {
+      background-color: $action;
+      width: max-content;
+      height: 3rem;
+      line-height: 3rem;
+      border-radius: $border-radius;
+      padding: 2px 12px;
+    }
+  }
 }

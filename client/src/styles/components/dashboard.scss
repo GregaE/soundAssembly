@@ -1,0 +1,10 @@
+.dashboard {
+  display: flex;
+}
+
+@media only screen and (max-width: 600px) {
+  .dashboard {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

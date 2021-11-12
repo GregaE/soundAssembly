@@ -1,8 +1,10 @@
+import TagList from './tagList'
+
 function SideBar() {
 
   return (
     <div className="sideBar">
-
+      <TagList/>
     </div>
   );
 }

@@ -27,13 +27,15 @@ function Dashboard({setArtistlist, setUsername, username}) {
   return (
     <div className="dashboard">
       <div>
+        <SideBar></SideBar>
+      </div>
+      <div>
         <h2>My Dashboard</h2>
         <div>Username: {username}</div>
         <div>
           <button onClick={importArtists}>Update library</button>
         </div>
         <Outlet></Outlet>
-        <SideBar></SideBar>
       </div>
     </div>
   );
