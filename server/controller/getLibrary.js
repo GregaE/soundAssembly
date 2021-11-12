@@ -1,7 +1,19 @@
 const axios = require('axios');
 const Library = require('../model/librarySchema.js');
+const getFollowedArtists = require('./artists');
 
-const access_token = "BQCUx7Y2sjcj3GR8LNSrQLPDcMFpWlvwx0od5Uv_HCrsFs6U2dtAP4ir3h-xzCCSBfHLIrk3tBMOydzGSP0EElO6u98GhJj5gL8eQ9L_AjGoWetFeFIYS62g0sQWIPYe2yklsTAOqD-nxloUc5Gl1xUntlM7Q6moNqgVqA"; // static token before full authorization module is complete
+const access_token = "BQAWUlMSP8IWAZmDO4V5mcUDyuXCsaS1bl7HqoaS5bsIQCVDHjtvqkBL5F-txCWkc8UUe8ZYB5ufTeiHPEc8XlpTdCDitvVziZ5jugB9UqrSuVfObpcUXa7gtRUaVkvhkc69XymRX83L0t08wE6odRh5bwP8rLrZxCj9wQ"; // static token before full authorization module is complete
+
+exports.getLibrary = async (req, res) => {
+  try {
+    const artistFetch = await Library.find({username: "mavienajera"});
+    res.send(artistFetch);
+  } catch (error) {
+    console.error(error);
+    res.status(500);
+  }
+}
+
 
 exports.importLibrary = async (req, res) => {
   // TO DO:
@@ -12,7 +24,6 @@ exports.importLibrary = async (req, res) => {
     const followedArtists = artistFetch.data.artists.items;
     // add tags array to each artist pre-populating some tags based on the genre
     const taggedArtists = populateTags(followedArtists);
-    console.log(taggedArtists)
     // fetch profile id for the specific account
     const profileData = await fetchProfile();
     const username = profileData.data.id;

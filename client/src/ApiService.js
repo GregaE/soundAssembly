@@ -15,13 +15,21 @@ function authorize () {
   return fetchRequest('/login')
 }
 
-const getAccountInfo = () => {
+// Import/refresh library via Spotify
+
+const importLibrary = () => {
   return fetchRequest('/importLibrary')
+}
+
+// Fetch existing list of followed artists and tags from db
+
+const getLibrary = () => {
+  return fetchRequest('/getLibrary')
 }
 
 // Requests directly to Spotify API
 
-const access_token = "BQCUx7Y2sjcj3GR8LNSrQLPDcMFpWlvwx0od5Uv_HCrsFs6U2dtAP4ir3h-xzCCSBfHLIrk3tBMOydzGSP0EElO6u98GhJj5gL8eQ9L_AjGoWetFeFIYS62g0sQWIPYe2yklsTAOqD-nxloUc5Gl1xUntlM7Q6moNqgVqA";
+const access_token = "BQAWUlMSP8IWAZmDO4V5mcUDyuXCsaS1bl7HqoaS5bsIQCVDHjtvqkBL5F-txCWkc8UUe8ZYB5ufTeiHPEc8XlpTdCDitvVziZ5jugB9UqrSuVfObpcUXa7gtRUaVkvhkc69XymRX83L0t08wE6odRh5bwP8rLrZxCj9wQ";
 
 async function getArtist(artistId, req, res) {
   const response = await fetch(`https://api.spotify.com/v1/artists/${artistId}`, {
@@ -47,4 +55,4 @@ async function getAlbums(artistId, req, res) {
 
 
 
-export { authorize, getAccountInfo, getAlbums, getArtist };
+export { authorize, importLibrary, getLibrary, getAlbums, getArtist };
