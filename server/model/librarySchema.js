@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const AccountSchema = new Schema({
+const LibrarySchema = new Schema({
   username: String,
   artists: [
     {
@@ -26,6 +26,7 @@ const AccountSchema = new Schema({
       popularity: Number,
       type: String,
       uri: String,
+      tags: [String],
     },
   ]
 },
@@ -33,4 +34,4 @@ const AccountSchema = new Schema({
 { typeKey: '$type' }
 );
 
-module.exports = mongoose.model('Account', AccountSchema)
+module.exports = mongoose.model('Account', LibrarySchema)

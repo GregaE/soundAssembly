@@ -15,19 +15,20 @@ function App() {
       <header>
         <h1>Sound Assembly</h1>
       </header>
-        <Routes>
-          <Route path="/login" exact element={<Login/>} />
-          <Route path="/" exact element={<Dashboard
+      <Routes>
+        <Route path="/login" exact element={<Login/>} />
+        <Route path="/" exact element={<Dashboard
           setArtistlist={setArtistlist}
           setUsername={setUsername}
           username={username}
           />}>
-          <Route path="/" exact element={<ArtistList
-          artistList={artistList}
-          />} />
+            <Route path="/" exact element={<ArtistList
+            artistList={artistList}
+            />} />
             <Route path="/artist/:artistId" exact element={<ArtistPage/>} />
-          </Route>
-        </Routes>
+        </Route>
+      </Routes>
+
     </div>
   );
 }

@@ -16,12 +16,12 @@ function authorize () {
 }
 
 const getAccountInfo = () => {
-  return fetchRequest('/artists')
+  return fetchRequest('/importLibrary')
 }
 
 // Requests directly to Spotify API
 
-const access_token = "BQAiHiTJ95ymh0qgGVmVWbmdT0hzu0rdTiCIZTLD7VIwnoU2w-izaeFM3p-8zLVqR4OcL602b_kemP_W_zck2bz2IfbNQCnet93_I3YhfmpZTCJreJ9RVOzTcm_jM22zg3jNrBLHmifnEsDAVkpJMGq6pOZ2hhTRxIuBYQ";
+const access_token = "BQCUx7Y2sjcj3GR8LNSrQLPDcMFpWlvwx0od5Uv_HCrsFs6U2dtAP4ir3h-xzCCSBfHLIrk3tBMOydzGSP0EElO6u98GhJj5gL8eQ9L_AjGoWetFeFIYS62g0sQWIPYe2yklsTAOqD-nxloUc5Gl1xUntlM7Q6moNqgVqA";
 
 async function getArtist(artistId, req, res) {
   const response = await fetch(`https://api.spotify.com/v1/artists/${artistId}`, {

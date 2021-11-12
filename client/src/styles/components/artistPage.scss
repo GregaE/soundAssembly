@@ -1,0 +1,20 @@
+
+.artist-details {
+  border: 1px solid red;
+  min-height: 20rem;
+  font-size: 1.8rem;
+  text-transform: capitalize;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+
+  img {
+    height: 200px;
+  }
+}
+
+
+.album-container {
+  @include itemContainer;
+}
