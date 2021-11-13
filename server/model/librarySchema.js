@@ -3,7 +3,9 @@ const Schema = mongoose.Schema;
 
 const LibrarySchema = new Schema({
   username: String,
-  tags: [String],
+  tags: [{
+    name: String,
+    }],
   artists: [
     {
       external_urls: {
@@ -27,7 +29,9 @@ const LibrarySchema = new Schema({
       popularity: Number,
       type: String,
       uri: String,
-      artistTags: [String],
+      artistTags: [{
+        name: String,
+      }],
     },
   ]
 },

@@ -8,6 +8,9 @@ function ArtistList(props) {
         .sort(function(a,b) {
           return (a.name < b.name) ? -1 : 1;
         })
+        // filter here based on tag
+          // loop through artist tags
+            // if none of the tags are in the current tags.active
         .map(artist => {
           return <Artist artist={artist} key={artist._id}></Artist>
       })

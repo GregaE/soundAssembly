@@ -23,6 +23,18 @@
       padding: 2px 12px;
       margin: 2px 0px;
       cursor: pointer;
+
+      &:hover {
+        background:darken($active,5%);
+        transition: all 0.3s ease;
+      }
+      &:active {
+        background:darken($active,5%);
+      }
+    }
+
+    .active {
+      background-color: $active;
     }
 
     input, input:hover, input:active, input:focus {

@@ -41,7 +41,7 @@ const createTag = (tagName) => {
 
 // Requests directly to Spotify API
 
-const access_token = "BQCr1SGEbKC_Eh1c6FVR4_-3dVBFmthRy3cm_BC2GhHOv2ubo0NB9b2JOydJ89psz-t7AgQpLzPrP7M9U2SX6PLM1fDBLW18u2PIJnOD2vYGI5GsUOd4pqiRawzn0gGPCkjxD8pswShCKIMqXW12yDDoe7gRTuPdsVlSdw";
+const access_token = "BQDw__i9n1f7xfHomSxfN7EaY23oBlDdyYyuXubLj3YOv9mLVY4Zyfmk9ItutcuSSjgZgYm21A2foDniy8gc5lXKvJO7xb3V39UMbdK1_BX7UXFoiIcsUxEldxLIpelK8gmnhh2dDCjbGgk8Lq-QuIN2cPR-TTtuxoXqcA";
 
 async function getArtist(artistId, req, res) {
   const response = await fetch(`https://api.spotify.com/v1/artists/${artistId}`, {

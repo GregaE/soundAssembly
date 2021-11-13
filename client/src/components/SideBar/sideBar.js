@@ -4,11 +4,12 @@ function SideBar(props) {
 
   return (
     <div className="sideBar">
+      <header>
+        <h1>Sound Assembly</h1>
+      </header>
       <TagList
       tags={props.tags}
       setTags={props.setTags}
-      artistList={props.artistList}
-      setArtistList={props.setArtistList}
       />
     </div>
   );

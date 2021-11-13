@@ -1,3 +1,9 @@
 .artist-container {
   @include itemContainer;
+
+
+  .hide {
+    display: none;
+  }
 }
+

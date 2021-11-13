@@ -11,11 +11,10 @@ function App() {
   const [username, setUsername] = useState("");
   const [tags, setTags] = useState([]);
 
+  console.log(tags)
+
   return (
     <div className="App">
-      <header>
-        <h1>Sound Assembly</h1>
-      </header>
       <Routes>
         <Route path="/login" exact element={<Login/>} />
         <Route path="/" exact element={<Dashboard

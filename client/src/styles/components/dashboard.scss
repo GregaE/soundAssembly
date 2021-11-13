@@ -1,5 +1,15 @@
 .dashboard {
   display: flex;
+  height: 100%;
+
+  header {
+    background-color: $bg-dark;
+    padding: 10px 10px;
+
+    h1 {
+      text-align: center;
+    }
+  }
 }
 
 @media only screen and (max-width: 600px) {
