@@ -8,7 +8,7 @@ function SideBar(props) {
       tags={props.tags}
       setTags={props.setTags}
       artistList={props.artistList}
-      setArtistlist={props.setArtistlist}
+      setArtistList={props.setArtistList}
       />
     </div>
   );

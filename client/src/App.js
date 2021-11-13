@@ -7,7 +7,7 @@ import ArtistPage from "./components/ArtistPage/artistPage";
 import React, { useState } from 'react';
 
 function App() {
-  const [artistList, setArtistlist] = useState([]);
+  const [artistList, setArtistList] = useState([]);
   const [username, setUsername] = useState("");
   const [tags, setTags] = useState([]);
 
@@ -19,7 +19,7 @@ function App() {
       <Routes>
         <Route path="/login" exact element={<Login/>} />
         <Route path="/" exact element={<Dashboard
-          setArtistlist={setArtistlist}
+          setArtistList={setArtistList}
           setUsername={setUsername}
           setTags={setTags}
           username={username}

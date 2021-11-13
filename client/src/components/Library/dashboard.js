@@ -3,23 +3,23 @@ import { Outlet } from 'react-router';
 import { importLibrary, getLibrary } from '../../ApiService';
 import SideBar from '../SideBar/sideBar';
 
-function Dashboard({setArtistlist, setUsername, setTags, username, tags, artistList}) {
+function Dashboard({setArtistList, setUsername, setTags, username, tags, artistList}) {
 
   useEffect(() => {
     // if account has the library pre-populated
     getLibrary().then(account => {
       if (account.length > 0) {
-        setArtistlist(account[0].artists);
+        setArtistList(account[0].artists);
         setUsername(account[0].username);
         setTags(account[0].tags);
       }
     })
     // if account does not have the library pre-populated
-  },[setArtistlist, setUsername, setTags])
+  },[setArtistList, setUsername, setTags])
 
   const importArtists = () => {
     importLibrary().then(account => {
-      setArtistlist(account.artists);
+      setArtistList(account.artists);
       setUsername(account.username);
       setTags(account[0].tags);
     })
@@ -32,7 +32,7 @@ function Dashboard({setArtistlist, setUsername, setTags, username, tags, artistL
         setTags={setTags}
         tags={tags}
         artistList={artistList}
-        setArtistlist={setArtistlist}
+        setArtistList={setArtistList}
         >
         </SideBar>
       </div>

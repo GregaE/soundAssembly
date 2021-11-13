@@ -14,7 +14,7 @@ function TagList(props) {
             tag={tag}
             key={tag}
             artistList={props.artistList}
-            setArtistlist={props.setArtistlist}>
+            setArtistList={props.setArtistList}>
             </Tag>
       })
     }

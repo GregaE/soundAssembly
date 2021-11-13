@@ -5,7 +5,6 @@ function Tag({artistList, setArtistList, tag}) {
     const filteredList = artistList
     .filter(artist => artist.artistTags
       .some(tag => tag === event.target.innerText));
-    console.log(filteredList)
     setArtistList(filteredList)
   }
 
