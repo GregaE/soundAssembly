@@ -16,14 +16,15 @@ exports.getTags = async (req, res) => {
 
 exports.createTag = async (req, res) => {
   try {
+    console.log(req.body)
     const {name} = req.body;
     const tag = await Library.findOneAndUpdate({username: "mavienajera"}, {
       $push: {
         "tags": name
       }
     })
-    res.status(201);
     res.send(tag);
+    res.status(201);
   } catch (error) {
     console.error(error);
     res.status(500);

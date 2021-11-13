@@ -1,3 +1,4 @@
+import { createTag } from '../../ApiService';
 import Tag from './tag'
 
 function TagList(props) {
@@ -19,15 +20,18 @@ function TagList(props) {
 
   function submitTag(event) {
     if (event.keyCode === 13) {
-      const newList = [...props.tags, event.target.value]
+      const input = event.target.value;
+      const newList = [...props.tags, input]
       props.setTags(newList);
+      createTag(input);
+      event.target.value = "";
     }
   }
 
   return (
     <div className="tagList">
       {renderTags(props.tags)}
-      <input onKeyUp={submitTag} placeholder="add tag..." type="text" />
+      <input type="text" onKeyUp={submitTag} placeholder="add tag..." />
     </div>
   );
 }

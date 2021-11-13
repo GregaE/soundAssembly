@@ -23,7 +23,7 @@
       margin: 2px 0px;
     }
 
-    input, input:hover, input:active, input:focus  {
+    input, input:hover, input:active, input:focus {
       border: none;
       background-color: $bg;
       height: 3rem;
@@ -34,6 +34,7 @@
       color: $light;
       outline: none;
       min-width: 100px;
+      font-family: $Poppins;
     }
 
     ::placeholder {

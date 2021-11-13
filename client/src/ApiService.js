@@ -29,13 +29,13 @@ const getLibrary = () => {
 
 // Create tag
 
-const createTag = (body) => {
+const createTag = (tagName) => {
   return fetchRequest('/tags', {
     method: 'POST',
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(body)
+    body: JSON.stringify({name: tagName})
   })
 }
 
