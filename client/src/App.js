@@ -24,6 +24,7 @@ function App() {
           setTags={setTags}
           username={username}
           tags={tags}
+          artistList={artistList}
           />}>
             <Route path="/" exact element={<ArtistList
             artistList={artistList}

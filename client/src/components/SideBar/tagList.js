@@ -10,7 +10,12 @@ function TagList(props) {
           return (a.toLowerCase() < b.toLowerCase()) ? -1 : 1;
         })
         .map(tag => {
-          return <Tag tag={tag} key={tag}></Tag>
+          return <Tag
+            tag={tag}
+            key={tag}
+            artistList={props.artistList}
+            setArtistlist={props.setArtistlist}>
+            </Tag>
       })
     }
     else {

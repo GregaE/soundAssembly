@@ -3,7 +3,7 @@ import { Outlet } from 'react-router';
 import { importLibrary, getLibrary } from '../../ApiService';
 import SideBar from '../SideBar/sideBar';
 
-function Dashboard({setArtistlist, setUsername, setTags, username, tags}) {
+function Dashboard({setArtistlist, setUsername, setTags, username, tags, artistList}) {
 
   useEffect(() => {
     // if account has the library pre-populated
@@ -28,7 +28,13 @@ function Dashboard({setArtistlist, setUsername, setTags, username, tags}) {
   return (
     <div className="dashboard">
       <div>
-        <SideBar setTags={setTags} tags={tags}></SideBar>
+        <SideBar
+        setTags={setTags}
+        tags={tags}
+        artistList={artistList}
+        setArtistlist={setArtistlist}
+        >
+        </SideBar>
       </div>
       <div>
         <h2>My Dashboard</h2>
