@@ -15,17 +15,22 @@ function ArtistList(props) {
         })
       }
       else {
-        return list
+        const filteredList = list
           .filter(artist => artist.artistTags
             .some(artistTag => props.tags
               .filter(tag => tag.status !== "inactive")
               .some(tag => tag.name === artistTag.name)))
-          .sort(function(a,b) {
+        if (filteredList.length > 0) {
+          return filteredList.sort(function(a,b) {
             return (a.name < b.name) ? -1 : 1;
           })
           .map(artist => {
             return <Artist artist={artist} key={artist._id}></Artist>
-        })
+          })
+        }
+        else {
+          return <p>No artists match the selected criteria.</p>
+        }
       }
     }
     else {
