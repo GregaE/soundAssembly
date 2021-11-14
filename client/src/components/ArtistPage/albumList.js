@@ -3,7 +3,6 @@ import Album from './album.js';
 function AlbumList(props) {
 
   function renderAlbums(list) {
-    console.log(list)
     return list
       // spotify has duplicated albums in their API, this removes albums with the same name
       .filter((album, pos, list) => {

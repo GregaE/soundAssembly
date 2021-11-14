@@ -1,5 +1,5 @@
 function ArtistTag(props) {
-
+  console.log('yes')
 
   return (
     <div>

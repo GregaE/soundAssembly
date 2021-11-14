@@ -4,14 +4,14 @@ import ArtistTag from './artistTag'
 function ArtistTagList(props) {
 
   function renderTags(tags) {
-
-    if (tags.length > 0) {
+    console.log(tags)
+    if (tags && tags.length > 0) {
       return tags
         .sort(function(a,b) {
           return (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1;
         })
         .map(tag => {
-          return <ArtistTag tag={tag} key={tag.name} tags={props.tags} setTags={props.setTags} />
+          return <ArtistTag tag={tag} key={tag.name} />
       })
     }
     else {
@@ -31,8 +31,8 @@ function ArtistTagList(props) {
 
   return (
     <div className="artistTagList">
-      {/* {renderTags(props.tags)}
-      <input type="text" onKeyUp={submitTag} placeholder="add tag..." /> */}
+      {renderTags(props.artistTags)}
+      <input type="text" onKeyUp={submitTag} placeholder="add tag..." />
     </div>
   );
 }

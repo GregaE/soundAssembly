@@ -23,6 +23,7 @@
       padding: 2px 12px;
       margin: 2px 0px;
       cursor: pointer;
+      text-transform: capitalize;
 
       &:hover {
         background:darken($active,5%);

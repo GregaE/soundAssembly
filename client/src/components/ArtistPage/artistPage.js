@@ -25,7 +25,7 @@ function ArtistPage(props) {
     <div className="artistPage">
       <div>
         <ArtistDetails artistInfo={artistInfo}></ArtistDetails>
-        <ArtistTagList></ArtistTagList>
+        <ArtistTagList artistTags={artistInfo.artistTags}></ArtistTagList>
       </div>
       <AlbumList albumList={albumList}></AlbumList>
     </div>
