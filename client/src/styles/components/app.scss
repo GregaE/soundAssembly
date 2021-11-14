@@ -2,9 +2,10 @@ body {
   height: 100vh;
 }
 
-#root, .App, .dashboard {
-  height: 100%;
+#root, .dashboard {
+  min-height: 100vh;
 }
+
 
 
 

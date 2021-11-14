@@ -11,8 +11,10 @@ function Dashboard({setArtistList, setUsername, setTags, username, tags}) {
       if (account.length > 0) {
         setArtistList(account[0].artists);
         setUsername(account[0].username);
-        account[0].tags.forEach(tag => tag.status = "inactive")
-        setTags(account[0].tags);
+        account[0].tags.forEach(tag => tag.status = "inactive");
+        if (account[0].tags) {
+          setTags(account[0].tags);
+        }
       }
     })
   },[setArtistList, setUsername, setTags])

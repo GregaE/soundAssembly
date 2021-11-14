@@ -8,10 +8,10 @@ function AlbumList(props) {
       // spotify has duplicated albums in their API, this removes albums with the same name
       .filter((album, pos, list) => {
         return list.map(map => map.name).indexOf(album.name) === pos
-    })
+      })
       .map(album => {
       return <Album album={album} key={album.id}></Album>
-    })
+      })
   }
 
   return (

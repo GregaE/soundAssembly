@@ -40,7 +40,7 @@ exports.importLibrary = async (req, res) => {
 // Spotify API calls
 
 function fetchArtists(req, res) {
-  const response = axios('https://api.spotify.com/v1/me/following?type=artist&limit=20', {
+  const response = axios('https://api.spotify.com/v1/me/following?type=artist&limit=50', {
       method: 'get',
       headers: {
         'Authorization': 'Bearer ' + access_token
