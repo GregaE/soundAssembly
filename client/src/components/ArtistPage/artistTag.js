@@ -1,8 +1,7 @@
 function ArtistTag(props) {
-  console.log('yes')
 
   return (
-    <div>
+    <div className="artistTag">
       {props.tag.name}
     </div>
   );

@@ -24,8 +24,11 @@ function ArtistPage(props) {
   return (
     <div className="artistPage">
       <div>
-        <ArtistDetails artistInfo={artistInfo}></ArtistDetails>
-        <ArtistTagList artistTags={artistInfo.artistTags}></ArtistTagList>
+        <ArtistDetails artistInfo={artistInfo} />
+        <ArtistTagList
+          artistTags={artistInfo.artistTags}
+          tags={props.tags}
+        />
       </div>
       <AlbumList albumList={albumList}></AlbumList>
     </div>

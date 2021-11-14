@@ -4,7 +4,6 @@ import ArtistTag from './artistTag'
 function ArtistTagList(props) {
 
   function renderTags(tags) {
-    console.log(tags)
     if (tags && tags.length > 0) {
       return tags
         .sort(function(a,b) {
@@ -19,20 +18,41 @@ function ArtistTagList(props) {
     }
   }
 
-  function submitTag(event) {
-    if (event.keyCode === 13) {
-      const input = event.target.value;
-      const newList = [...props.tags, {name: input}]
-      props.setTags(newList);
-      // createTag(input);
-      event.target.value = "";
+  function renderOptions(tags) {
+    if (tags && tags.length > 0) {
+      return tags
+        .sort(function(a,b) {
+          return (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1;
+        })
+        .map(tag => {
+          return <option value={tag.name} key={tag.name}>{tag.name}</option>
+      })
+    }
+    else {
+      return "";
     }
   }
+
+  // function submitTag(event) {
+  //   if (event.keyCode === 13) {
+  //     const input = event.target.value;
+  //     const newList = [...props.tags, {name: input}]
+  //     props.setTags(newList);
+  //     // createTag(input);
+  //     event.target.value = "";
+  //   }
+  // }
 
   return (
     <div className="artistTagList">
       {renderTags(props.artistTags)}
-      <input type="text" onKeyUp={submitTag} placeholder="add tag..." />
+
+      <label>Tag Artist:
+        <input list="avail-tags"/>
+      </label>
+      <datalist id="avail-tags">
+        {renderOptions(props.tags)}
+      </datalist>
     </div>
   );
 }

@@ -5,7 +5,7 @@ const LibrarySchema = new Schema({
   username: String,
   tags: [{
     name: String,
-    }],
+  }],
   artists: [
     {
       external_urls: {

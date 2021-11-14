@@ -19,7 +19,7 @@ exports.createTag = async (req, res) => {
     const {name} = req.body;
     const tag = await Library.findOneAndUpdate({username: "mavienajera"}, {
       $push: {
-        "tags": name
+        "tags": {name: name}
       }
     })
     res.send(tag);
@@ -30,26 +30,30 @@ exports.createTag = async (req, res) => {
   }
 }
 
-// // Get all tags for the artist
+// Add new tag to artist
 
-// exports.getArtistTags = async (req, res) => {
-//   try {
-//     const tags = await Library.find({username: "mavienajera"}, { tags: 1 });
-//     res.send(tags[0].tags);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500);
-//   }
-// }
+exports.tagArtist = async (req, res) => {
+  try {
+    const {name} = req.body;
+    const tag = await Library.updateOne({username: "mavienajera"})
+    res.send(tag);
+    res.status(201);
+  } catch (error) {
+    console.error(error);
+    res.status(500);
+  }
+}
 
-// exports.tagArtist = async (req, res) => {
-//   try {
-//     const {name} = req.body;
-//     const tag = await Tag.create({name})
-//     res.status(201);
-//     res.send(tag);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500);
+// db.collection.update({
+//   username: "mavienajera",
+//   artists: {
+//     $elemMatch: {
+//       id: "0CKa42Jqrc9fSFbDjePaXP"
+//     }
 //   }
-// }
+// },
+// {
+//   $set: {
+//     artists: "OMG"
+//   }
+// })

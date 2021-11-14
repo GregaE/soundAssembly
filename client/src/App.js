@@ -21,12 +21,16 @@ function App() {
           setTags={setTags}
           username={username}
           tags={tags}
-          />}>
-            <Route path="/" exact element={<ArtistList
-            artistList={artistList}
+          />}
+        >
+          <Route path="/" exact element={<ArtistList
+          artistList={artistList}
+          tags={tags}
+          />} />
+          <Route path="/artist/:artistId" exact element={<ArtistPage
             tags={tags}
-            />} />
-            <Route path="/artist/:artistId" exact element={<ArtistPage/>} />
+            />}
+          />
         </Route>
       </Routes>
     </div>
