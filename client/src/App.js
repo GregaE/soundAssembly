@@ -11,8 +11,6 @@ function App() {
   const [username, setUsername] = useState("");
   const [tags, setTags] = useState([]);
 
-  console.log(tags)
-
   return (
     <div className="App">
       <Routes>
