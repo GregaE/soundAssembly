@@ -4,16 +4,29 @@ function ArtistList(props) {
 
   function renderArtists(list) {
     if (list.length > 0) {
-      return list
-        .sort(function(a,b) {
-          return (a.name < b.name) ? -1 : 1;
+      // when no tag filters are applied show all artists
+      if (props.tags.every(tag => tag.status === "inactive")) {
+        return list
+          .sort(function(a,b) {
+            return (a.name < b.name) ? -1 : 1;
+          })
+          .map(artist => {
+            return <Artist artist={artist} key={artist._id}></Artist>
         })
-        // filter here based on tag
-          // loop through artist tags
-            // if none of the tags are in the current tags.active
-        .map(artist => {
-          return <Artist artist={artist} key={artist._id}></Artist>
-      })
+      }
+      else {
+        return list
+          .filter(artist => artist.artistTags
+            .some(artistTag => props.tags
+              .filter(tag => tag.status !== "inactive")
+              .some(tag => tag.name === artistTag.name)))
+          .sort(function(a,b) {
+            return (a.name < b.name) ? -1 : 1;
+          })
+          .map(artist => {
+            return <Artist artist={artist} key={artist._id}></Artist>
+        })
+      }
     }
     else {
       return <p>Your library is empty. Click on "Update Library" to import your followed artists.</p>

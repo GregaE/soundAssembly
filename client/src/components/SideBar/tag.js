@@ -3,23 +3,25 @@ function Tag(props) {
   function toggleTag() {
     const newArray = props.tags.map(tag => {
       if (tag.name === props.tag.name) {
-        return {...{
-          name: tag.name,
-          status: "active"
-        }}
+        if (props.tag.status === 'inactive') {
+          return {...{
+            name: tag.name,
+            status: "active"
+          }}
+        }
+        else {
+          return {...{
+            name: tag.name,
+            status: "inactive"
+          }}
+        }
       }
       else {
         return {...tag}
       }
     })
 
-
-    if (props.tag.status === 'inactive') {
-      props.setTags(newArray)
-    }
-    // else {
-
-    // }
+    props.setTags(newArray)
   }
 
 

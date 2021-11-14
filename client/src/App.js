@@ -23,10 +23,10 @@ function App() {
           setTags={setTags}
           username={username}
           tags={tags}
-          artistList={artistList}
           />}>
             <Route path="/" exact element={<ArtistList
             artistList={artistList}
+            tags={tags}
             />} />
             <Route path="/artist/:artistId" exact element={<ArtistPage/>} />
         </Route>

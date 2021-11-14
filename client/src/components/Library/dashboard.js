@@ -3,10 +3,10 @@ import { Outlet } from 'react-router';
 import { importLibrary, getLibrary } from '../../ApiService';
 import SideBar from '../SideBar/sideBar';
 
-function Dashboard({setArtistList, setUsername, setTags, username, tags, artistList}) {
+function Dashboard({setArtistList, setUsername, setTags, username, tags}) {
 
   useEffect(() => {
-    // if account has the library pre-populated
+    // if account has existing library
     getLibrary().then(account => {
       if (account.length > 0) {
         setArtistList(account[0].artists);
@@ -15,7 +15,6 @@ function Dashboard({setArtistList, setUsername, setTags, username, tags, artistL
         setTags(account[0].tags);
       }
     })
-    // if account does not have the library pre-populated
   },[setArtistList, setUsername, setTags])
 
   const importArtists = () => {
