@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { getFollowedArtists } = require('./controller/artists');
+const { getFollowedArtists, getArtist } = require('./controller/artists');
 const { authorize, getToken, refreshToken } = require('./controller/authorization');
 const { getLibrary, importLibrary } = require('./controller/getLibrary');
 const { getTags, createTag } = require('./controller/tags');
@@ -19,6 +19,7 @@ router.get('/importLibrary', importLibrary);
 
 // Artists
 router.get('/artists', getFollowedArtists);
+router.get('/artists/:artistId', getArtist);
 
 // Fetch library for the account
 router.get('/getLibrary', getLibrary);

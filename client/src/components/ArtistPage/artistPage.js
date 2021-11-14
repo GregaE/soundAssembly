@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getAlbums, getArtist } from '../../ApiService';
 import AlbumList from './albumList';
 import ArtistDetails from './artistDetails';
+import ArtistTagList from './artistTagList'
 
 function ArtistPage(props) {
 
@@ -22,7 +23,10 @@ function ArtistPage(props) {
 
   return (
     <div className="artistPage">
-      <ArtistDetails artistInfo={artistInfo}></ArtistDetails>
+      <div>
+        <ArtistDetails artistInfo={artistInfo}></ArtistDetails>
+        <ArtistTagList></ArtistTagList>
+      </div>
       <AlbumList albumList={albumList}></AlbumList>
     </div>
   );
