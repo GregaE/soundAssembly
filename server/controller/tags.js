@@ -34,8 +34,27 @@ exports.createTag = async (req, res) => {
 
 exports.tagArtist = async (req, res) => {
   try {
+    console.log(req.params.artistId)
+    console.log(req.body)
+    const id = req.params.artistId;
     const {name} = req.body;
-    const tag = await Library.updateOne({username: "mavienajera"})
+    const tag = await Library.updateOne({
+      "username": "mavienajera"
+    },
+    {
+      $push: {
+        "artists.$[i].artistTags": {
+          name: name
+        }
+      }
+    },
+    {
+      arrayFilters: [
+        {
+          "i.id": id
+        }
+      ]
+    })
     res.send(tag);
     res.status(201);
   } catch (error) {
@@ -44,16 +63,35 @@ exports.tagArtist = async (req, res) => {
   }
 }
 
-// db.collection.update({
-//   username: "mavienajera",
-//   artists: {
-//     $elemMatch: {
-//       id: "0CKa42Jqrc9fSFbDjePaXP"
-//     }
-//   }
-// },
-// {
-//   $set: {
-//     artists: "OMG"
-//   }
-// })
+// Untag artist
+
+exports.untagArtist = async (req, res) => {
+  try {
+    console.log(req.params.artistId)
+    console.log(req.body)
+    const id = req.params.artistId;
+    const {name} = req.body;
+    const tag = await Library.updateOne({
+      "username": "mavienajera"
+    },
+    {
+      $push: {
+        "artists.$[i].artistTags": {
+          name: name
+        }
+      }
+    },
+    {
+      arrayFilters: [
+        {
+          "i.id": id
+        }
+      ]
+    })
+    res.send(tag);
+    res.status(201);
+  } catch (error) {
+    console.error(error);
+    res.status(500);
+  }
+}

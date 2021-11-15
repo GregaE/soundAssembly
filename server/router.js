@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { getFollowedArtists, getArtist } = require('./controller/artists');
 const { authorize, getToken, refreshToken } = require('./controller/authorization');
 const { getLibrary, importLibrary } = require('./controller/getLibrary');
-const { getTags, createTag } = require('./controller/tags');
+const { getTags, createTag, tagArtist, untagArtist } = require('./controller/tags');
 const router = Router();
 
 // SPOTIFY API
@@ -27,5 +27,8 @@ router.get('/getLibrary', getLibrary);
 // Tags
 router.get('/tags', getTags);
 router.post('/tags', createTag);
+router.post('/tags/add/:artistId', tagArtist);
+router.post('/tags/remove/:artistId', untagArtist)
+
 
 module.exports = router;

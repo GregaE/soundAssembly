@@ -33,6 +33,8 @@ function ArtistTagList(props) {
     }
   }
 
+  console.log(props.tags)
+
   // function submitTag(event) {
   //   if (event.keyCode === 13) {
   //     const input = event.target.value;

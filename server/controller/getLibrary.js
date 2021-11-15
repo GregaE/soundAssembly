@@ -1,7 +1,7 @@
 const axios = require('axios');
 const Library = require('../model/librarySchema.js');
 
-const access_token = "BQDHMGYmeGsdQ87wQioJhfLqU1XpS_MSFTDq4b1IWYLutNxoOzlsdIEIryNHyAxRymVUqfO3LO1ZwtVnHyMkaXEA9aS6bfDL8289MEU0RA4UqLuS6RuAD2lYpd-KE_4YEqp6Br6ZY4YGoXsQ2nXZb8NEVmKI7zDORh9NqQ"; // static token before full authorization module is complete
+const access_token = "BQC0Sgy9yXaetHQRvsmZuarnhmsbREQqzD8yxVH5o7TD8ij1ahQwo49MKZ1g5aWfGWMhw8XHmxF3pZd8FBUbZXPLHdVkdeyTwCrMvV4n4ginQPkwrMx3DqY8ViRm5G2_nZOrbZXNmA9YttmZa3eGfi4NFwCuKRRbtowQkA"; // static token before full authorization module is complete
 
 // Fetch existing library from db
 
@@ -70,7 +70,7 @@ function populateTags(artistList) {
     const artistTags = [];
 
     // List of genres for filtering
-    const genreList = ["rock","metal","punk","jazz","ska","reggae","hip hop","EDM"]
+    const genreList = ["rock","metal","punk","jazz","ska","reggae","hip hop","EDM","indie"]
 
     genreList.forEach(item => {
       if (artistList[artist].genres.some(genre => genre.includes(item))) {
