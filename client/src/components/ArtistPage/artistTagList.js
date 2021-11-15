@@ -16,7 +16,10 @@ function ArtistTagList(props) {
             key={tag.name}
             artistTags={props.artistTags}
             artistInfo={props.artistInfo}
+            setArtistInfo={props.setArtistInfo}
             setArtistTags={props.setArtistTags}
+            artistList={props.artistList}
+            setArtistList={props.setArtistList}
             />
       })
     }
@@ -52,6 +55,14 @@ function ArtistTagList(props) {
         // Update DB and update artist tag list
         tagArtist(props.artistInfo.id, input);
         props.setArtistTags(newArtistTags);
+        const artistInfoCopy = JSON.parse(JSON.stringify(props.artistInfo))
+        artistInfoCopy.artistTags = newArtistTags;
+        props.setArtistInfo(artistInfoCopy);
+        // setting ArtistList need to recheck - should not be necessary
+        const artistListCopy = JSON.parse(JSON.stringify(props.artistList));
+        const index = artistListCopy.findIndex(artist => artist.id === artistInfoCopy.id)
+        artistListCopy[index] = artistInfoCopy;
+        props.setArtistList(artistListCopy);
         // Clear input
         event.target.value = "";
         // Create new tag 'global' tag if it doesn't exist
@@ -66,13 +77,13 @@ function ArtistTagList(props) {
 
   return (
     <div className="artistTagList">
-      {renderTags(props.artistTags)}
       <label>Tag Artist:
         <input list="avail-tags" onKeyUp={submitTag} />
       </label>
       <datalist id="avail-tags">
         {renderOptions(props.tags)}
       </datalist>
+      {renderTags(props.artistTags)}
     </div>
   );
 }

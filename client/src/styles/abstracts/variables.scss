@@ -84,7 +84,7 @@ $border-radius: 500px;
     transition: 0.2s;
 
     &:hover {
-      box-shadow: 0 0 15px $action;
+      box-shadow: 0 0 40px $action;
     }
 
     .item-image {
@@ -98,8 +98,8 @@ $border-radius: 500px;
       background-size: cover;
 
       img {
-        width: 100px;
-        height: 100px;
+        width: 70px;
+        height: 70px;
         transition: 0.1s;
 
         &:hover {

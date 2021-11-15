@@ -29,9 +29,12 @@ function TagList(props) {
   }
 
   return (
-    <div className="tagList">
-      {renderTags(props.tags)}
-      <input type="text" onKeyUp={submitTag} placeholder="add tag..." />
+    <div className="tagList-container">
+      <p>Filter via tag:</p>
+      <div className="tagList">
+        {renderTags(props.tags)}
+        <input type="text" onKeyUp={submitTag} placeholder="add tag..." />
+      </div>
     </div>
   );
 }

@@ -8,6 +8,15 @@ function ArtistTag(props) {
       .filter(tag => tag.name !== props.tag.name);
     props.setArtistTags(newList);
     untagArtist(props.artistInfo.id, props.tag.name)
+
+    const artistInfoCopy = JSON.parse(JSON.stringify(props.artistInfo))
+    artistInfoCopy.artistTags = newList;
+    props.setArtistInfo(artistInfoCopy);
+
+    const artistListCopy = JSON.parse(JSON.stringify(props.artistList));
+    const index = artistListCopy.findIndex(artist => artist.id === artistInfoCopy.id)
+    artistListCopy[index] = artistInfoCopy;
+    props.setArtistList(artistListCopy);
   }
 
   return (

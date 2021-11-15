@@ -1,34 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Outlet } from 'react-router';
-import { importLibrary, getLibrary } from '../../ApiService';
 import SideBar from '../SideBar/sideBar';
 import Logout from '../Logout/logout';
 
 function Dashboard({setArtistList, setUsername, setTags, username, tags}) {
-
-  useEffect(() => {
-    // if account has existing library
-    getLibrary().then(account => {
-      if (account.length > 0) {
-        setArtistList(account[0].artists);
-        setUsername(account[0].username);
-        account[0].tags.forEach(tag => tag.status = "inactive");
-        if (account[0]) {
-          setTags(account[0].tags);
-        }
-      }
-    })
-  },[setArtistList, setUsername, setTags])
-
-  const importArtists = () => {
-    importLibrary().then(account => {
-      setArtistList(account.artists);
-      setUsername(account.username)}).then(account => {
-      if (account) {
-        setTags(account.tags.map(tag => tag.status = 'inactive'));
-      }
-    })
-  }
 
   return (
     <div className="dashboard">
@@ -41,11 +16,11 @@ function Dashboard({setArtistList, setUsername, setTags, username, tags}) {
       </div>
       <div>
         <Logout
+          setArtistList={setArtistList}
+          setTags={setTags}
+          setUsername={setUsername}
           username={username}
         />
-        <div>
-          <button onClick={importArtists}>Update library</button>
-        </div>
         <Outlet></Outlet>
       </div>
     </div>

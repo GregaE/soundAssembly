@@ -1,5 +1,6 @@
 .logout {
   position: fixed;
+  right: 30px;
   height: 8rem;
   display: flex;
   align-items: center;
@@ -9,12 +10,17 @@
   z-index:2;
 
   button {
-    @include btn($bg-dark);
     z-index: 3;
     opacity: 1;
     margin: 20px;
-    text-transform: lowercase;
+  }
 
+  #user {
+    background-color: $bg-dark;
+
+    span {
+      text-transform: capitalize;
+    }
   }
 }
 

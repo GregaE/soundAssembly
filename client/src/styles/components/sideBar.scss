@@ -7,48 +7,66 @@
   position: fixed;
   z-index: 3;
 
-  .tagList {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    background-color: $bg;
+  header {
+    margin-top: 10px;
+  }
+
+  .tagList-container {
     margin: 20px 20px;
-    padding: 8px 8px;
-    border-radius: 5px;
 
-    .tag {
-      @include tag;
-
-      &:hover {
-        background:darken($active,5%);
-        transition: all 0.3s ease;
-      }
-      &:active {
-        background:darken($active,5%);
-      }
+    p {
+      text-align: left;
+      padding: 20px 0;
     }
 
-    .active {
-      background-color: $active;
-    }
-
-    input, input:hover, input:active, input:focus {
-      border: none;
+    .tagList {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
       background-color: $bg;
-      height: 3rem;
-      line-height: 3rem;
-      font-size: 1.8rem;
-      border-radius: $border-radius;
-      padding: 2px 5px;
-      color: $light;
-      outline: none;
-      min-width: 100px;
-      font-family: $Poppins;
-    }
+      padding: 8px 8px;
+      border-radius: 5px;
 
-    ::placeholder {
-      color: $light;
-      opacity: 1;
+      .tag {
+        @include tag;
+
+        &:hover {
+          background:darken($active,5%);
+          transition: all 0.3s ease;
+        }
+        &:active {
+          background:darken($active,5%);
+        }
+      }
+
+      .active {
+        background-color: $active;
+      }
+
+      input, input:hover, input:active, input:focus {
+        border: none;
+        background-color: $bg;
+        height: 3rem;
+        line-height: 3rem;
+        font-size: 1.8rem;
+        border-radius: $border-radius;
+        padding: 2px 5px;
+        color: $light;
+        outline: none;
+        min-width: 100px;
+        font-family: $Poppins;
+      }
+
+      ::placeholder {
+        color: $light;
+        opacity: 1;
+      }
     }
   }
+}
+
+
+.extra {
+  position: relative;
+  visibility: hidden;
 }

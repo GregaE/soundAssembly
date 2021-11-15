@@ -34,6 +34,8 @@ function ArtistPage(props) {
           setArtistInfo={setArtistInfo}
           tags={props.tags}
           setTags={props.setTags}
+          artistList={props.artistList}
+          setArtistList={props.setArtistList}
         />
       </div>
       <AlbumList albumList={albumList}></AlbumList>
