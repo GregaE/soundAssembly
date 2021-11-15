@@ -4,8 +4,7 @@ import Tag from './tag'
 function TagList(props) {
 
   function renderTags(tags) {
-
-    if (tags.length > 0) {
+    if (tags && tags.length > 0) {
       return tags
         .sort(function(a,b) {
           return (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1;
@@ -19,12 +18,12 @@ function TagList(props) {
     }
   }
 
-  function submitTag(event) {
+  async function submitTag(event) {
     if (event.keyCode === 13) {
       const input = event.target.value;
-      const newList = [...props.tags, {name: input}]
+      const newList = [...props.tags, {name: input, status: 'inactive'}]
+      await createTag(input);
       props.setTags(newList);
-      createTag(input);
       event.target.value = "";
     }
   }

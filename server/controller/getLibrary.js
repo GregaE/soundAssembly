@@ -1,7 +1,7 @@
 const axios = require('axios');
 const Library = require('../model/librarySchema.js');
 
-const access_token = "BQC0Sgy9yXaetHQRvsmZuarnhmsbREQqzD8yxVH5o7TD8ij1ahQwo49MKZ1g5aWfGWMhw8XHmxF3pZd8FBUbZXPLHdVkdeyTwCrMvV4n4ginQPkwrMx3DqY8ViRm5G2_nZOrbZXNmA9YttmZa3eGfi4NFwCuKRRbtowQkA"; // static token before full authorization module is complete
+const access_token = "BQDdViqRwzphPCPB9utcOcuAqymZS7FAHSRMWaLmJKGYnHa4puW41Y6q2WKokaWzQ-qSSqS1MpD4a385tqH_8CiuKzPf080Kc2Fh2pFSZbYwJ6tOwAVjA3GcCotI9oOK0PeYrE0alRhVVsPwbScxH5mGNUs5i_9ysNeqPQ"; // static token before full authorization module is complete
 
 // Fetch existing library from db
 
@@ -23,11 +23,10 @@ exports.importLibrary = async (req, res) => {
     const artistFetch = await fetchArtists();
     const followedArtists = artistFetch.data.artists.items;
     // add tags array to each artist pre-populating some tags based on the genre
-    const taggedArtists = populateTags(followedArtists);
+    const taggedArtists = await populateTags(followedArtists);
     // fetch profile id for the specific account
     const profileData = await fetchProfile();
     const username = profileData.data.id;
-    console.log(taggedArtists)
     // create account with followed artists in the DB
     const event = await Library.create({username: username, tags: taggedArtists.tags, artists: taggedArtists.artistList})
     res.send(event);

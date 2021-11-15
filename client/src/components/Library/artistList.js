@@ -41,6 +41,14 @@ function ArtistList(props) {
   return (
     <div className="artist-container">
       {renderArtists(props.artistList)}
+      <div className="item buffer"></div>
+      <div className="item buffer"></div>
+      <div className="item buffer"></div>
+      <div className="item buffer"></div>
+      <div className="item buffer"></div>
+      <div className="item buffer"></div>
+      <div className="item buffer"></div>
+      <div className="item buffer"></div>
     </div>
   );
 }

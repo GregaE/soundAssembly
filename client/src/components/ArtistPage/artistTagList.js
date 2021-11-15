@@ -1,4 +1,5 @@
 // import { createTag } from '../../ApiService';
+import { tagArtist } from '../../ApiService';
 import ArtistTag from './artistTag'
 
 function ArtistTagList(props) {
@@ -33,24 +34,21 @@ function ArtistTagList(props) {
     }
   }
 
-  console.log(props.tags)
-
-  // function submitTag(event) {
-  //   if (event.keyCode === 13) {
-  //     const input = event.target.value;
-  //     const newList = [...props.tags, {name: input}]
-  //     props.setTags(newList);
-  //     // createTag(input);
-  //     event.target.value = "";
-  //   }
-  // }
+  function submitTag(event) {
+    if (event.keyCode === 13) {
+      const input = event.target.value;
+      const newArtistTags = [...props.artistInfo.artistTags, {name: input}];
+      tagArtist(input, props.artistInfo.id);
+      props.setArtistTags(newArtistTags);
+      event.target.value = "";
+    }
+  }
 
   return (
     <div className="artistTagList">
       {renderTags(props.artistTags)}
-
       <label>Tag Artist:
-        <input list="avail-tags"/>
+        <input list="avail-tags" onKeyUp={submitTag} />
       </label>
       <datalist id="avail-tags">
         {renderOptions(props.tags)}

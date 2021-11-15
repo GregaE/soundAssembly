@@ -12,7 +12,7 @@ function Dashboard({setArtistList, setUsername, setTags, username, tags}) {
         setArtistList(account[0].artists);
         setUsername(account[0].username);
         account[0].tags.forEach(tag => tag.status = "inactive");
-        if (account[0].tags) {
+        if (account[0]) {
           setTags(account[0].tags);
         }
       }
@@ -22,8 +22,10 @@ function Dashboard({setArtistList, setUsername, setTags, username, tags}) {
   const importArtists = () => {
     importLibrary().then(account => {
       setArtistList(account.artists);
-      setUsername(account.username);
-      setTags(account[0].tags.map(tag => tag.status = 'inactive'));
+      setUsername(account.username)}).then(account => {
+      if (account) {
+        setTags(account.tags.map(tag => tag.status = 'inactive'));
+      }
     })
   }
 

@@ -16,6 +16,14 @@ function AlbumList(props) {
   return (
     <div className="album-container">
       {renderAlbums(props.albumList)}
+      <div className="item buffer"></div>
+      <div className="item buffer"></div>
+      <div className="item buffer"></div>
+      <div className="item buffer"></div>
+      <div className="item buffer"></div>
+      <div className="item buffer"></div>
+      <div className="item buffer"></div>
+      <div className="item buffer"></div>
     </div>
   );
 }

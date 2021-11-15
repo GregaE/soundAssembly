@@ -34,7 +34,31 @@ const getArtist = (artistId) => {
 // Create tag
 
 const createTag = (tagName) => {
-  return fetchRequest('/tags', {
+  return fetchRequest(`/tags`, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({name: tagName})
+  })
+}
+
+// Add tag to artist
+
+const tagArtist = (artistId, tagName) => {
+  return fetchRequest(`/tags/add/${artistId}`, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({name: tagName})
+  })
+}
+
+// Remove tag from artist
+
+const untagArtist = (artistId, tagName) => {
+  return fetchRequest(`/tags/remove/${artistId}`, {
     method: 'POST',
     headers: {
       "Content-Type": "application/json"
@@ -45,7 +69,7 @@ const createTag = (tagName) => {
 
 // Requests directly to Spotify API
 
-const access_token = "BQC0Sgy9yXaetHQRvsmZuarnhmsbREQqzD8yxVH5o7TD8ij1ahQwo49MKZ1g5aWfGWMhw8XHmxF3pZd8FBUbZXPLHdVkdeyTwCrMvV4n4ginQPkwrMx3DqY8ViRm5G2_nZOrbZXNmA9YttmZa3eGfi4NFwCuKRRbtowQkA";
+const access_token = "BQBjIqDHqTIW0MEhS6caI3oIXQ1TpM-IiAvpng1FlY3Zps1HTf4yHhgO1kUMT2MlofPaDVDn30zjkpel6-nOqekDnj9ef4-7GvxNRRo5VhB4aRKPWS2-hjjLvFQIowV1x3cUORNjIEJBkdCqNnDhGJYfOeacKXtzjHmHIA";
 
 async function getAlbums(artistId, req, res) {
   const response = await fetch(`https://api.spotify.com/v1/artists/${artistId}/albums`, {
@@ -58,4 +82,4 @@ async function getAlbums(artistId, req, res) {
   return albums;
 }
 
-export { authorize, importLibrary, getLibrary, getAlbums, getArtist, createTag };
+export { authorize, importLibrary, getLibrary, getAlbums, getArtist, createTag, tagArtist, untagArtist };

@@ -9,7 +9,10 @@ function Artist(props) {
         pathname: `/artist/${props.artist.id}`
         }}>
         <div>
-          <img src={props.artist.images[0].url} alt={props.artist.name} />
+          <div
+            className="item-image"
+            style={{ backgroundImage: `url(${props.artist.images[0].url})` }}
+          />
           <div className="item-name">
             {props.artist.name}
           </div>

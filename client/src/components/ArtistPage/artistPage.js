@@ -9,6 +9,8 @@ function ArtistPage(props) {
 
   const [albumList, setAlbumlist] = useState([]);
   const [artistInfo, setArtistInfo] = useState([]);
+  const [artistTags, setArtistTags] = useState([]);
+
 
   const {artistId} = useParams();
 
@@ -18,6 +20,7 @@ function ArtistPage(props) {
     });
     getArtist(artistId).then(artist => {
       setArtistInfo(artist)
+      setArtistTags(artist.artistTags)
     })
   },[artistId])
 
@@ -26,8 +29,11 @@ function ArtistPage(props) {
       <div>
         <ArtistDetails artistInfo={artistInfo} />
         <ArtistTagList
-          artistTags={artistInfo.artistTags}
+          artistTags={artistTags}
+          artistInfo={artistInfo}
           tags={props.tags}
+          setArtistTags={setArtistTags}
+          setArtistInfo={setArtistInfo}
         />
       </div>
       <AlbumList albumList={albumList}></AlbumList>

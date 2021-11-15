@@ -22,8 +22,8 @@ exports.createTag = async (req, res) => {
         "tags": {name: name}
       }
     })
-    res.send(tag);
-    res.status(201);
+    res.send(tag)
+    res.status(204);
   } catch (error) {
     console.error(error);
     res.status(500);
@@ -34,8 +34,6 @@ exports.createTag = async (req, res) => {
 
 exports.tagArtist = async (req, res) => {
   try {
-    console.log(req.params.artistId)
-    console.log(req.body)
     const id = req.params.artistId;
     const {name} = req.body;
     const tag = await Library.updateOne({
@@ -54,9 +52,17 @@ exports.tagArtist = async (req, res) => {
           "i.id": id
         }
       ]
-    })
+    });
+    // if tag does not exist, add it to list of tags
+    const existingTags = this.getTags();
+    console.log(existingTags)
+    await Library.findOneAndUpdate({username: "mavienajera"}, {
+      $push: {
+        "tags": {name: name}
+      }
+    });
     res.send(tag);
-    res.status(201);
+    res.status(204);
   } catch (error) {
     console.error(error);
     res.status(500);
@@ -67,15 +73,13 @@ exports.tagArtist = async (req, res) => {
 
 exports.untagArtist = async (req, res) => {
   try {
-    console.log(req.params.artistId)
-    console.log(req.body)
     const id = req.params.artistId;
     const {name} = req.body;
     const tag = await Library.updateOne({
       "username": "mavienajera"
     },
     {
-      $push: {
+      $pull: {
         "artists.$[i].artistTags": {
           name: name
         }
@@ -89,7 +93,7 @@ exports.untagArtist = async (req, res) => {
       ]
     })
     res.send(tag);
-    res.status(201);
+    res.status(204);
   } catch (error) {
     console.error(error);
     res.status(500);
