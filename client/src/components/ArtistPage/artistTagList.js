@@ -77,13 +77,17 @@ function ArtistTagList(props) {
 
   return (
     <div className="artistTagList">
-      <label>Tag Artist:
-        <input list="avail-tags" onKeyUp={submitTag} />
-      </label>
-      <datalist id="avail-tags">
-        {renderOptions(props.tags)}
-      </datalist>
-      {renderTags(props.artistTags)}
+      <div className="tag-container">
+        {renderTags(props.artistTags)}
+      </div>
+      <div>
+        <label>Tag Artist:
+          <input list="avail-tags" onKeyUp={submitTag} />
+        </label>
+        <datalist id="avail-tags">
+          {renderOptions(props.tags)}
+        </datalist>
+      </div>
     </div>
   );
 }

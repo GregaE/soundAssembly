@@ -40,7 +40,8 @@ function ArtistList(props) {
 
   // Render buffer to left-align items in last row (flexbox)
   function renderBuffer(n) {
-    if(props.artistList > 5) {
+    if(props.artistList.length > 2) {
+      console.log(n)
       const bufferList = []
       for (let i = 0; i < n; i++) {
         const el = <div className="item buffer" key={i} />;
@@ -54,8 +55,8 @@ function ArtistList(props) {
     <div className="artist-container">
       <h2>Artists</h2>
       <div className="artist-list">
-      {renderArtists(props.artistList)}
-      {renderBuffer(7)}
+        {renderArtists(props.artistList)}
+        {renderBuffer(7)}
       </div>
     </div>
   );

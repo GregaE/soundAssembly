@@ -5,13 +5,16 @@ $Poppins: 'Poppins', sans-serif;
 
 // colors
 
-$dark: #601ED7;
+// Purple alts: #601ED7, #3a1282, rgba(96,30,215,0.8),
+// Action green: #1ed760
+
+$dark: #000000;
 $light: #ffffff;
-$bg: #601ED7;
-$bg-dark: #3a1282;
-$bg-opaque: rgba(96,30,215,0.8);
-$action: #1ed760;
-$active: #D7BC1D;
+$bg: #2f2f2f;
+$bg-dark: #000000;
+$bg-opaque: rgba(47,47,47,0.8);
+$action: #2cd8a4;
+$active: #d82c60;
 
 // border-radius
 
@@ -84,7 +87,7 @@ $border-radius: 500px;
     transition: 0.2s;
 
     &:hover {
-      box-shadow: 0 0 40px $action;
+      box-shadow: 0 0 20px $action;
     }
 
     .item-image {

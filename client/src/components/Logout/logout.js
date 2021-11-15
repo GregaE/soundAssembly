@@ -4,6 +4,7 @@ function Logout(props) {
 
   const importArtists = () => {
     importLibrary().then(account => {
+      console.log(account)
       props.setArtistList(account.artists);
       props.setUsername(account.username);
       if (account) {

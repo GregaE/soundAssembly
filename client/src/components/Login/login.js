@@ -1,11 +1,12 @@
-import {authorize} from "../../ApiService"
+import {authorize} from "../../ApiService";
+import logo from '../../logoBlack.png';
 
 function Login() {
   return (
     <div className="login">
       <div className="login-form">
         <div>
-          <h2>Sound Assembly</h2>
+          <img src={logo} alt="logo" />
         </div>
         <div>
           <h3>Organize your music library</h3>

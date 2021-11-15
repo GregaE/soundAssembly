@@ -1,4 +1,5 @@
-import TagList from './tagList'
+import TagList from './tagList';
+import logo from '../../logoWhite.png';
 
 function SideBar(props) {
 
@@ -6,10 +7,9 @@ function SideBar(props) {
     <div>
       <div className="sideBar">
         <header>
-          <h1>Sound Assembly</h1>
+          <img src={logo} alt="logo" />
         </header>
         <div>
-
           <TagList
           tags={props.tags}
           setTags={props.setTags}
