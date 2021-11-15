@@ -53,14 +53,6 @@ exports.tagArtist = async (req, res) => {
         }
       ]
     });
-    // if tag does not exist, add it to list of tags
-    const existingTags = this.getTags();
-    console.log(existingTags)
-    await Library.findOneAndUpdate({username: "mavienajera"}, {
-      $push: {
-        "tags": {name: name}
-      }
-    });
     res.send(tag);
     res.status(204);
   } catch (error) {

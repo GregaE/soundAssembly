@@ -1,4 +1,4 @@
-// import { createTag } from '../../ApiService';
+import { createTag } from '../../ApiService';
 import { tagArtist } from '../../ApiService';
 import ArtistTag from './artistTag'
 
@@ -11,7 +11,13 @@ function ArtistTagList(props) {
           return (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1;
         })
         .map(tag => {
-          return <ArtistTag tag={tag} key={tag.name} />
+          return <ArtistTag
+            tag={tag}
+            key={tag.name}
+            artistTags={props.artistTags}
+            artistInfo={props.artistInfo}
+            setArtistTags={props.setArtistTags}
+            />
       })
     }
     else {
@@ -37,10 +43,24 @@ function ArtistTagList(props) {
   function submitTag(event) {
     if (event.keyCode === 13) {
       const input = event.target.value;
-      const newArtistTags = [...props.artistInfo.artistTags, {name: input}];
-      tagArtist(input, props.artistInfo.id);
-      props.setArtistTags(newArtistTags);
-      event.target.value = "";
+      // Prevent tagging artist twice with same tag
+      if (props.artistTags.some(tag => tag.name === input.toLowerCase())) {
+        alert("The tag already exists on profile")
+      }
+      else {
+        const newArtistTags = [...props.artistInfo.artistTags, {name: input}];
+        // Update DB and update artist tag list
+        tagArtist(props.artistInfo.id, input);
+        props.setArtistTags(newArtistTags);
+        // Clear input
+        event.target.value = "";
+        // Create new tag 'global' tag if it doesn't exist
+        if (props.tags.every(tag => tag.name !== input.toLowerCase())) {
+          const newList = [...props.tags, {name: input, status: 'inactive'}]
+          props.setTags(newList);
+          createTag(input);
+        }
+      }
     }
   }
 

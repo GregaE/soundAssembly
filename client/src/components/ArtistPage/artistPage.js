@@ -7,7 +7,7 @@ import ArtistTagList from './artistTagList'
 
 function ArtistPage(props) {
 
-  const [albumList, setAlbumlist] = useState([]);
+  const [albumList, setAlbumList] = useState([]);
   const [artistInfo, setArtistInfo] = useState([]);
   const [artistTags, setArtistTags] = useState([]);
 
@@ -16,7 +16,7 @@ function ArtistPage(props) {
 
   useEffect(() => {
     getAlbums(artistId).then(albums => {
-      setAlbumlist([...albums.items])
+      setAlbumList([...albums.items])
     });
     getArtist(artistId).then(artist => {
       setArtistInfo(artist)
@@ -30,10 +30,11 @@ function ArtistPage(props) {
         <ArtistDetails artistInfo={artistInfo} />
         <ArtistTagList
           artistTags={artistTags}
-          artistInfo={artistInfo}
-          tags={props.tags}
           setArtistTags={setArtistTags}
+          artistInfo={artistInfo}
           setArtistInfo={setArtistInfo}
+          tags={props.tags}
+          setTags={props.setTags}
         />
       </div>
       <AlbumList albumList={albumList}></AlbumList>

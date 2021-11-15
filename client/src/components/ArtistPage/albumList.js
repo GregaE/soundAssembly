@@ -13,17 +13,20 @@ function AlbumList(props) {
       })
   }
 
+  // Render buffer to left-align items in last row (flexbox)
+  function renderBuffer(n) {
+    const bufferList = []
+    for (let i = 0; i < n; i++) {
+      const el = <div className="item buffer" key={i} />;
+      bufferList.push(el);
+    }
+    return bufferList;
+  }
+
   return (
     <div className="album-container">
       {renderAlbums(props.albumList)}
-      <div className="item buffer"></div>
-      <div className="item buffer"></div>
-      <div className="item buffer"></div>
-      <div className="item buffer"></div>
-      <div className="item buffer"></div>
-      <div className="item buffer"></div>
-      <div className="item buffer"></div>
-      <div className="item buffer"></div>
+      {renderBuffer(7)}
     </div>
   );
 }

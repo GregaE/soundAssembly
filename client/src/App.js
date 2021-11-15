@@ -29,6 +29,7 @@ function App() {
           />} />
           <Route path="/artist/:artistId" exact element={<ArtistPage
             tags={tags}
+            setTags={setTags}
             />}
           />
         </Route>

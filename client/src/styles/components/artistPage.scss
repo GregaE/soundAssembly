@@ -19,7 +19,13 @@
   .artistTag {
     @include tag;
     cursor: auto;
+
+    i {
+      padding-left: 5px;
+      cursor: pointer;
+    }
   }
+
 
 }
 
