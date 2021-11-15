@@ -82,16 +82,28 @@ $border-radius: 500px;
     transition: 0.2s;
 
     &:hover {
-      transform: scale(1.02);
       box-shadow: 0 0 15px $action;
     }
 
     .item-image {
       width: 200px;
       height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
+
+      img {
+        width: 100px;
+        height: 100px;
+        transition: 0.1s;
+
+        &:hover {
+          transform: scale(1.04);
+        }
+      }
     }
 
     .item-name {

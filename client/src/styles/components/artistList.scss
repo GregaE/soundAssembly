@@ -1,9 +1,9 @@
 .artist-container {
   @include itemContainer;
 
-
-  .hide {
-    display: none;
+  .item:hover {
+    transform: scale(1.02);
   }
+
 }
 

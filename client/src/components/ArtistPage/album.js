@@ -1,3 +1,5 @@
+import play from '../../play-button.png';
+
 function Album(props) {
 
   return (
@@ -7,7 +9,9 @@ function Album(props) {
           <div
             className="item-image"
             style={{ backgroundImage: `url(${props.album.images[0].url})` }}
-          />
+          >
+            <img src={play} alt="play-button" />
+          </div>
           <div className="item-name">
             {props.album.name}
           </div>
