@@ -29,7 +29,12 @@
 
 }
 
-
 .album-container {
   @include itemContainer;
+
+  padding-bottom: 0px !important;
+
+  p {
+    padding-bottom: 2px;
+  }
 }

@@ -2,6 +2,8 @@ import play from '../../play-button.png';
 
 function Album(props) {
 
+  const releaseYear = props.album.release_date.slice(0, 4)
+
   return (
     <div className="item">
       <a href={props.album.external_urls.spotify} target="_blank" rel="noreferrer">
@@ -13,7 +15,7 @@ function Album(props) {
             <img src={play} alt="play-button" />
           </div>
           <div className="item-name">
-            {props.album.name}
+            <p>{props.album.name} ({releaseYear})</p>
           </div>
         </div>
       </a>
