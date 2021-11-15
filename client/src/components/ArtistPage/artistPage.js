@@ -11,7 +11,6 @@ function ArtistPage(props) {
   const [artistInfo, setArtistInfo] = useState([]);
   const [artistTags, setArtistTags] = useState([]);
 
-
   const {artistId} = useParams();
 
   useEffect(() => {
@@ -26,7 +25,7 @@ function ArtistPage(props) {
 
   return (
     <div className="artistPage">
-      <div>
+      <div className="artistInfo-container">
         <ArtistDetails artistInfo={artistInfo} />
         <ArtistTagList
           artistTags={artistTags}

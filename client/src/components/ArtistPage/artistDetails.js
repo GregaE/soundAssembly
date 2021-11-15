@@ -1,7 +1,9 @@
 function ArtistDetails(props) {
 
   const noOfFollowers = function () {
-    return (props.artistInfo.followers) ? props.artistInfo.followers.total : "";
+    // format follower number with commas for thousands
+    const followers = props.artistInfo.followers.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return (props.artistInfo.followers) ? followers : "";
   }
 
   const artistImage = function () {
@@ -10,13 +12,15 @@ function ArtistDetails(props) {
 
   return (
     <div className="artist-details">
-      <div>
-        <img src={artistImage()} alt={props.artistInfo.name} />
-      </div>
-      <div>
+      <div
+        className="artist-img"
+        style={{ backgroundImage: `linear-gradient(
+          rgba(0, 0, 0, 0.6),
+          rgba(0, 0, 0, 0.6)
+        ), url(${artistImage()})` }}
+      >
         <h2>{props.artistInfo.name}</h2>
         <div>Followers: {noOfFollowers()}</div>
-        <button>Tag</button>
       </div>
     </div>
   );

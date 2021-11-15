@@ -69,7 +69,7 @@ const untagArtist = (artistId, tagName) => {
 
 // Requests directly to Spotify API
 
-const access_token = "BQAh8Ka_BZc5k7NFXT-O3RAQxRzNafzsdD7FHLlADiAuW8kdH0pzgei4tl-YJ9vEUf5flUpu3Yx8DLDHzrpTnzXadyOZcL-lycnMDlJONIoob5_ivaVwXoPkKi93_F-EltNSBOUVwa5yhNsJrV9by4wjT27rTOAU_DVL3g";
+const access_token = "BQDtvFXwhsV6pl1YZQ-Emo_h5-k9rkzTVuiI0zXzJbEyypnZNWOMkJtcKpnjf7ovu4aAPyCWF_x4_nwvC3uVyvME_KH_FA2iTbGExDYsVAO7wKmAEoatdj3HouSlqh9aeI-L1WO48pwgwlI-NEhVzpKAkDzzcq4jIIDQ8A";
 
 async function getAlbums(artistId, req, res) {
   const response = await fetch(`https://api.spotify.com/v1/artists/${artistId}/albums`, {

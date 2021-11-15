@@ -1,32 +1,42 @@
-.artist-details {
-  border: 1px solid red;
-  min-height: 20rem;
-  font-size: 1.8rem;
-  text-transform: capitalize;
+.artistInfo-container {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
+  justify-content: space-around;
+  margin: 20px 0px;
 
-  img {
-    height: 200px;
-  }
+  .artist-details {
+    min-height: 20rem;
+    font-size: 1.8rem;
+    text-transform: capitalize;
 
-}
-
-.artistTagList {
-
-  .artistTag {
-    @include tag;
-    cursor: auto;
-
-    i {
-      padding-left: 5px;
-      cursor: pointer;
+    .artist-img {
+      height: 290px;
+      width: 290px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 15px;
     }
+
   }
 
+  .artistTagList {
 
+    .artistTag {
+      @include tag;
+      cursor: auto;
+
+      i {
+        padding-left: 5px;
+        cursor: pointer;
+      }
+    }
+
+  }
 }
 
 .album-container {
