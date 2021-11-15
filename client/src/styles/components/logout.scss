@@ -1,0 +1,24 @@
+.logout {
+  position: fixed;
+  height: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  background-color: $bg-opaque;
+  z-index:2;
+
+  button {
+    @include btn($bg-dark);
+    z-index: 3;
+    opacity: 1;
+    margin: 20px;
+    text-transform: lowercase;
+
+  }
+}
+
+.buffer {
+  position: relative;
+  visibility: hidden;
+}

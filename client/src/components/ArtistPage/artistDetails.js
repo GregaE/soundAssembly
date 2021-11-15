@@ -2,8 +2,10 @@ function ArtistDetails(props) {
 
   const noOfFollowers = function () {
     // format follower number with commas for thousands
-    const followers = props.artistInfo.followers.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    return (props.artistInfo.followers) ? followers : "";
+    if (props.artistInfo.followers) {
+      const followers = props.artistInfo.followers.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      return followers;
+    }
   }
 
   const artistImage = function () {

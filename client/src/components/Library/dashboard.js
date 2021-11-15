@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Outlet } from 'react-router';
 import { importLibrary, getLibrary } from '../../ApiService';
 import SideBar from '../SideBar/sideBar';
+import Logout from '../Logout/logout';
 
 function Dashboard({setArtistList, setUsername, setTags, username, tags}) {
 
@@ -39,8 +40,9 @@ function Dashboard({setArtistList, setUsername, setTags, username, tags}) {
         </SideBar>
       </div>
       <div>
-        <h2>My Dashboard</h2>
-        <div>Username: {username}</div>
+        <Logout
+          username={username}
+        />
         <div>
           <button onClick={importArtists}>Update library</button>
         </div>
