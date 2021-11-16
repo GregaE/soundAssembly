@@ -2,14 +2,17 @@ import { importLibrary } from '../../ApiService';
 
 function Logout(props) {
 
-  const importArtists = () => {
-    importLibrary().then(account => {
-      console.log(account)
+  console.log(props.tags)
+
+  const importArtists = async () => {
+    await importLibrary().then(account => {
       props.setArtistList(account.artists);
       props.setUsername(account.username);
-      if (account) {
-        props.setTags(account.tags.map(tag => tag.status = 'inactive'));
-      }
+      // Create the tag list and set the status the default inactive status
+      const newTagList = account.tags.map(function(tag) {
+        return {name:tag.name, status: "inactive"}
+      })
+      props.setTags(newTagList);
     })
   }
 
@@ -18,8 +21,8 @@ function Logout(props) {
       <div className="logout">
         <button onClick={importArtists}>Update library</button>
           <button id="user">Username: <span>{props.username}</span>
-          <div class="user-dropdown-content">
-            <a href="#">Logout</a>
+          <div className="user-dropdown-content">
+            <a href="https://www.google.com/">Logout</a>
           </div>
           </button>
       </div>

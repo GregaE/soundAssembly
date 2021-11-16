@@ -20,6 +20,7 @@ function Dashboard({setArtistList, setUsername, setTags, username, tags}) {
           setTags={setTags}
           setUsername={setUsername}
           username={username}
+          tags={tags}
         />
         <Outlet></Outlet>
       </div>

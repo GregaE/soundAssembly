@@ -1,7 +1,7 @@
 const axios = require('axios');
 const Library = require('../model/librarySchema.js');
 
-const access_token = "BQDlI17vosO8SJt0kv9ZIrewAq1HABcesPPDGwtI-u6-RILPhFbsH9aMfz-EfTm8MXdM1t-fIP4tnIjnUO2fBrV3ddpt1N21UCUd-llcF1Hp7y1w-OqV9oWjC6mPG9EWGi_KAPxCnRnxiE-ur1kemPqOU_vBfXSjObAn4w"; // static token before full authorization module is complete
+const access_token = "BQAGK_o6PW2kAj-6W82PowK_9jTnSNwandn5qkVnGjrjcKP4GEPuixp3C1h1eEMeOcUWt9sYZ0kaJIpQjKg8Fen-QNryX2IcQU31Ncn1qmlvvx8Q0pX-G34B-EW8mrSXsKPKOIloYiqkVLSKkKJ-k_PCYzA_52VSe8FmWw"; // static token before full authorization module is complete
 
 // Fetch existing library from db
 
@@ -74,7 +74,6 @@ function populateTags(artistList) {
     genreList.forEach(item => {
       if (artistList[artist].genres.some(genre => genre.includes(item))) {
         artistTags.push({name: item});
-        console.log(tags)
         if (!tags.some(tag => tag.name === item)) {
           tags.push({name: item})
         }

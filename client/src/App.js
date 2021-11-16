@@ -34,6 +34,7 @@ function App() {
         <Route path="/" exact element={<Dashboard
           setArtistList={setArtistList}
           setTags={setTags}
+          setUsername={setUsername}
           username={username}
           tags={tags}
           />}

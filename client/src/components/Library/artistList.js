@@ -4,6 +4,7 @@ function ArtistList(props) {
 
   function renderArtists(list) {
     if (list.length > 0) {
+      console.log(props.tags)
       // when no tag filters are applied show all artists
       if (props.tags.every(tag => tag.status === "inactive")) {
         return list
@@ -41,7 +42,6 @@ function ArtistList(props) {
   // Render buffer to left-align items in last row (flexbox)
   function renderBuffer(n) {
     if(props.artistList && props.artistList.length > 2) {
-      console.log(n)
       const bufferList = []
       for (let i = 0; i < n; i++) {
         const el = <div className="item buffer" key={i} />;
