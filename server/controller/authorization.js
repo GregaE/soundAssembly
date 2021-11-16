@@ -18,6 +18,7 @@ exports.authorize = async (req, res) => {
         scope: scope,
         redirect_uri: redirect_uri,
         mode: 'no-cors',
+
         // state: state
       })
     );
