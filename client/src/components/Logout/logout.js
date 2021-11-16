@@ -17,7 +17,11 @@ function Logout(props) {
     <div>
       <div className="logout">
         <button onClick={importArtists}>Update library</button>
-        <button id="user">Username: <span>{props.username}</span></button>
+          <button id="user">Username: <span>{props.username}</span>
+          <div class="user-dropdown-content">
+            <a href="#">Logout</a>
+          </div>
+          </button>
       </div>
       <div className="logout buffer">
       </div>
