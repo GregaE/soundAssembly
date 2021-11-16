@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { getFollowedArtists, getArtist } = require('./controller/artists');
-const { authorize, getToken, refreshToken } = require('./controller/authorization');
+const { authorize, refreshToken } = require('./controller/authorization');
 const { getLibrary, importLibrary } = require('./controller/getLibrary');
 const { getTags, createTag, tagArtist, untagArtist } = require('./controller/tags');
 const router = Router();
@@ -9,7 +9,6 @@ const router = Router();
 
 // OAuth
 router.get('/login', authorize);
-router.get('/callback', getToken);
 router.get('/refresh_token', refreshToken);
 
 // Fetch artists

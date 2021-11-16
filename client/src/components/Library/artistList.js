@@ -4,7 +4,6 @@ function ArtistList(props) {
 
   function renderArtists(list) {
     if (list.length > 0) {
-      console.log(props.tags)
       // when no tag filters are applied show all artists
       if (props.tags.every(tag => tag.status === "inactive")) {
         return list

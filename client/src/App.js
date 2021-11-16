@@ -8,6 +8,9 @@ import ArtistPage from "./components/ArtistPage/artistPage";
 import { getLibrary } from './ApiService';
 
 function App() {
+  // Code returned by spotify API during auth
+  const code = new URLSearchParams(window.location.search).get('code');
+
   const [artistList, setArtistList] = useState([]);
   const [username, setUsername] = useState("");
   const [tags, setTags] = useState([]);
@@ -27,8 +30,9 @@ function App() {
   },[setArtistList, setUsername, setTags])
 
   return (
-    <div className="App">
 
+
+    <div className="App">
       <Routes>
         <Route path="/login" exact element={<Login/>} />
         <Route path="/" exact element={<Dashboard

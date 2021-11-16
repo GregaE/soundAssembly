@@ -4,7 +4,6 @@ import Tag from './tag'
 function TagList(props) {
 
   function renderTags(tags) {
-    console.log(tags)
     if (tags && tags.length > 0) {
       return tags
         .sort(function(a,b) {

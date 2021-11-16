@@ -1,3 +1,5 @@
+const spotifyWebApi = require('spotify-web-api-node')
+
 const querystring = require('querystring');
 
 const client_id = '8804a75f7e7b47aea04216646cbd5612';
@@ -6,22 +8,19 @@ const redirect_uri = 'http://localhost:3000/';
 
 exports.authorize = async (req, res) => {
   try {
-    // const state = generateRandomString(16);
-    // res.cookie(stateKey, state);
+    const code = req.body.code;
+    const spotifyApi = new spotifyWebApi({
+      redirect_uri: redirect_uri,
+      client_id: client_id,
+      client_secret: client_secret
+    })
 
-    // your application requests authorization
-    const scope = 'user-read-private user-read-private user-top-read user-follow-read user-follow-modify user-library-read';
-    res.redirect('https://accounts.spotify.com/authorize?' +
-      querystring.stringify({
-        response_type: 'code',
-        client_id: client_id,
-        scope: scope,
-        redirect_uri: redirect_uri,
-        mode: 'no-cors',
-
-        // state: state
-      })
-    );
+    await spotifyApi.authorizationCodeGrand(code);
+    res.json({
+      accessToken: data.body.acces_token,
+      refreshToken: data.body.refresh_token,
+      expiresIn: data.body.expires_in
+    })
   } catch (error) {
       console.error(error);
       res.status(500);

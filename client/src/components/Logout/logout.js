@@ -2,8 +2,6 @@ import { importLibrary } from '../../ApiService';
 
 function Logout(props) {
 
-  console.log(props.tags)
-
   const importArtists = async () => {
     await importLibrary().then(account => {
       props.setArtistList(account.artists);
