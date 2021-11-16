@@ -32,7 +32,7 @@ function App() {
   return (
 
 
-    <div className="App">
+
       <Routes>
         <Route path="/login" exact element={<Login/>} />
         <Route path="/" exact element={<Dashboard
@@ -56,7 +56,7 @@ function App() {
           />
         </Route>
       </Routes>
-    </div>
+
   );
 }
 
