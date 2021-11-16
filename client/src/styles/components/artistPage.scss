@@ -6,6 +6,11 @@
   gap: 20px;
   margin: 25px 25px;
 
+  .tag-header {
+    display: flex;
+    margin-bottom: 10px;
+  }
+
   .artist-details {
     min-height: 20rem;
     font-size: 1.8rem;
@@ -25,14 +30,19 @@
   }
 
   .artistTagList {
-    border: 1px solid red;
     max-width: 500px;
     min-width: 350px;
+    margin: 25px 25px;
 
     .tag-container {
       display: flex;
       flex-wrap: wrap;
       gap: 5px;
+      background-color: $dark;
+      border-radius: 5px;
+      padding: 12px 12px;
+      min-height: 80px;
+      max-height: 150px;
 
       .artistTag {
         @include tag;
@@ -49,7 +59,73 @@
         }
       }
     }
+
+    .tag-input {
+      margin-top: 20px;
+      display: flex;
+
+      button {
+        position: absolute;
+        z-index: 1;
+      }
+
+      input {
+        background-color: $dark;
+        color: $light;
+        width: 200px;
+        max-width:0;
+        height: 42px;
+        padding: 12px 20px;
+        margin-left: 150px;
+        transition: all 1s ease;
+        box-sizing:border-box;
+        opacity:0;
+        border-top-right-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+        border: 1px solid $action;
+        font-size: 1.7rem;
+        font-family: $Poppins;
+        outline: none;
+      }
+
+      .expanded {
+        max-width:200px;
+        opacity:1 !important;
+        transition-delay: 0.3s;
+      }
+
+      .sliced {
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+      }
+
+      .full {
+        transition-delay: 0.4s;
+      }
+
+
+
+      // input, input:hover, input:active, input:focus {
+      //   border: $light;
+      //   background-color: $bg;
+      //   height: 3rem;
+      //   line-height: 3rem;
+      //   font-size: 1.8rem;
+      //   border-radius: $border-radius;
+      //   padding: 2px 5px;
+      //   color: $light;
+      //   outline: $light;
+      //   min-width: 100px;
+      //   font-family: $Poppins;
+      // }
+    }
   }
+}
+
+
+
+option {
+  text-transform: capitalize;
 }
 
 .album-container {

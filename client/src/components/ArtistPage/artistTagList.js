@@ -1,8 +1,12 @@
 import { createTag } from '../../ApiService';
 import { tagArtist } from '../../ApiService';
-import ArtistTag from './artistTag'
+import ArtistTag from './artistTag';
+import { useState } from 'react';
 
 function ArtistTagList(props) {
+
+  const [inputState, setInputClass] = useState("");
+  const [buttonState, setButtonClass] = useState("full");
 
   function renderTags(tags) {
     if (tags && tags.length > 0) {
@@ -35,7 +39,7 @@ function ArtistTagList(props) {
           return (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1;
         })
         .map(tag => {
-          return <option value={tag.name} key={tag.name}>{tag.name}</option>
+          return <option value={tag.name} key={tag.name}></option>
       })
     }
     else {
@@ -75,15 +79,26 @@ function ArtistTagList(props) {
     }
   }
 
+  function toggleExpand() {
+    if (inputState === "") {
+      setInputClass("expanded");
+      setButtonClass("sliced");
+    }
+    else {
+      setInputClass("")
+      setButtonClass("full");
+    }
+  }
+
   return (
     <div className="artistTagList">
+      <div className="tag-header">Current tags:</div>
       <div className="tag-container">
         {renderTags(props.artistTags)}
       </div>
-      <div>
-        <label>Tag Artist:
-          <input list="avail-tags" onKeyUp={submitTag} />
-        </label>
+      <div className="tag-input">
+        <button className={buttonState} onClick={toggleExpand}>Tag Artist</button>
+        <input className={inputState} list="avail-tags" placeholder="...add tag" onKeyUp={submitTag} />
         <datalist id="avail-tags">
           {renderOptions(props.tags)}
         </datalist>

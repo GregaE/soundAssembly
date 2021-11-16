@@ -40,7 +40,7 @@ function ArtistList(props) {
 
   // Render buffer to left-align items in last row (flexbox)
   function renderBuffer(n) {
-    if(props.artistList.length > 2) {
+    if(props.artistList && props.artistList.length > 2) {
       console.log(n)
       const bufferList = []
       for (let i = 0; i < n; i++) {
