@@ -8,7 +8,7 @@ const router = Router();
 // SPOTIFY API
 
 // OAuth
-router.get('/login', authorize);
+router.post('/login', authorize);
 router.get('/refresh_token', refreshToken);
 
 // Fetch artists

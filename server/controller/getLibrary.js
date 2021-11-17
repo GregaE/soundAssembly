@@ -1,7 +1,7 @@
 const axios = require('axios');
 const Library = require('../model/librarySchema.js');
 
-const access_token = "BQDTDBrxHGZoYYGt_2flGqdmvEc5gvAhrU4kwpwocLhY7t4WS0qPNmQwoG4wxXuuOLh0R3H5wNNYWQitC5qPgQQ-a6rDG-GZD2UgWNkg_MMPfA2Vg8Dy_eyb8KutBKQW6OQZC_Y1H7QeJhKqwoHQOHJkhnQ6ni3Oot3blA"; // static token before full authorization module is complete
+const access_token = "BQD_YyK4z2HmT0Hguwai7K2Z-EGltQRq6vPuYlhFB6wia7G0lM29gXeDYBz20u2cPXwmCCHZejg5snBlgarKaL1URAudPcsKA4UsBbCnXkOYXsVUoxU4IYUs-ndrrtHHDsbggKM68VkKr35yVWh8TtHNxGIwf-AyTf2-ew"; // static token before full authorization module is complete
 
 // Fetch existing library from db
 

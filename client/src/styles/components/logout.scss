@@ -1,6 +1,6 @@
 .logout {
   position: fixed;
-  right: 2%;
+  right: 0%;
   height: 8rem;
   display: flex;
   align-items: center;
@@ -13,6 +13,26 @@
     z-index: 3;
     opacity: 1;
     margin: 2rem;
+  }
+
+  .navigate {
+    background-color: $bg-dark;
+    font-size: 1.8rem;
+    line-height: 1.8rem;
+    padding: 10px 15px !important;
+
+    &:hover {
+      transform: scale(1.05)
+    }
+  }
+
+  #back-btn {
+    margin-right: 0px;
+  }
+
+  #forward-btn {
+    margin-right: 1110px;
+    margin-left: 10px;
   }
 
   #user {

@@ -1,3 +1,5 @@
+import axios from "axios";
+
 // DB requests
 
 const base_url = "http://localhost:8889"
@@ -11,8 +13,12 @@ function fetchRequest (path, options) {
     })
 }
 
-function authorize () {
-  return fetchRequest('/login')
+// Spotify OAuth
+
+function login (code) {
+  return axios.post(base_url + '/login', {
+    code,
+  })
 }
 
 // Import/refresh library via Spotify
@@ -69,7 +75,7 @@ const untagArtist = (artistId, tagName) => {
 
 // Requests directly to Spotify API
 
-const access_token = "BQDTDBrxHGZoYYGt_2flGqdmvEc5gvAhrU4kwpwocLhY7t4WS0qPNmQwoG4wxXuuOLh0R3H5wNNYWQitC5qPgQQ-a6rDG-GZD2UgWNkg_MMPfA2Vg8Dy_eyb8KutBKQW6OQZC_Y1H7QeJhKqwoHQOHJkhnQ6ni3Oot3blA";
+const access_token = "BQD_YyK4z2HmT0Hguwai7K2Z-EGltQRq6vPuYlhFB6wia7G0lM29gXeDYBz20u2cPXwmCCHZejg5snBlgarKaL1URAudPcsKA4UsBbCnXkOYXsVUoxU4IYUs-ndrrtHHDsbggKM68VkKr35yVWh8TtHNxGIwf-AyTf2-ew";
 
 async function getAlbums(artistId, req, res) {
   const response = await fetch(`https://api.spotify.com/v1/artists/${artistId}/albums`, {
@@ -82,4 +88,4 @@ async function getAlbums(artistId, req, res) {
   return albums;
 }
 
-export { authorize, importLibrary, getLibrary, getAlbums, getArtist, createTag, tagArtist, untagArtist };
+export { login, importLibrary, getLibrary, getAlbums, getArtist, createTag, tagArtist, untagArtist };

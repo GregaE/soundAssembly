@@ -1,4 +1,5 @@
 import { importLibrary } from '../../ApiService';
+import { useNavigate } from 'react-router-dom';
 
 function Logout(props) {
 
@@ -14,15 +15,19 @@ function Logout(props) {
     })
   }
 
+  const navigate = useNavigate();
+
   return (
     <div>
       <div className="logout">
+      <button className="navigate" id="back-btn" onClick={() => navigate(-1)}><i className="fa fa-arrow-left"/></button>
+        <button className="navigate" id="forward-btn" onClick={() => navigate(+1)}><i className="fa fa-arrow-right"/></button>
         <button onClick={importArtists}>Update library</button>
-          <button id="user">Username: <span>{props.username}</span>
+        <button id="user">Username: <span>mavienajera</span>
           <div className="user-dropdown-content">
-            <a href="https://www.google.com/">Logout</a>
+            <a href="/login">Logout</a>
           </div>
-          </button>
+        </button>
       </div>
       <div className="logout buffer">
       </div>

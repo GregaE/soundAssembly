@@ -6,8 +6,10 @@ import Logout from '../Logout/logout';
 import ArtistList from "./artistList";
 import ArtistPage from "../ArtistPage/artistPage";
 import { getLibrary } from '../../ApiService';
+import useAuth from '../UseAuth/useAuth';
 
 function Dashboard(props) {
+  const accessToken = useAuth(props.code)
 
   const [artistList, setArtistList] = useState([]);
   const [username, setUsername] = useState("");

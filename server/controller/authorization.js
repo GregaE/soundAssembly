@@ -1,30 +1,31 @@
-const spotifyWebApi = require('spotify-web-api-node')
+const SpotifyWebApi = require('spotify-web-api-node');
 
-const querystring = require('querystring');
-
-const client_id = '8804a75f7e7b47aea04216646cbd5612';
-const client_secret = '1d15a0a679b44546aff8de6e09ae09fa';
+const client_id = 'eb223861b910494681b502eb94f2c79a';
+const client_secret = 'a1b8c03c919e42f2a2762698971eb8ea';
 const redirect_uri = 'http://localhost:3000/';
 
 exports.authorize = async (req, res) => {
-  try {
+    console.log(req.body.code)
     const code = req.body.code;
-    const spotifyApi = new spotifyWebApi({
-      redirect_uri: redirect_uri,
+    const spotifyApi = new SpotifyWebApi({
       client_id: client_id,
-      client_secret: client_secret
-    })
+      client_secret: client_secret,
+      redirect_uri: redirect_uri
+    });
 
-    await spotifyApi.authorizationCodeGrand(code);
-    res.json({
-      accessToken: data.body.acces_token,
-      refreshToken: data.body.refresh_token,
-      expiresIn: data.body.expires_in
-    })
-  } catch (error) {
-      console.error(error);
-      res.status(500);
-  }
+    spotifyApi
+      .authorizationCodeGrant(code)
+      .then(data => {
+        res.json({
+          accessToken: data.body.access_token,
+          refreshToken: data.body.refresh_token,
+          expiresIn: data.body.expires_in,
+        })
+      })
+      .catch(err => {
+        console.log(err)
+        res.sendStatus(400)
+      })
 }
 
 exports.getToken = async (req, res) => {
