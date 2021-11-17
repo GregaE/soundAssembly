@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/SpotReact');
+mongoose.connect(process.env.DB_URL);
+require('dotenv').config();
 
 const db = mongoose.connection;
 

@@ -1,17 +1,17 @@
 import logo from '../../logoBlack.png';
+require('dotenv').config();
+
 
 function Login() {
 
   const params = new URLSearchParams({
-    client_id: 'eb223861b910494681b502eb94f2c79a',
+    client_id: process.env.CLIENT_ID,
     response_type: 'code',
     redirect_uri: 'http://localhost:3000/',
     scope: 'user-read-private%20user-read-private%20user-top-read%20user-follow-read%20user-follow-modify%20user-library-read',
   });
   const base_url = 'https://accounts.spotify.com/authorize?'
   const auth = base_url + params;
-
-  const alt ='https://accounts.spotify.com/authorize?client_id=8804a75f7e7b47aea04216646cbd5612&response_type=code&redirect_uri=http://localhost:3000&scope=user-read-private%20user-read-private%20user-top-read%20user-follow-read%20user-follow-modify%20user-library-read'
 
   return (
     <div className="login">

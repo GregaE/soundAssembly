@@ -1,15 +1,15 @@
 const SpotifyWebApi = require('spotify-web-api-node');
+require('dotenv').config();
 
-const client_id = 'eb223861b910494681b502eb94f2c79a';
-const client_secret = 'a1b8c03c919e42f2a2762698971eb8ea';
+
 const redirect_uri = 'http://localhost:3000/';
 
 exports.authorize = async (req, res) => {
     console.log(req.body.code)
     const code = req.body.code;
     const spotifyApi = new SpotifyWebApi({
-      client_id: client_id,
-      client_secret: client_secret,
+      client_id: process.env.CLIENT_ID,
+      client_secret: process.env.CLIENT_SECRET,
       redirect_uri: redirect_uri
     });
 
