@@ -21,20 +21,15 @@ git clone https://github.com/GregaE/soundAssembly.git
 2. Install backend dependencies and start server
 ```
 cd server
-```
 npm install
-```
 npm run serve
 ```
 
 3. Install frontend dependencies and start client
 ```
 cd ..
-```
 cd client
-```
 npm install
-```
 npm start
 ```
 
