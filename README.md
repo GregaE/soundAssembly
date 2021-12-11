@@ -2,7 +2,7 @@
   <img src="client/src/logoBlack.png" />
 </p>
 
-Sound Assembly is a web application that allows users to login via Spotify OAuth, tag their followed artists to organize their music collection.
+Sound Assembly is a web application that allows users to login via Spotify OAuth and tag their followed artists to organise their music collection.
 
 ## Preview
 
