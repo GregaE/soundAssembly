@@ -2,7 +2,7 @@
   <img src="client/src/logoBlack.png" />
 </p>
 
-Sound Assembly is an app for Spotify users which allows you to tag your followed artists and organise your music collection.
+Sound Assembly is a web application that allows users to login via Spotify OAuth, tag their followed artists to organize their music collection.
 
 ## Preview
 
