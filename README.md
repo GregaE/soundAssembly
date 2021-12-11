@@ -4,10 +4,10 @@
 
 Sound Assembly is an app for Spotify users which allows you to tag your followed artists and organise your music collection.
 
-## Screenshots
+## Preview
 
 <p align="center">
-  <img src="demoGif.gif" />
+  <img src="readMeGif.gif" />
 </p>
 
 ## Getting started
@@ -38,4 +38,4 @@ npm install
 npm start
 ```
 
-4. Login via your Spotify Account and start exploring!
+4. Login via your Spotify Account and click on Update Library to import your followed artists
