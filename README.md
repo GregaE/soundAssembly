@@ -34,3 +34,19 @@ npm start
 ```
 
 4. Login via your Spotify Account and click on Update Library to import your followed artists
+
+## Built with
+
+* [React](https://reactjs.org/) - Front end library for building user interfaces
+* [SASS](https://sass-lang.com/) - Routing and *navigation* for *React* Native apps
+* [Express](https://expressjs.com/) - Storage to share data inside the app
+* [MongoDB](https://www.mongodb.com/) - Build cross-platform native apps
+* [Mongoose](https://mongoosejs.com/) - Realtime database and authentication with Facebook
+* Dependencies: [Spotify API](https://developer.spotify.com/documentation/web-api/) - Realtime database and authentication with Facebook
+
+
+## Author
+
+Grega Erzen - [Github](https://github.com/GregaE) - [LinkedIn](https://www.linkedin.com/in/erzengrega/)
+
+
