@@ -37,12 +37,12 @@ npm start
 
 ## Built with
 
-* [React](https://reactjs.org/) - Front end library for building user interfaces
-* [SASS](https://sass-lang.com/) - Routing and *navigation* for *React* Native apps
-* [Express](https://expressjs.com/) - Storage to share data inside the app
-* [MongoDB](https://www.mongodb.com/) - Build cross-platform native apps
-* [Mongoose](https://mongoosejs.com/) - Realtime database and authentication with Facebook
-* Dependencies: [Spotify API](https://developer.spotify.com/documentation/web-api/) - Realtime database and authentication with Facebook
+* [React](https://reactjs.org/)
+* [SASS](https://sass-lang.com/)
+* [Express](https://expressjs.com/)
+* [MongoDB](https://www.mongodb.com/)
+* [Mongoose](https://mongoosejs.com/)
+* Dependencies: [Spotify API](https://developer.spotify.com/documentation/web-api/)
 
 
 ## Author
