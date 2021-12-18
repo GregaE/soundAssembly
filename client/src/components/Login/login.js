@@ -5,10 +5,10 @@ require('dotenv').config();
 function Login() {
 
   const params = new URLSearchParams({
-    client_id: process.env.CLIENT_ID,
+    client_id: 'eb223861b910494681b502eb94f2c79a',
     response_type: 'code',
-    redirect_uri: 'http://localhost:3000/',
-    scope: 'user-read-private%20user-read-private%20user-top-read%20user-follow-read%20user-follow-modify%20user-library-read',
+    redirect_uri: 'http://localhost:3000',
+    scope: 'user-read-private%20user-top-read%20user-follow-read%20user-follow-modify%20user-library-read',
   });
   const base_url = 'https://accounts.spotify.com/authorize?'
   const auth = base_url + params;
