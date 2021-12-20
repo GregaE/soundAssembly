@@ -9,7 +9,7 @@ const router = Router();
 
 // OAuth
 router.post('/login', authorize);
-router.get('/refresh_token', refreshToken);
+router.get('/refresh', refreshToken);
 
 // Fetch artists
 router.get('/importLibrary', importLibrary);
