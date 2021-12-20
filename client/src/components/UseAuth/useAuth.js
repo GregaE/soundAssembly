@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
 import { login, refresh } from '../../ApiService';
 
-function useAuth(code) {
+function UseAuth(code) {
   const [accessToken, setAccessToken] = useState();
   const [refreshToken, setRefreshToken] = useState();
   const [expiresIn, setExpiresIn] = useState();
-
-  console.log(accessToken)
 
   useEffect(()=> {
     login(code)
@@ -15,6 +13,7 @@ function useAuth(code) {
         setAccessToken(res.accessToken)
         setRefreshToken(res.refreshToken)
         setExpiresIn(res.expiresIn)
+        sessionStorage.setItem('token', res.accessToken)
         window.history.pushState({}, null, "/")
       })
       .catch(() => {window.location = '/'})
@@ -27,6 +26,7 @@ function useAuth(code) {
         .then(res => {
           setAccessToken(res.accessToken)
           setExpiresIn(res.expiresIn)
+          sessionStorage.setItem('token', res.accessToken)
         })
         .catch(() => {window.location = '/'})
     }, (expiresIn - 60) * 1000)
@@ -37,4 +37,4 @@ function useAuth(code) {
   return accessToken
 }
 
-export default useAuth;
+export default UseAuth;

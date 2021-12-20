@@ -11,6 +11,8 @@ import useAuth from '../UseAuth/useAuth';
 function Dashboard(props) {
   const accessToken = useAuth(props.code)
 
+  console.log(accessToken)
+
   const [artistList, setArtistList] = useState([]);
   const [username, setUsername] = useState("");
   const [tags, setTags] = useState([]);

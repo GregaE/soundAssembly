@@ -15,6 +15,10 @@ function Logout(props) {
     })
   }
 
+  function logout () {
+    sessionStorage.removeItem('token')
+  }
+
   const navigate = useNavigate();
 
   return (
@@ -24,7 +28,7 @@ function Logout(props) {
         <button className="navigate" id="forward-btn" onClick={() => navigate(+1)}><i className="fa fa-arrow-right"/></button>
         <button onClick={importArtists}>Update library</button>
         <button id="user">Username: <span>mavienajera</span>
-          <div className="user-dropdown-content">
+          <div onClick={logout} className="user-dropdown-content">
             <a href="/login">Logout</a>
           </div>
         </button>
