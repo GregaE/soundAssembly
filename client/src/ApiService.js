@@ -2,7 +2,7 @@ import axios from "axios";
 
 // DB requests
 
-const base_url = "http://localhost:8889"
+const base_url = process.env.REACT_APP_SERVER_URL
 
 function fetchRequest (path, options) {
   return fetch(base_url + path, options)
