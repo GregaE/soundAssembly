@@ -9,7 +9,6 @@ function UseAuth(code) {
   useEffect(()=> {
     login(code)
       .then(res => {
-        console.log(res)
         setAccessToken(res.accessToken)
         setRefreshToken(res.refreshToken)
         setExpiresIn(res.expiresIn)
