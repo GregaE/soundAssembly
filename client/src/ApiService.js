@@ -96,4 +96,16 @@ async function getAlbums(artistId, req, res) {
   return albums;
 }
 
-export { login, refresh, importLibrary, getLibrary, getAlbums, getArtist, createTag, tagArtist, untagArtist };
+async function getUser(req, res) {
+  console.log(sessionStorage.getItem('token'))
+  const response = await fetch(`https://api.spotify.com/v1/me`, {
+      method: 'get',
+      headers: {
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+      }
+  });
+  const albums = await response.json();
+  return albums;
+}
+
+export { login, refresh, importLibrary, getLibrary, getAlbums, getArtist, createTag, tagArtist, untagArtist, getUser };

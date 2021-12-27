@@ -7,11 +7,13 @@ function UseAuth(code) {
   const [expiresIn, setExpiresIn] = useState();
 
   useEffect(()=> {
+    console.log(code)
     login(code)
       .then(res => {
         setAccessToken(res.accessToken)
         setRefreshToken(res.refreshToken)
         setExpiresIn(res.expiresIn)
+        console.log("mygod")
         sessionStorage.setItem('token', res.accessToken)
         window.history.pushState({}, null, "/")
       })
