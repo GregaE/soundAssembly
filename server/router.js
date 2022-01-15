@@ -29,5 +29,4 @@ router.post('/tags', createTag);
 router.post('/tags/add/:artistId', tagArtist);
 router.post('/tags/remove/:artistId', untagArtist)
 
-
 module.exports = router;
