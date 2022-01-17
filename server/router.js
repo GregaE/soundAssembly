@@ -27,6 +27,17 @@ router.get('/getLibrary', getLibrary);
 router.get('/tags', getTags);
 router.post('/tags', createTag);
 router.post('/tags/add/:artistId', tagArtist);
-router.post('/tags/remove/:artistId', untagArtist)
+router.post('/tags/remove/:artistId', untagArtist);
+
+router.get('/tryme', async (req, res) => {
+  try {
+    res.send({
+      "hello": "success"
+  });
+  } catch (error) {
+    console.error(error);
+    res.status(500);
+  }
+})
 
 module.exports = router;
