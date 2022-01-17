@@ -5,13 +5,14 @@ function Logout(props) {
 
   const importArtists = async () => {
     await importLibrary().then(account => {
-      props.setArtistList(account.artists);
-      props.setUsername(account.username);
-      // Create the tag list and set the status the default inactive status
-      const newTagList = account.tags.map(function(tag) {
-        return {name:tag.name, status: "inactive"}
-      })
-      props.setTags(newTagList);
+      console.log(account)
+      // props.setArtistList(account.artists);
+      // props.setUsername(account.username);
+      // // Create the tag list and set the status the default inactive status
+      // const newTagList = account.tags.map(function(tag) {
+      //   return {name:tag.name, status: "inactive"}
+      // })
+      // props.setTags(newTagList);
     })
   }
 
