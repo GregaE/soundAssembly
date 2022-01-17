@@ -50,7 +50,7 @@ function Dashboard(props) {
   useEffect(() => {
     // if account has existing library
     getLibrary().then(account => {
-      if (account.length > 0) {
+      if (account && account.length > 0) {
         setArtistList(account[0].artists);
         account[0].tags.forEach(tag => tag.status = "inactive");
         if (account[0]) {

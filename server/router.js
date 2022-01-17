@@ -29,6 +29,8 @@ router.post('/tags', createTag);
 router.post('/tags/add/:artistId', tagArtist);
 router.post('/tags/remove/:artistId', untagArtist);
 
+// Test route
+
 router.get('/tryme', async (req, res) => {
   try {
     res.send({
