@@ -76,6 +76,7 @@ function Dashboard(props) {
           setUsername={setUsername}
           username={username}
           tags={tags}
+          accessToken={accessToken}
         />
         <Routes>
           <Route path="/" exact element={<ArtistList

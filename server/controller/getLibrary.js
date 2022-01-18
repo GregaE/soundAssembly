@@ -19,14 +19,13 @@ exports.getLibrary = async (req, res) => {
 
 exports.importLibrary = async (req, res) => {
   try {
+    const username = req.params.username;
+    const {accessToken} = req.body;
     // fetch followed artists for the specific account
-    const artistFetch = await fetchArtists();
+    const artistFetch = await fetchArtists(accessToken);
     const followedArtists = artistFetch.data.artists.items;
     // add tags array to each artist pre-populating some tags based on the genre
     const taggedArtists = await populateTags(followedArtists);
-    // fetch profile id for the specific account
-    const profileData = await fetchProfile();
-    const username = profileData.data.id;
     // create account with followed artists in the DB
     const event = await Library.create({username: username, tags: taggedArtists.tags, artists: taggedArtists.artistList})
     res.send(event);
@@ -38,13 +37,14 @@ exports.importLibrary = async (req, res) => {
 
 // Spotify API calls
 
-function fetchArtists(req, res) {
+function fetchArtists(token, req, res) {
   const response = axios('https://api.spotify.com/v1/me/following?type=artist&limit=50', {
       method: 'get',
       headers: {
-        'Authorization': 'Bearer ' + access_token
+        'Authorization': 'Bearer ' + token
       }
   });
+  console.log(response)
   return response
 }
 

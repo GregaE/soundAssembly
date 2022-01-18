@@ -33,8 +33,14 @@ async function refresh (refreshToken) {
 
 // Import/refresh library via Spotify
 
-const importLibrary = () => {
-  return fetchRequest('/tryme')
+const importLibrary = (accessToken, username) => {
+  return fetchRequest(`/importLibrary/${username}`, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({accessToken: accessToken})
+  })
 }
 
 // Fetch existing list of followed artists and tags from db
