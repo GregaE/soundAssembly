@@ -45,8 +45,8 @@ const importLibrary = (accessToken, username) => {
 
 // Fetch existing list of followed artists and tags from db
 
-const getLibrary = () => {
-  return fetchRequest('/getLibrary')
+const getLibrary = (username) => {
+  return fetchRequest(`/getLibrary/${username}`)
 }
 
 const getArtist = (artistId) => {
@@ -55,8 +55,8 @@ const getArtist = (artistId) => {
 
 // Create tag
 
-const createTag = (tagName) => {
-  return fetchRequest(`/tags`, {
+const createTag = (tagName, username) => {
+  return fetchRequest(`/tags/${username}`, {
     method: 'POST',
     headers: {
       "Content-Type": "application/json"

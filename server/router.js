@@ -21,13 +21,13 @@ router.get('/artists', getFollowedArtists);
 router.get('/artists/:artistId', getArtist);
 
 // Fetch library for the account
-router.get('/getLibrary', getLibrary);
+router.get('/getLibrary/:username', getLibrary);
 
 // Tags
-router.get('/tags', getTags);
-router.post('/tags', createTag);
-router.post('/tags/add/:artistId', tagArtist);
-router.post('/tags/remove/:artistId', untagArtist);
+router.get('/tags/:username', getTags);
+router.post('/tags/:username', createTag);
+router.post('/tags/add/:artistId/:username', tagArtist);
+router.post('/tags/remove/:artistId/:username', untagArtist);
 
 // Test route
 

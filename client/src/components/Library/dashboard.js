@@ -49,7 +49,7 @@ function Dashboard(props) {
 
   useEffect(() => {
     // if account has existing library
-    getLibrary().then(account => {
+    getLibrary(username).then(account => {
       if (account && account.length > 0) {
         setArtistList(account[0].artists);
         account[0].tags.forEach(tag => tag.status = "inactive");
@@ -58,7 +58,7 @@ function Dashboard(props) {
         }
       }
     })
-  },[setArtistList, setUsername, setTags])
+  },[setArtistList, setUsername, setTags, username])
 
   return (
     <div className="dashboard">
@@ -66,6 +66,7 @@ function Dashboard(props) {
         <SideBar
         setTags={setTags}
         tags={tags}
+        username={username}
         >
         </SideBar>
       </div>

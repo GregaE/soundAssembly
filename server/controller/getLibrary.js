@@ -7,7 +7,7 @@ const access_token = "BQCOrfv3YDt6TAQ9mv3Ss99UPj0CEChLyrnzuv7mVDTRvF0tACDqc503h-
 
 exports.getLibrary = async (req, res) => {
   try {
-    const artistFetch = await Library.find({username: "mavienajera"});
+    const artistFetch = await Library.find({username: req.params.username});
     res.send(artistFetch);
   } catch (error) {
     console.error(error);
@@ -19,7 +19,6 @@ exports.getLibrary = async (req, res) => {
 
 exports.importLibrary = async (req, res) => {
   try {
-    const username = req.params.username;
     const {accessToken} = req.body;
     // fetch followed artists for the specific account
     const artistFetch = await fetchArtists(accessToken);
@@ -27,7 +26,7 @@ exports.importLibrary = async (req, res) => {
     // add tags array to each artist pre-populating some tags based on the genre
     const taggedArtists = await populateTags(followedArtists);
     // create account with followed artists in the DB
-    const event = await Library.create({username: username, tags: taggedArtists.tags, artists: taggedArtists.artistList})
+    const event = await Library.create({username: req.params.username, tags: taggedArtists.tags, artists: taggedArtists.artistList})
     res.send(event);
   } catch (error) {
     console.error(error);

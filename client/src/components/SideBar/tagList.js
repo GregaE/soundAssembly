@@ -22,7 +22,7 @@ function TagList(props) {
     if (event.keyCode === 13) {
       const input = event.target.value;
       const newList = [...props.tags, {name: input, status: 'inactive'}]
-      await createTag(input);
+      await createTag(input, props.username);
       props.setTags(newList);
       event.target.value = "";
     }

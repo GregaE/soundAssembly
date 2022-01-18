@@ -13,6 +13,7 @@ function SideBar(props) {
           <TagList
           tags={props.tags}
           setTags={props.setTags}
+          username={props.username}
           />
         </div>
       </div>
