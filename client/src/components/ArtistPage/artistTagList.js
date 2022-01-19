@@ -24,6 +24,7 @@ function ArtistTagList(props) {
             setArtistTags={props.setArtistTags}
             artistList={props.artistList}
             setArtistList={props.setArtistList}
+            username={props.username}
             />
       })
     }
@@ -39,7 +40,7 @@ function ArtistTagList(props) {
           return (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1;
         })
         .map(tag => {
-          return <option value={tag.name} key={tag.name}></option>
+          return <option value={tag.name} key={tag.name} username={props.username}></option>
       })
     }
     else {
@@ -57,7 +58,7 @@ function ArtistTagList(props) {
       else {
         const newArtistTags = [...props.artistInfo.artistTags, {name: input}];
         // Update DB and update artist tag list
-        tagArtist(props.artistInfo.id, input);
+        tagArtist(props.artistInfo.id, input, props.username);
         props.setArtistTags(newArtistTags);
         const artistInfoCopy = JSON.parse(JSON.stringify(props.artistInfo))
         artistInfoCopy.artistTags = newArtistTags;

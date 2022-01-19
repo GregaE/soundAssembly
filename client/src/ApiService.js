@@ -53,7 +53,7 @@ const getArtist = (artistId) => {
   return fetchRequest(`/artists/${artistId}`)
 }
 
-// Create tag
+// Tag management
 
 const createTag = (tagName, username) => {
   return fetchRequest(`/tags/${username}`, {
@@ -65,10 +65,8 @@ const createTag = (tagName, username) => {
   })
 }
 
-// Add tag to artist
-
-const tagArtist = (artistId, tagName) => {
-  return fetchRequest(`/tags/add/${artistId}`, {
+const tagArtist = (artistId, tagName, username) => {
+  return fetchRequest(`/tags/add/${artistId}/${username}`, {
     method: 'POST',
     headers: {
       "Content-Type": "application/json"
@@ -77,10 +75,8 @@ const tagArtist = (artistId, tagName) => {
   })
 }
 
-// Remove tag from artist
-
-const untagArtist = (artistId, tagName) => {
-  return fetchRequest(`/tags/remove/${artistId}`, {
+const untagArtist = (artistId, tagName, username) => {
+  return fetchRequest(`/tags/remove/${artistId}/${username}`, {
     method: 'POST',
     headers: {
       "Content-Type": "application/json"
@@ -103,7 +99,6 @@ async function getAlbums(artistId, req, res) {
 }
 
 async function getUser(req, res) {
-  console.log(sessionStorage.getItem('token'))
   const response = await fetch(`https://api.spotify.com/v1/me`, {
       method: 'get',
       headers: {

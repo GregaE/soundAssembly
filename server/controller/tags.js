@@ -37,7 +37,7 @@ exports.tagArtist = async (req, res) => {
     const id = req.params.artistId;
     const {name} = req.body;
     const tag = await Library.updateOne({
-      "username": "mavienajera"
+      "username": req.params.username
     },
     {
       $push: {
@@ -68,7 +68,7 @@ exports.untagArtist = async (req, res) => {
     const id = req.params.artistId;
     const {name} = req.body;
     const tag = await Library.updateOne({
-      "username": "mavienajera"
+      "username": req.params.username
     },
     {
       $pull: {

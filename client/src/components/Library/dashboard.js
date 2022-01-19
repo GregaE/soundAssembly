@@ -49,15 +49,17 @@ function Dashboard(props) {
 
   useEffect(() => {
     // if account has existing library
-    getLibrary(username).then(account => {
-      if (account && account.length > 0) {
-        setArtistList(account[0].artists);
-        account[0].tags.forEach(tag => tag.status = "inactive");
-        if (account[0]) {
-          setTags(account[0].tags);
+    if (username) {
+      getLibrary(username).then(account => {
+        if (account && account.length > 0) {
+          setArtistList(account[0].artists);
+          account[0].tags.forEach(tag => tag.status = "inactive");
+          if (account[0]) {
+            setTags(account[0].tags);
+          }
         }
-      }
-    })
+      })
+    }
   },[setArtistList, setUsername, setTags, username])
 
   return (
@@ -89,6 +91,7 @@ function Dashboard(props) {
             setTags={setTags}
             artistList={artistList}
             setArtistList={setArtistList}
+            username={username}
             />}
           />
         </Routes>
