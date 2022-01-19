@@ -11,7 +11,7 @@ function ArtistList(props) {
             return (a.name < b.name) ? -1 : 1;
           })
           .map(artist => {
-            return <Artist artist={artist} key={artist._id}></Artist>
+            return <Artist artist={artist} key={artist._id} username={props.username}></Artist>
         })
       }
       else {

@@ -17,11 +17,11 @@ function ArtistPage(props) {
     getAlbums(artistId).then(albums => {
       setAlbumList([...albums.items])
     });
-    getArtist(artistId).then(artist => {
+    getArtist(artistId, props.username).then(artist => {
       setArtistInfo(artist)
       setArtistTags(artist.artistTags)
     })
-  },[artistId])
+  },[artistId, props.username])
 
   return (
     <div className="artistPage">

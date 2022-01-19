@@ -85,6 +85,7 @@ function Dashboard(props) {
           <Route path="/" exact element={<ArtistList
           artistList={artistList}
           tags={tags}
+          username={username}
           />} />
           <Route path="/artist/:artistId" exact element={<ArtistPage
             tags={tags}

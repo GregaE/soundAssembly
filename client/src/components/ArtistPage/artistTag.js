@@ -7,7 +7,6 @@ function ArtistTag(props) {
       .map(tag => {return {...tag}})
       .filter(tag => tag.name !== props.tag.name);
     props.setArtistTags(newList);
-    console.log(props.username)
     untagArtist(props.artistInfo.id, props.tag.name, props.username)
     const artistInfoCopy = JSON.parse(JSON.stringify(props.artistInfo))
     artistInfoCopy.artistTags = newList;

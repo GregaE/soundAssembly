@@ -17,8 +17,8 @@ router.post('/importLibrary/:username', importLibrary);
 // FROM DB
 
 // Artists
-router.get('/artists', getFollowedArtists);
-router.get('/artists/:artistId', getArtist);
+router.get('/artists/:username', getFollowedArtists);
+router.get('/artists/:artistId/:username', getArtist);
 
 // Fetch library for the account
 router.get('/getLibrary/:username', getLibrary);

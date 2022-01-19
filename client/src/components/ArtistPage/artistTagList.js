@@ -74,7 +74,7 @@ function ArtistTagList(props) {
         if (props.tags.every(tag => tag.name !== input.toLowerCase())) {
           const newList = [...props.tags, {name: input, status: 'inactive'}]
           props.setTags(newList);
-          createTag(input);
+          createTag(input, props.username);
         }
       }
     }

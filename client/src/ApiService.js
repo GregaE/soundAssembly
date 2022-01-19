@@ -49,8 +49,8 @@ const getLibrary = (username) => {
   return fetchRequest(`/getLibrary/${username}`)
 }
 
-const getArtist = (artistId) => {
-  return fetchRequest(`/artists/${artistId}`)
+const getArtist = (artistId, username) => {
+  return fetchRequest(`/artists/${artistId}/${username}`)
 }
 
 // Tag management

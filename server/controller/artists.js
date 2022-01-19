@@ -18,7 +18,7 @@ exports.getFollowedArtists = async (req, res) => {
 exports.getArtist = async (req, res) => {
   try {
     const id = req.params.artistId;
-    const artist = await Library.findOne({username: 'mavienajera'}, {artists: 1, artists: {$elemMatch: {id: id}}});
+    const artist = await Library.findOne({username: req.params.username}, {artists: 1, artists: {$elemMatch: {id: id}}});
     res.send(artist.artists[0]);
   } catch (error) {
     console.error(error);
