@@ -26,13 +26,13 @@ function Logout(props) {
     <div>
       <div className="logout">
       <button className="navigate" id="back-btn" onClick={() => navigate(-1)}><i className="fa fa-arrow-left"/></button>
-        <button className="navigate" id="forward-btn" onClick={() => navigate(+1)}><i className="fa fa-arrow-right"/></button>
-        <button onClick={importArtists}>Update library</button>
-        <button id="user">Username: <span>{props.username}</span>
-          <div onClick={logout} className="user-dropdown-content">
-            <a href="/login">Logout</a>
-          </div>
-        </button>
+      <button className="navigate" id="forward-btn" onClick={() => navigate(+1)}><i className="fa fa-arrow-right"/></button>
+      <button onClick={importArtists}>Update library</button>
+      <button id="user">Username: <span>{props.username}</span>
+        <div onClick={logout} className="user-dropdown-content">
+          <a href="/login">Logout</a>
+        </div>
+      </button>
       </div>
       <div className="logout buffer">
       </div>
