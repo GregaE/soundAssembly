@@ -8,7 +8,7 @@ function ArtistList(props) {
       if (props.tags.every(tag => tag.status === "inactive")) {
         return list
           .sort(function(a,b) {
-            return (a.name < b.name) ? -1 : 1;
+            return (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1;
           })
           .map(artist => {
             return <Artist artist={artist} key={artist._id} username={props.username}></Artist>

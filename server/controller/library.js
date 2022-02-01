@@ -19,26 +19,41 @@ exports.importLibrary = async (req, res) => {
   try {
     const {accessToken} = req.body;
     // fetch followed artists for the specific account
-
     const artistFetch = await fetchArtists(accessToken, 'https://api.spotify.com/v1/me/following?type=artist&limit=50');
-    console.log(artistFetch.data)
     const total = artistFetch.data.artists.total;
     let start = artistFetch.data.artists.next
     let loadedArtists = artistFetch.data.artists.items;
-
+    // if the number of followed artists exceeds 50 continuously call the api to take into account pagination
     while (loadedArtists.length < total) {
       const artists = await fetchArtists(accessToken, start);
       start = artists.data.artists.next;
-      console.log(artists.data.artists.next)
       loadedArtists.push(...artists.data.artists.items)
     }
-    // console.log(loadedArtists)
-    // const followedArtists = artistFetch.data.artists.items;
-    // add tags array to each artist pre-populating specific tags based on the genre
-    const taggedArtists = await populateTags(loadedArtists);
-    // create account with followed artists in the DB
-    const event = await Library.create({username: req.params.username, tags: taggedArtists.tags, artists: taggedArtists.artistList})
-    res.send(event);
+    const account = await Library.find({username: req.params.username});
+    // for existing accounts just add artists that were followed on Spotify since last load
+    if (account.length > 0) {
+      console.log(account[0].artists)
+      const newArtists = loadedArtists
+        .filter(artist => !account[0].artists
+          .some(existingArtist => existingArtist.id === artist.id));
+      // add tags array to each artist pre-populating specific tags based on the genre
+      const taggedNewArtists = await populateTags(newArtists);
+      console.log(taggedNewArtists)
+      // update account with new followed artists in the DB
+      const event = await Library.findOneAndUpdate({username: req.params.username}, {
+        $push: {
+          "artists": {$each: [...taggedNewArtists.artistList]}
+        }
+      })
+      res.send(event);
+    }
+    else {
+      // add tags array to each artist pre-populating specific tags based on the genre
+      const taggedArtists = await populateTags(loadedArtists);
+      // create account with followed artists in the DB
+      const event = await Library.create({username: req.params.username, tags: taggedArtists.tags, artists: taggedArtists.artistList})
+      res.send(event);
+    }
   } catch (error) {
     console.error(error);
     res.status(500);
