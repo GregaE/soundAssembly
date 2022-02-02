@@ -41,10 +41,14 @@ exports.importLibrary = async (req, res) => {
       console.log(taggedNewArtists)
       // update account with new followed artists in the DB
       const event = await Library.findOneAndUpdate({username: req.params.username}, {
-        $push: {
-          "artists": {$each: [...taggedNewArtists.artistList]}
+          $push: {
+            "artists": {$each: [...taggedNewArtists.artistList]}
+          },
+        },
+        {
+          new: true
         }
-      })
+      )
       res.send(event);
     }
     else {
