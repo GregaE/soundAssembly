@@ -26,8 +26,8 @@ router.get('/getLibrary/:username', getLibrary);
 // Tags
 router.get('/tags/:username', getTags);
 router.post('/tags/:username', createTag);
-router.post('/tags/add/:artistId/:username', tagArtist);
-router.post('/tags/remove/:artistId/:username', untagArtist);
+router.put('/tags/add/:artistId/:username', tagArtist);
+router.put('/tags/remove/:artistId/:username', untagArtist);
 
 // Test route
 

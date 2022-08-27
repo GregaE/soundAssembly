@@ -19,7 +19,7 @@ exports.importLibrary = async (req, res) => {
   try {
     const {accessToken} = req.body;
     // fetch followed artists for the specific account
-    const artistFetch = await fetchArtists(accessToken, 'https://api.spotify.com/v1/me/following?type=artist&limit=50');
+    const artistFetch = await fetchArtists(accessToken, 'https://api.spotify.com/v1/me/following?type=artist');
     const total = artistFetch.data.artists.total;
     let start = artistFetch.data.artists.next
     let loadedArtists = artistFetch.data.artists.items;

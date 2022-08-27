@@ -67,7 +67,7 @@ const createTag = (tagName, username) => {
 
 const tagArtist = (artistId, tagName, username) => {
   return fetchRequest(`/tags/add/${artistId}/${username}`, {
-    method: 'POST',
+    method: 'PUT',
     headers: {
       "Content-Type": "application/json"
     },
@@ -77,7 +77,7 @@ const tagArtist = (artistId, tagName, username) => {
 
 const untagArtist = (artistId, tagName, username) => {
   return fetchRequest(`/tags/remove/${artistId}/${username}`, {
-    method: 'POST',
+    method: 'PUT',
     headers: {
       "Content-Type": "application/json"
     },
