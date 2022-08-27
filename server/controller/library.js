@@ -19,13 +19,13 @@ exports.importLibrary = async (req, res) => {
   try {
     const {accessToken} = req.body;
     // fetch followed artists for the specific account
-    const library = await fetchArtists(accessToken, 'https://api.spotify.com/v1/me/following?type=artist');
+    const library = await fetchFollowedArtists(accessToken, 'https://api.spotify.com/v1/me/following?type=artist');
     const total = library.data.artists.total;
     let start = library.data.artists.next
     let loadedArtists = library.data.artists.items;
     // if the number of followed artists exceeds 50 continuously call the api to take into account pagination
     while (loadedArtists.length < total) {
-      const artists = await fetchArtists(accessToken, start);
+      const artists = await fetchFollowedArtists(accessToken, start);
       start = artists.data.artists.next;
       loadedArtists.push(...artists.data.artists.items)
     }
@@ -64,7 +64,7 @@ exports.importLibrary = async (req, res) => {
 
 // Spotify API calls
 
-function fetchArtists(token, url, req, res) {
+function fetchFollowedArtists(token, url, req, res) {
   const response = axios(url, {
       method: 'get',
       headers: {
