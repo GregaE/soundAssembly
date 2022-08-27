@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route } from "react-router-dom";
 import { Outlet } from 'react-router';
-import SideBar from '../SideBar/sideBar';
-import Logout from '../Logout/logout';
-import ArtistList from "./artistList";
-import ArtistPage from "../ArtistPage/artistPage";
+import SideBar from '../SideBar/SideBar';
+import Logout from '../Logout/Logout';
+import ArtistList from "./ArtistList";
+import ArtistPage from "../ArtistPage/ArtistPage";
 import { getLibrary, getUser } from '../../ApiService';
 import { login, refresh } from '../../ApiService';
 

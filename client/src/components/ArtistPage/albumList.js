@@ -1,4 +1,4 @@
-import Album from './album.js';
+import Album from './Album.js';
 
 function AlbumList(props) {
 

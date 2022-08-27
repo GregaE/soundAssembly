@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import { getAlbums, getArtist } from '../../ApiService';
-import AlbumList from './albumList';
-import ArtistDetails from './artistDetails';
-import ArtistTagList from './artistTagList'
+import AlbumList from './AlbumList';
+import ArtistDetails from './ArtistDetails';
+import ArtistTagList from './ArtistTagList'
 
 function ArtistPage(props) {
 

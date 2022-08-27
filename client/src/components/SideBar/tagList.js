@@ -1,5 +1,5 @@
 import { createTag } from '../../ApiService';
-import Tag from './tag'
+import Tag from './Tag'
 
 function TagList(props) {
 

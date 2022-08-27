@@ -1,4 +1,4 @@
-import TagList from './tagList';
+import TagList from './TagList';
 import logo from '../../logoWhite.png';
 
 function SideBar(props) {
