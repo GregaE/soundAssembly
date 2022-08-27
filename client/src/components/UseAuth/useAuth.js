@@ -7,7 +7,6 @@ function UseAuth(code) {
   const [expiresIn, setExpiresIn] = useState();
 
   useEffect(()=> {
-    console.log(code)
     login(code)
       .then(res => {
         setAccessToken(res.accessToken)
