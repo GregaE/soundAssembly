@@ -1,5 +1,5 @@
 import TagList from './TagList';
-import logo from '../../logoWhite.png';
+import logo from '../../assets/logoWhite.png';
 
 function SideBar(props) {
 

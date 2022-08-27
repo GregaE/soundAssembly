@@ -1,4 +1,4 @@
-import play from '../../play-button.png';
+import play from '../../assets/play-button.png';
 
 function Album(props) {
 

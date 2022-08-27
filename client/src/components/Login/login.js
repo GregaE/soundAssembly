@@ -1,4 +1,4 @@
-import logo from '../../logoBlack.png';
+import logo from '../../assets/logoBlack.png';
 require('dotenv').config();
 
 function Login() {
