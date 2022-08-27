@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const LibrarySchema = new Schema({
+const UserLibrarySchema = new Schema({
   username: String,
   tags: [{
     name: String,
@@ -39,4 +39,4 @@ const LibrarySchema = new Schema({
   { typeKey: '$type' }
 );
 
-module.exports = mongoose.model('Account', LibrarySchema)
+module.exports = mongoose.model('UserLibrary', UserLibrarySchema)

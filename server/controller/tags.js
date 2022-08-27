@@ -19,7 +19,7 @@ exports.createTag = async (req, res) => {
     const {name} = req.body;
     const tag = await Library.findOneAndUpdate({username: req.params.username}, {
       $push: {
-        "tags": {name: name}
+        "tags": { name }
       }
     })
     res.send(tag)

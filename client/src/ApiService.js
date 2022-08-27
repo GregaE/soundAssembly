@@ -55,33 +55,33 @@ const getArtist = (artistId, username) => {
 
 // Tag management
 
-const createTag = (tagName, username) => {
+const createTag = (tag, username) => {
   return fetchRequest(`/tags/${username}`, {
     method: 'POST',
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({name: tagName})
+    body: JSON.stringify({name: tag})
   })
 }
 
-const tagArtist = (artistId, tagName, username) => {
+const tagArtist = (artistId, tag, username) => {
   return fetchRequest(`/tags/add/${artistId}/${username}`, {
     method: 'PUT',
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({name: tagName})
+    body: JSON.stringify({name: tag})
   })
 }
 
-const untagArtist = (artistId, tagName, username) => {
+const untagArtist = (artistId, tag, username) => {
   return fetchRequest(`/tags/remove/${artistId}/${username}`, {
     method: 'PUT',
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({name: tagName})
+    body: JSON.stringify({name: tag})
   })
 }
 

@@ -5,7 +5,6 @@ function Logout(props) {
 
   const importArtists = async () => {
     await importLibrary(props.accessToken, props.username).then(account => {
-      console.log(account)
       props.setArtistList(account.artists);
       props.setUsername(account.username);
       // Create the tag list and set the status the default inactive status

@@ -32,13 +32,11 @@ exports.importLibrary = async (req, res) => {
     const account = await Library.find({username: req.params.username});
     // for existing accounts just add artists that were followed on Spotify since last load
     if (account.length > 0) {
-      console.log(account[0].artists)
       const newArtists = loadedArtists
         .filter(artist => !account[0].artists
           .some(existingArtist => existingArtist.id === artist.id));
       // add tags array to each artist pre-populating specific tags based on the genre
       const taggedNewArtists = await populateTags(newArtists);
-      console.log(taggedNewArtists)
       // update account with new followed artists in the DB
       const event = await Library.findOneAndUpdate({username: req.params.username}, {
           $push: {
