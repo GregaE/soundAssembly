@@ -5,8 +5,8 @@ const Library = require('../model/librarySchema.js');
 
 exports.getLibrary = async (req, res) => {
   try {
-    const artistFetch = await Library.find({username: req.params.username});
-    res.send(artistFetch);
+    const library = await Library.find({username: req.params.username});
+    res.send(library);
   } catch (error) {
     console.error(error);
     res.status(500);
@@ -19,10 +19,10 @@ exports.importLibrary = async (req, res) => {
   try {
     const {accessToken} = req.body;
     // fetch followed artists for the specific account
-    const artistFetch = await fetchArtists(accessToken, 'https://api.spotify.com/v1/me/following?type=artist');
-    const total = artistFetch.data.artists.total;
-    let start = artistFetch.data.artists.next
-    let loadedArtists = artistFetch.data.artists.items;
+    const library = await fetchArtists(accessToken, 'https://api.spotify.com/v1/me/following?type=artist');
+    const total = library.data.artists.total;
+    let start = library.data.artists.next
+    let loadedArtists = library.data.artists.items;
     // if the number of followed artists exceeds 50 continuously call the api to take into account pagination
     while (loadedArtists.length < total) {
       const artists = await fetchArtists(accessToken, start);
