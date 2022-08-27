@@ -4,8 +4,8 @@ const Library = require('../model/librarySchema.js');
 
 exports.getTags = async (req, res) => {
   try {
-    const tags = await Library.find({username: req.params.username}, { tags: 1 });
-    res.send(tags[0].tags);
+    const tagsData = await Library.find({username: req.params.username}, { tags: 1 });
+    res.send(tagsData[0].tags);
   } catch (error) {
     console.error(error);
     res.status(500);
