@@ -4,22 +4,19 @@ import logo from '../../assets/logoWhite.png';
 function SideBar(props) {
 
   return (
-    <div>
+    <aside>
       <div className="sideBar">
-        <header>
-          <img src={logo} alt="logo" />
-        </header>
         <div>
           <TagList
-          tags={props.tags}
-          setTags={props.setTags}
-          username={props.username}
+            tags={props.tags}
+            setTags={props.setTags}
+            username={props.username}
           />
         </div>
       </div>
       <div className="sideBar extra">
       </div>
-    </div>
+    </aside>
   );
 }
 

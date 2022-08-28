@@ -1,18 +1,17 @@
 @forward "./variables.scss" as var*;
 @import "./variables.scss";
-
+@import './reset';
 @import '../components/artistList';
 @import '../components/artistPage';
-@import './reset';
 @import '../components/sideBar';
 @import '../components/dashboard';
+@import '../components/navbar';
 @import '../components/app';
 @import '../components/login';
-@import '../components/logout';
 
 html {
   font-family: $Poppins;
-  font-size: 10px;
+  font-size: 8px;
 }
 
 body {

@@ -1,0 +1,92 @@
+nav {
+  position: fixed;
+  right: 0%;
+  height: 7.3rem;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  z-index: 1000;
+
+  .logo {
+    width: 40rem;
+    background-color: $bg-dark;
+    img {
+      width: 40rem;
+      height: 7.3rem;
+    }
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1.5rem;
+    background-color: $bg-opaque;
+
+    div {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    button {
+      z-index: 3;
+      opacity: 1;
+    }
+  
+    .navigate {
+      background-color: $bg-dark;
+      font-size: 1.8rem;
+      line-height: 1.8rem;
+      padding: 10px 15px !important;
+  
+      &:hover {
+        transform: scale(1.05)
+      }
+    }
+  
+    #user {
+      background-color: $bg-dark;
+      border-radius: 0px;
+      position: relative;
+  
+      span {
+        text-transform: capitalize;
+      }
+  
+      .user-dropdown-content {
+        position:absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        background-color: $bg-dark;
+        transform: translateY(-5rem);
+        transition: 0.5s;
+        height: 5rem;
+        line-height: 5rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+  
+        a {
+          text-decoration: none;
+          color: $light;
+  
+          &:hover {
+            color: $active;
+          }
+        }
+      }
+  
+      &:hover, .user-dropdown-content:hover {
+  
+        .user-dropdown-content {
+          opacity: 1;
+          transform: translateY(4.9rem);
+        }
+      }
+  
+    }
+  }
+
+}

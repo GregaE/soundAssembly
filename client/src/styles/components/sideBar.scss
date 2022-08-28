@@ -1,19 +1,11 @@
 .sideBar {
-  min-width: 350px;
-  max-width: 350px;
+  min-width: 40rem;
+  max-width: 40rem;
   min-height: 100%;
   background-color: $bg-dark;
-  border: 1px solid $bg-dark;
   position: fixed;
+  margin-top: 7.3rem;
   z-index: 3;
-
-  header {
-    font-style: italic;
-
-    img {
-      width: 341px;
-    }
-  }
 
   .tagList-container {
     margin: 20px 20px;

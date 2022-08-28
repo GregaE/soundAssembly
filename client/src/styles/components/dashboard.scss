@@ -2,21 +2,7 @@
   display: flex;
   min-height: 100%;
 
-  header {
-    background-color: $bg-dark;
-    padding: 10px 10px;
-
-    h1 {
-      text-align: center;
-      margin: 0px !important;
-      padding: 0px !important;
-    }
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .dashboard {
-    flex-wrap: wrap;
-    justify-content: center;
+  main {
+    margin-top: 7.3rem;
   }
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Routes, Route } from "react-router-dom";
 import { Outlet } from 'react-router';
 import SideBar from '../SideBar/SideBar';
-import Logout from '../Logout/Logout';
+import NavBar from '../NavBar/NavBar';
 import ArtistList from "./ArtistList";
 import ArtistPage from "../ArtistPage/ArtistPage";
 import { getLibrary, getUser } from '../../ApiService';
@@ -49,54 +49,66 @@ function Dashboard(props) {
 
   useEffect(() => {
     // if account has existing library
-    if (username) {
-      getLibrary(username).then(account => {
-        if (account && account.length > 0) {
-          setArtistList(account[0].artists);
-          account[0].tags.forEach(tag => tag.status = "inactive");
-          if (account[0]) {
-            setTags(account[0].tags);
+    async function fetchLibrary() {
+      if (username) {
+        const userLibrary = await getLibrary(username);
+        if (userLibrary && userLibrary.length > 0) {
+          setArtistList(userLibrary[0].artists);
+          userLibrary[0].tags.forEach(tag => tag.status = "inactive");
+          if (userLibrary[0]) {
+            setTags(userLibrary[0].tags);
           }
         }
-      })
+      }
     }
+    fetchLibrary()
   },[setArtistList, setUsername, setTags, username])
 
   return (
-    <div className="dashboard">
-      <div>
-        <SideBar
+    <div>
+      <NavBar
+        setArtistList={setArtistList}
         setTags={setTags}
-        tags={tags}
+        setUsername={setUsername}
         username={username}
+        tags={tags}
+        accessToken={accessToken}
+      />
+      <div className="dashboard">
+        <SideBar
+          setTags={setTags}
+          tags={tags}
+          username={username}
         >
         </SideBar>
-      </div>
-      <div>
-        <Logout
-          setArtistList={setArtistList}
-          setTags={setTags}
-          setUsername={setUsername}
-          username={username}
-          tags={tags}
-          accessToken={accessToken}
-        />
-        <Routes>
-          <Route path="/" exact element={<ArtistList
-          artistList={artistList}
-          tags={tags}
-          username={username}
-          />} />
-          <Route path="/artist/:artistId" exact element={<ArtistPage
-            tags={tags}
-            setTags={setTags}
-            artistList={artistList}
+        <main>
+          {/* <Logout
             setArtistList={setArtistList}
+            setTags={setTags}
+            setUsername={setUsername}
             username={username}
-            />}
-          />
-        </Routes>
-        <Outlet></Outlet>
+            tags={tags}
+            accessToken={accessToken}
+          /> */}
+          <Routes>
+            <Route path="/" exact element={
+              <ArtistList
+              artistList={artistList}
+              tags={tags}
+              username={username}
+            />} />
+            <Route path="/artist/:artistId" exact element={
+              <ArtistPage
+                tags={tags}
+                setTags={setTags}
+                artistList={artistList}
+                setArtistList={setArtistList}
+                username={username}
+              />}
+            />
+          </Routes>
+          <Outlet></Outlet>
+        </main>
       </div>
     </div>
   );
