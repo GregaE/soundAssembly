@@ -6,6 +6,7 @@ const Library = require('../model/librarySchema.js');
 exports.getLibrary = async (req, res) => {
   try {
     const library = await Library.find({username: req.params.username});
+    console.log(library);
     res.send(library);
   } catch (error) {
     console.error(error);

@@ -27,7 +27,7 @@ export default function NavBar(props) {
 
   return (
     <nav>
-      <div class="logo">
+      <div className="logo">
         <Link to="/">
           <img src={logo} alt="logo" />
         </Link>
