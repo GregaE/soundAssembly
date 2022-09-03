@@ -1,9 +1,14 @@
 import { createTag } from '../../ApiService';
 import { tagArtist } from '../../ApiService';
+import { useAppSelector, useAppDispatch } from "../../hooks/reduxHooks";
+import { addTag, setTags } from '../../store/tagsSlice';
+
 import ArtistTag from './ArtistTag';
 import { useState } from 'react';
 
 function ArtistTagList(props) {
+  const dispatch = useAppDispatch();
+  const tags = useAppSelector((state) => state.tags.tags);
 
   const [inputState, setInputClass] = useState("");
   const [buttonState, setButtonClass] = useState("full");
@@ -35,7 +40,7 @@ function ArtistTagList(props) {
 
   function renderOptions(tags) {
     if (tags && tags.length > 0) {
-      return tags
+      return [...tags]
         .sort(function(a,b) {
           return (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1;
         })
@@ -71,9 +76,9 @@ function ArtistTagList(props) {
         // Clear input
         event.target.value = "";
         // Create new tag 'global' tag if it doesn't exist
-        if (props.tags.every(tag => tag.name !== input.toLowerCase())) {
-          const newList = [...props.tags, {name: input, status: 'inactive'}]
-          props.setTags(newList);
+        if (tags.every(tag => tag.name !== input.toLowerCase())) {
+          const newList = [...tags, {name: input, status: 'inactive'}]
+          dispatch(setTags(newList))
           createTag(input, props.username);
         }
       }
@@ -101,7 +106,7 @@ function ArtistTagList(props) {
         <button className={buttonState} onClick={toggleExpand}>Tag Artist</button>
         <input className={inputState} list="avail-tags" placeholder="...add tag" onKeyUp={submitTag} />
         <datalist id="avail-tags">
-          {renderOptions(props.tags)}
+          {renderOptions(tags)}
         </datalist>
       </div>
     </div>

@@ -1,4 +1,8 @@
+import { useAppDispatch } from "../../hooks/reduxHooks";
+import { setTags } from '../../store/tagsSlice';
+
 function Tag(props) {
+  const dispatch = useAppDispatch();
 
   function toggleTag() {
     const newArray = props.tags.map(tag => {
@@ -21,7 +25,7 @@ function Tag(props) {
       }
     })
 
-    props.setTags(newArray)
+    dispatch(setTags(newArray))
   }
 
   const tagClass = `tag ${props.tag.status}`

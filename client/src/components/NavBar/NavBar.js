@@ -1,9 +1,12 @@
 import { importLibrary } from '../../ApiService';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useAppDispatch } from "../../hooks/reduxHooks";
+import { setTags } from '../../store/tagsSlice';
 import logo from '../../assets/logoWhite.png';
 
 export default function NavBar(props) {
+  const dispatch = useAppDispatch();
 
   const importArtists = async () => {
     console.log('start')
@@ -14,7 +17,7 @@ export default function NavBar(props) {
       const newTagList = account.tags.map(function(tag) {
         return {name:tag.name, status: "inactive"}
       })
-      props.setTags(newTagList);
+      dispatch(setTags(newTagList));
     })
     console.log('finish')
   }

@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useAppSelector } from "../../hooks/reduxHooks";
+
 import Artist from './Artist.js';
 
 function ArtistList(props) {
+  const tags = useAppSelector((state) => state.tags.tags);
 
   function renderArtists(list) {
     if (list.length > 0) {
       // when no tag filters are applied show all artists
-      if (props.tags.every(tag => tag.status === "inactive")) {
+      if (tags.every(tag => tag.status === "inactive")) {
         return list
           .sort(function(a,b) {
             return (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1;
@@ -18,7 +20,7 @@ function ArtistList(props) {
       else {
         const filteredList = list
           .filter(artist => artist.artistTags
-            .some(artistTag => props.tags
+            .some(artistTag => tags
               .filter(tag => tag.status !== "inactive")
               .some(tag => tag.name === artistTag.name)))
         if (filteredList.length > 0) {

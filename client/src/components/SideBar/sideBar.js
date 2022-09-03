@@ -1,5 +1,4 @@
 import TagList from './TagList';
-import logo from '../../assets/logoWhite.png';
 
 function SideBar(props) {
 
@@ -8,8 +7,6 @@ function SideBar(props) {
       <div className="sideBar">
         <div>
           <TagList
-            tags={props.tags}
-            setTags={props.setTags}
             username={props.username}
           />
         </div>

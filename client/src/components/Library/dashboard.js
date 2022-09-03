@@ -7,13 +7,17 @@ import ArtistList from "./ArtistList";
 import ArtistPage from "../ArtistPage/ArtistPage";
 import { getLibrary, getUser } from '../../ApiService';
 import { login, refresh } from '../../ApiService';
+import { useAppSelector, useAppDispatch } from "../../hooks/reduxHooks";
+import { setTags } from '../../store/tagsSlice';
 
 function Dashboard(props) {
 
+  const dispatch = useAppDispatch();
+
+  const tags = useAppSelector((state) => state.tags.tags);
+
   const [artistList, setArtistList] = useState([]);
   const [username, setUsername] = useState("");
-  const [tags, setTags] = useState([]);
-
   const [accessToken, setAccessToken] = useState();
   const [refreshToken, setRefreshToken] = useState();
   const [expiresIn, setExpiresIn] = useState();
@@ -56,19 +60,18 @@ function Dashboard(props) {
           setArtistList(userLibrary[0].artists);
           userLibrary[0].tags.forEach(tag => tag.status = "inactive");
           if (userLibrary[0]) {
-            setTags(userLibrary[0].tags);
+            dispatch(setTags(userLibrary[0].tags))
           }
         }
       }
     }
     fetchLibrary()
-  },[setArtistList, setUsername, setTags, username])
+  },[setArtistList, setUsername, username, dispatch])
 
   return (
     <div>
       <NavBar
         setArtistList={setArtistList}
-        setTags={setTags}
         setUsername={setUsername}
         username={username}
         tags={tags}
@@ -76,20 +79,10 @@ function Dashboard(props) {
       />
       <div className="dashboard">
         <SideBar
-          setTags={setTags}
-          tags={tags}
           username={username}
         >
         </SideBar>
         <main>
-          {/* <Logout
-            setArtistList={setArtistList}
-            setTags={setTags}
-            setUsername={setUsername}
-            username={username}
-            tags={tags}
-            accessToken={accessToken}
-          /> */}
           <Routes>
             <Route path="/" exact element={
               <ArtistList
@@ -99,8 +92,6 @@ function Dashboard(props) {
             />} />
             <Route path="/artist/:artistId" exact element={
               <ArtistPage
-                tags={tags}
-                setTags={setTags}
                 artistList={artistList}
                 setArtistList={setArtistList}
                 username={username}
