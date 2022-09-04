@@ -1,11 +1,11 @@
 import { useAppSelector } from "../../hooks/reduxHooks";
-
+import { Artist as ArtistInterface } from "../../interfaces/Artist";
 import Artist from './Artist';
 
-function ArtistList(props) {
+function ArtistList(props: { username: any; artistList: ArtistInterface[]; }) {
   const tags = useAppSelector((state) => state.tags.tags);
 
-  function renderArtists(list) {
+  function renderArtists(list: ArtistInterface[]) {
     if (list.length > 0) {
       // when no tag filters are applied show all artists
       if (tags.every(tag => tag.status === "inactive")) {
@@ -14,7 +14,7 @@ function ArtistList(props) {
             return (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1;
           })
           .map(artist => {
-            return <Artist artist={artist} key={artist._id} username={props.username}></Artist>
+            return <Artist artist={artist} key={artist._id} />
         })
       }
       else {
@@ -28,7 +28,7 @@ function ArtistList(props) {
             return (a.name < b.name) ? -1 : 1;
           })
           .map(artist => {
-            return <Artist artist={artist} key={artist._id}></Artist>
+            return <Artist artist={artist} key={artist._id} />
           })
         }
         else {
@@ -42,7 +42,7 @@ function ArtistList(props) {
   }
 
   // Render buffer to left-align items in last row (flexbox)
-  function renderBuffer(n) {
+  function renderBuffer(n: number) {
     if(props.artistList && props.artistList.length > 2) {
       const bufferList = []
       for (let i = 0; i < n; i++) {
