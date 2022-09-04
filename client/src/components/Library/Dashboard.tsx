@@ -9,18 +9,22 @@ import { getLibrary, getUser } from '../../ApiService';
 import { login, refresh } from '../../ApiService';
 import { useAppSelector, useAppDispatch } from "../../hooks/reduxHooks";
 import { setTags } from '../../store/tagsSlice';
+import { Tag } from '../../interfaces/Tag';
+import { Artist } from '../../interfaces/Artist';
 
-function Dashboard(props) {
+function Dashboard(props: { code: unknown; }) {
 
   const dispatch = useAppDispatch();
 
   const tags = useAppSelector((state) => state.tags.tags);
 
-  const [artistList, setArtistList] = useState([]);
+  const [artistList, setArtistList] = useState([] as Artist[]);
   const [username, setUsername] = useState("");
-  const [accessToken, setAccessToken] = useState();
-  const [refreshToken, setRefreshToken] = useState();
-  const [expiresIn, setExpiresIn] = useState();
+  const [accessToken, setAccessToken] = useState("");
+  const [refreshToken, setRefreshToken] = useState("");
+  const [expiresIn, setExpiresIn] = useState(0);
+
+  const browserWindow: Window = window;
 
   useEffect(()=> {
     login(props.code)
@@ -30,10 +34,10 @@ function Dashboard(props) {
         setExpiresIn(res.expiresIn)
         sessionStorage.setItem('token', res.accessToken)
         getUser().then(account => setUsername(account.display_name))
-        window.history.pushState({}, null, "/")
+        window.history.pushState({}, "/")
       })
-      .catch(() => {window.location = '/'})
-  },[props.code])
+      .catch(() => {browserWindow.location = '/'})
+  },[browserWindow, props.code])
 
   useEffect(()=> {
     if(!refreshToken || !expiresIn) return
@@ -44,11 +48,11 @@ function Dashboard(props) {
           setExpiresIn(res.expiresIn)
           sessionStorage.setItem('token', res.accessToken)
         })
-        .catch(() => {window.location = '/'})
+        .catch(() => {browserWindow.location = '/'})
     }, (expiresIn - 60) * 1000)
 
     return () => clearInterval(interval)
-  },[refreshToken, expiresIn])
+  },[refreshToken, expiresIn, browserWindow])
 
 
   useEffect(() => {
@@ -58,7 +62,7 @@ function Dashboard(props) {
         const userLibrary = await getLibrary(username);
         if (userLibrary && userLibrary.length > 0) {
           setArtistList(userLibrary[0].artists);
-          userLibrary[0].tags.forEach(tag => tag.status = "inactive");
+          userLibrary[0].tags.forEach((tag: Tag) => tag.status = "inactive");
           if (userLibrary[0]) {
             dispatch(setTags(userLibrary[0].tags))
           }
@@ -78,19 +82,15 @@ function Dashboard(props) {
         accessToken={accessToken}
       />
       <div className="dashboard">
-        <SideBar
-          username={username}
-        >
-        </SideBar>
+        <SideBar username={username} />
         <main>
           <Routes>
-            <Route path="/" exact element={
+            <Route path="/" element={
               <ArtistList
-              artistList={artistList}
-              tags={tags}
-              username={username}
+                artistList={artistList}
+                username={username}
             />} />
-            <Route path="/artist/:artistId" exact element={
+            <Route path="/artist/:artistId" element={
               <ArtistPage
                 artistList={artistList}
                 setArtistList={setArtistList}
