@@ -1,10 +1,11 @@
 import axios from "axios";
+import { Tag } from "./interfaces/Tag";
 
 // DB requests
 
 const base_url = process.env.REACT_APP_SERVER_URL
 
-function fetchRequest (path, options) {
+function fetchRequest(path: string, options?: RequestInit) {
   return fetch(base_url + path, options)
     .then(res => res.status < 400 ? res : Promise.reject())
     .then(res => res.status !== 204 ? res.json(): res)
@@ -15,7 +16,7 @@ function fetchRequest (path, options) {
 
 // Spotify OAuth
 
-async function login (code) {
+async function login(code: string) {
   const res = await axios
     .post(base_url + '/login', {
       code,
@@ -23,7 +24,7 @@ async function login (code) {
   return res.data
 }
 
-async function refresh (refreshToken) {
+async function refresh(refreshToken: string) {
   const res = await axios
     .post(base_url + '/refresh', {
       refreshToken,
@@ -33,7 +34,7 @@ async function refresh (refreshToken) {
 
 // Import/refresh library via Spotify
 
-const importLibrary = (accessToken, username) => {
+const importLibrary = (accessToken: string, username: string) => {
   return fetchRequest(`/importLibrary/${username}`, {
     method: 'POST',
     headers: {
@@ -45,49 +46,49 @@ const importLibrary = (accessToken, username) => {
 
 // Fetch existing list of followed artists and tags from db
 
-const getLibrary = (username) => {
+const getLibrary = (username: string) => {
   return fetchRequest(`/getLibrary/${username}`)
 }
 
-const getArtist = (artistId, username) => {
+const getArtist = (artistId: string, username: string) => {
   return fetchRequest(`/artists/${artistId}/${username}`)
 }
 
 // Tag management
 
-const createTag = (tag, username) => {
+const createTag = (tagName: string, username: string) => {
   return fetchRequest(`/tags/${username}`, {
     method: 'POST',
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({name: tag})
+    body: JSON.stringify({name: tagName})
   })
 }
 
-const tagArtist = (artistId, tag, username) => {
+const tagArtist = (artistId: string, tagName: string, username: string) => {
   return fetchRequest(`/tags/add/${artistId}/${username}`, {
     method: 'PUT',
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({name: tag})
+    body: JSON.stringify({ name: tagName })
   })
 }
 
-const untagArtist = (artistId, tag, username) => {
+const untagArtist = (artistId: string, tagName: string, username: string) => {
   return fetchRequest(`/tags/remove/${artistId}/${username}`, {
     method: 'PUT',
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({name: tag})
+    body: JSON.stringify({ name: tagName })
   })
 }
 
 // Requests directly to Spotify API
 
-async function getAlbums(artistId, req, res) {
+async function getAlbums(artistId: string, req?: Request, res?: Response) {
   const response = await fetch(`https://api.spotify.com/v1/artists/${artistId}/albums`, {
       method: 'get',
       headers: {
@@ -98,7 +99,7 @@ async function getAlbums(artistId, req, res) {
   return albums;
 }
 
-async function getUser(req, res) {
+async function getUser(req?: Request, res?: Response) {
   const response = await fetch(`https://api.spotify.com/v1/me`, {
       method: 'get',
       headers: {

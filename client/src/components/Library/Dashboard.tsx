@@ -12,7 +12,7 @@ import { setTags } from '../../store/tagsSlice';
 import { Tag } from '../../interfaces/Tag';
 import { Artist } from '../../interfaces/Artist';
 
-function Dashboard(props: { code: unknown; }) {
+function Dashboard(props: { code: string; }) {
 
   const dispatch = useAppDispatch();
 

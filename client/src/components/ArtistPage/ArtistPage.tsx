@@ -17,14 +17,16 @@ function ArtistPage(props: { username: string; artistList: Artist[]; setArtistLi
   const {artistId} = useParams();
 
   useEffect(() => {
-    getAlbums(artistId).then(albums => {
-      console.log(albums);
-      setAlbumList([...albums.items])
-    });
-    getArtist(artistId, props.username).then(artist => {
-      setArtistInfo(artist)
-      setArtistTags(artist.artistTags)
-    })
+    if (artistId) {
+      getAlbums(artistId).then(albums => {
+        console.log(albums);
+        setAlbumList([...albums.items])
+      });
+      getArtist(artistId, props.username).then(artist => {
+        setArtistInfo(artist)
+        setArtistTags(artist.artistTags)
+      })
+    }
   },[artistId, props.username])
 
   return (
