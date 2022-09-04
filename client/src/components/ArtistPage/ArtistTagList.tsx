@@ -5,15 +5,25 @@ import { addTag } from '../../store/tagsSlice';
 
 import ArtistTag from './ArtistTag';
 import { useState } from 'react';
+import { Artist } from '../../interfaces/Artist';
+import { Tag } from '../../interfaces/Tag';
 
-function ArtistTagList(props) {
+function ArtistTagList(props: { 
+  artistTags: Tag[];
+  artistInfo: Artist;
+  artistList: Artist[];
+  setArtistInfo: (artistInfo: Artist) => void;
+  setArtistTags: (newList: Tag[]) => void;
+  setArtistList: (newList: Artist[]) => void;
+  username: string;
+}) {
   const dispatch = useAppDispatch();
   const tags = useAppSelector((state) => state.tags.tags);
 
   const [inputState, setInputClass] = useState("");
   const [buttonState, setButtonClass] = useState("full");
 
-  function renderTags(tags) {
+  function renderTags(tags: Tag[]) {
     if (tags && tags.length > 0) {
       return tags
         .sort(function(a,b) {
@@ -38,14 +48,14 @@ function ArtistTagList(props) {
     }
   }
 
-  function renderOptions(tags) {
+  function renderOptions(tags: Tag[]) {
     if (tags && tags.length > 0) {
       return [...tags]
         .sort(function(a,b) {
           return (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1;
         })
         .map(tag => {
-          return <option value={tag.name} key={tag.name} username={props.username}></option>
+          return <option value={tag.name} key={tag.name}></option>
       })
     }
     else {
@@ -53,9 +63,9 @@ function ArtistTagList(props) {
     }
   }
 
-  function submitTag(event) {
+  function submitTag(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.keyCode === 13) {
-      const input = event.target.value;
+      const input = (event.target as HTMLInputElement).value;
       // Prevent tagging artist twice with same tag
       if (props.artistTags.some(tag => tag.name === input.toLowerCase())) {
         alert("The tag already exists on profile")
@@ -70,11 +80,11 @@ function ArtistTagList(props) {
         props.setArtistInfo(artistInfoCopy);
         // setting ArtistList need to recheck - should not be necessary
         const artistListCopy = JSON.parse(JSON.stringify(props.artistList));
-        const index = artistListCopy.findIndex(artist => artist.id === artistInfoCopy.id)
+        const index = artistListCopy.findIndex((artist: Artist) => artist.id === artistInfoCopy.id)
         artistListCopy[index] = artistInfoCopy;
         props.setArtistList(artistListCopy);
         // Clear input
-        event.target.value = "";
+        (event.target as HTMLInputElement).value = "";
         // Create new tag 'global' tag if it doesn't exist
         if (tags.every(tag => tag.name !== input.toLowerCase())) {
           dispatch(addTag({name: input, status: 'inactive'}))

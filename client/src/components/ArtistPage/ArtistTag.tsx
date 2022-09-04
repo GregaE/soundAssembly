@@ -9,8 +9,8 @@ function ArtistTag(props: {
   artistList: Artist[];
   username: string;
   setArtistTags: (newList: Tag[]) => void;
-  setArtistList: (newList: Artist) => void;
-  setArtistInfo: (newList: Artist[]) => void;
+  setArtistList: (newList: Artist[]) => void;
+  setArtistInfo: (newList: Artist) => void;
 }) {
   function removeTag() {
     const newList = props.artistTags
