@@ -1,7 +1,8 @@
-function ArtistDetails(props) {
+import { Artist } from "../../interfaces/Artist";
 
-  const noOfFollowers = function () {
-    // format follower number with commas for thousands
+function ArtistDetails(props: { artistInfo: Artist }) {
+
+  const followersFormatted = function () {
     if (props.artistInfo.followers) {
       const followers = props.artistInfo.followers.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       return followers;
@@ -22,7 +23,7 @@ function ArtistDetails(props) {
         ), url(${artistImage()})` }}
       >
         <h2>{props.artistInfo.name}</h2>
-        <div>Followers: {noOfFollowers()}</div>
+        <div>Followers: {followersFormatted()}</div>
       </div>
     </div>
   );

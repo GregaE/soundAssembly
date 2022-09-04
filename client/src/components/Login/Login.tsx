@@ -3,14 +3,19 @@ require('dotenv').config();
 
 function Login() {
 
-  const params = new URLSearchParams({
-    client_id: process.env.REACT_APP_SPOTIFY_CLIENT_ID,
-    response_type: 'code',
-    redirect_uri: process.env.REACT_APP_SPOTIFY_REDIRECT_URI,
-    scope: 'user-read-private%20user-top-read%20user-follow-read%20user-follow-modify%20user-library-read',
-  });
+  const params = () => {
+    if (process.env.REACT_APP_SPOTIFY_CLIENT_ID && process.env.REACT_APP_SPOTIFY_REDIRECT_URI) {
+      return new URLSearchParams({
+        client_id: process.env.REACT_APP_SPOTIFY_CLIENT_ID,
+        response_type: 'code',
+        redirect_uri: process.env.REACT_APP_SPOTIFY_REDIRECT_URI,
+        scope: 'user-read-private%20user-top-read%20user-follow-read%20user-follow-modify%20user-library-read',
+      });
+    }
+  }
+
   const base_url = 'https://accounts.spotify.com/authorize?'
-  const auth = base_url + params;
+  const auth = base_url + params();
 
   return (
     <div className="login">

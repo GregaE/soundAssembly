@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../hooks/reduxHooks";
 
-import Artist from './Artist.js';
+import Artist from './Artist';
 
 function ArtistList(props) {
   const tags = useAppSelector((state) => state.tags.tags);

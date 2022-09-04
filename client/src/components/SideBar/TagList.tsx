@@ -1,20 +1,21 @@
 import { createTag } from '../../ApiService';
 import { useAppSelector, useAppDispatch } from "../../hooks/reduxHooks";
-import { addTag, setTags } from '../../store/tagsSlice';
-import Tag from './SidebarTag'
+import { addTag } from '../../store/tagsSlice';
+import SidebarTag from './SidebarTag'
+import { Tag } from '../../interfaces/Tag';
 
-function TagList(props) {
+function TagList(props: { username: string; }) {
   const dispatch = useAppDispatch();
   const tags = useAppSelector((state) => state.tags.tags);
 
-  function renderTags(tags) {
+  function renderTags(tags: Tag[]) {
     if (tags && tags.length > 0) {
       return [...tags]
         .sort(function(a,b) {
           return (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1;
         })
         .map(tag => {
-          return <Tag tag={tag} key={tag.name} tags={tags} />
+          return <SidebarTag tag={tag} key={tag.name} tags={tags} />
       })
     }
     else {
@@ -22,12 +23,12 @@ function TagList(props) {
     }
   }
 
-  async function submitTag(event) {
+  async function submitTag(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.keyCode === 13) {
-      const input = event.target.value;
+      const input = (event.target as HTMLInputElement).value;
       await createTag(input, props.username);
-      dispatch(addTag({name: input, status: 'inactive'}))
-      event.target.value = "";
+      dispatch(addTag({name: input, status: 'inactive'} as Tag));
+      (event.target as HTMLInputElement).value = "";
     }
   }
 

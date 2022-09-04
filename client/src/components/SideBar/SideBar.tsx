@@ -1,6 +1,6 @@
 import TagList from './TagList';
 
-function SideBar(props) {
+function SideBar(props: { username: string; }) {
 
   return (
     <aside>

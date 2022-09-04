@@ -1,7 +1,7 @@
 import play from '../../assets/play-button.png';
+import { Album as AlbumProps } from '../../interfaces/Album';
 
-function Album(props) {
-
+function Album(props: { album: AlbumProps }) {
   const releaseYear = props.album.release_date.slice(0, 4)
 
   return (

@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { login, refresh } from '../../ApiService';
 
-function UseAuth(code) {
+function UseAuth(code: string) {
   const [accessToken, setAccessToken] = useState();
   const [refreshToken, setRefreshToken] = useState();
   const [expiresIn, setExpiresIn] = useState();
+
+  const browserWindow: Window = window;
 
   useEffect(()=> {
     login(code)
@@ -13,10 +15,10 @@ function UseAuth(code) {
         setRefreshToken(res.refreshToken)
         setExpiresIn(res.expiresIn)
         sessionStorage.setItem('token', res.accessToken)
-        window.history.pushState({}, null, "/")
+        browserWindow.history.pushState({}, "/")
       })
-      .catch(() => {window.location = '/'})
-  },[code])
+      .catch(() => {browserWindow.location = '/'})
+  },[browserWindow, code])
 
   useEffect(()=> {
     if(!refreshToken || !expiresIn) return
@@ -27,11 +29,11 @@ function UseAuth(code) {
           setExpiresIn(res.expiresIn)
           sessionStorage.setItem('token', res.accessToken)
         })
-        .catch(() => {window.location = '/'})
+        .catch(() => {browserWindow.location = '/'})
     }, (expiresIn - 60) * 1000)
 
     return () => clearInterval(interval)
-  },[refreshToken, expiresIn])
+  },[refreshToken, expiresIn, browserWindow])
 
   return accessToken
 }

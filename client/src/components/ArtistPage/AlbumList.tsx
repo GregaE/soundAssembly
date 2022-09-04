@@ -1,8 +1,9 @@
-import Album from './Album.js';
+import Album from "./Album";
+import { Album as AlbumInferface } from "../../interfaces/Album";
 
-function AlbumList(props) {
+function AlbumList(props: { albumList: Array<AlbumInferface> }) {
 
-  function renderAlbums(list) {
+  function renderAlbums(list: Array<AlbumInferface>) {
     return list
       // spotify has duplicated albums in their API, this removes albums with the same name
       .filter((album, pos, list) => {
@@ -14,7 +15,7 @@ function AlbumList(props) {
   }
 
   // Render buffer to left-align items in last row (flexbox)
-  function renderBuffer(n) {
+  function renderBuffer(n: number) {
     if(props.albumList && props.albumList.length > 2) {
       const bufferList = []
       for (let i = 0; i < n; i++) {

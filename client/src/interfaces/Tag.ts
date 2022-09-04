@@ -1,5 +1,5 @@
 export interface Tag {
   name: string,
   _id: string,
-  status?: 'active' | 'inactive' | undefined,
+  status?: 'active' | 'inactive',
 }
