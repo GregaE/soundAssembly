@@ -78,7 +78,6 @@ function Dashboard(props: { code: unknown; }) {
         setArtistList={setArtistList}
         setUsername={setUsername}
         username={username}
-        tags={tags}
         accessToken={accessToken}
       />
       <div className="dashboard">

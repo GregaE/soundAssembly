@@ -4,8 +4,15 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { setTags } from '../../store/tagsSlice';
 import logo from '../../assets/logoWhite.png';
+import { Artist } from '../../interfaces/Artist';
+import { Tag } from '../../interfaces/Tag';
 
-export default function NavBar(props) {
+export default function NavBar(props: { 
+  accessToken: string;
+  username: string;
+  setArtistList: (newList: Artist[]) => void;
+  setUsername: (newUsername: string) => void;
+}) {
   const dispatch = useAppDispatch();
 
   const importArtists = async () => {
@@ -14,7 +21,7 @@ export default function NavBar(props) {
       props.setArtistList(account.artists);
       props.setUsername(account.username);
       // Create the tag list and set the status the default inactive status
-      const newTagList = account.tags.map(function(tag) {
+      const newTagList = account.tags.map(function(tag: Tag) {
         return {name:tag.name, status: "inactive"}
       })
       dispatch(setTags(newTagList));
