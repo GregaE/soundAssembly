@@ -27,11 +27,11 @@
         @include tag;
 
         &:hover {
-          background:darken($active,5%);
+          background: $active;
           transition: all 0.3s ease;
         }
         &:active {
-          background:darken($active,5%);
+          background:darken($active, 10%);
         }
       }
 

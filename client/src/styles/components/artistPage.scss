@@ -63,6 +63,7 @@
     .tag-input {
       margin-top: 20px;
       display: flex;
+      align-items: center;
 
       button {
         position: absolute;
@@ -102,22 +103,6 @@
       .full {
         transition-delay: 0.4s;
       }
-
-
-
-      // input, input:hover, input:active, input:focus {
-      //   border: $light;
-      //   background-color: $bg;
-      //   height: 3rem;
-      //   line-height: 3rem;
-      //   font-size: 1.8rem;
-      //   border-radius: $border-radius;
-      //   padding: 2px 5px;
-      //   color: $light;
-      //   outline: $light;
-      //   min-width: 100px;
-      //   font-family: $Poppins;
-      // }
     }
   }
 }

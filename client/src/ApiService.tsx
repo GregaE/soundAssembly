@@ -1,6 +1,4 @@
 import axios from "axios";
-import { Tag } from "./interfaces/Tag";
-
 // DB requests
 
 const base_url = process.env.REACT_APP_SERVER_URL
