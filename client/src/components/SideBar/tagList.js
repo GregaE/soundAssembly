@@ -1,7 +1,7 @@
 import { createTag } from '../../ApiService';
 import { useAppSelector, useAppDispatch } from "../../hooks/reduxHooks";
 import { addTag, setTags } from '../../store/tagsSlice';
-import Tag from './Tag'
+import Tag from './SidebarTag'
 
 function TagList(props) {
   const dispatch = useAppDispatch();
@@ -25,9 +25,8 @@ function TagList(props) {
   async function submitTag(event) {
     if (event.keyCode === 13) {
       const input = event.target.value;
-      const newList = [...tags, {name: input, status: 'inactive'}]
       await createTag(input, props.username);
-      dispatch(setTags(newList))
+      dispatch(addTag({name: input, status: 'inactive'}))
       event.target.value = "";
     }
   }

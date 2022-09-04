@@ -1,7 +1,8 @@
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { setTags } from '../../store/tagsSlice';
+import { Tag } from "../../interfaces/Tag";
 
-function Tag(props) {
+function SidebarTag(props: { tags: Tag[]; tag: Tag }) {
   const dispatch = useAppDispatch();
 
   function toggleTag() {
@@ -25,7 +26,7 @@ function Tag(props) {
       }
     })
 
-    dispatch(setTags(newArray))
+    dispatch(setTags(newArray as Tag[]))
   }
 
   const tagClass = `tag ${props.tag.status}`
@@ -37,4 +38,4 @@ function Tag(props) {
   );
 }
 
-export default Tag;
+export default SidebarTag;

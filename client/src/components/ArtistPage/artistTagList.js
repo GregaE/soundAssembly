@@ -1,7 +1,7 @@
 import { createTag } from '../../ApiService';
 import { tagArtist } from '../../ApiService';
 import { useAppSelector, useAppDispatch } from "../../hooks/reduxHooks";
-import { addTag, setTags } from '../../store/tagsSlice';
+import { addTag } from '../../store/tagsSlice';
 
 import ArtistTag from './ArtistTag';
 import { useState } from 'react';
@@ -77,8 +77,7 @@ function ArtistTagList(props) {
         event.target.value = "";
         // Create new tag 'global' tag if it doesn't exist
         if (tags.every(tag => tag.name !== input.toLowerCase())) {
-          const newList = [...tags, {name: input, status: 'inactive'}]
-          dispatch(setTags(newList))
+          dispatch(addTag({name: input, status: 'inactive'}))
           createTag(input, props.username);
         }
       }
