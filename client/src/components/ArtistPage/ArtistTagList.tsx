@@ -7,13 +7,12 @@ import ArtistTag from './ArtistTag';
 import { useState } from 'react';
 import { Artist } from '../../interfaces/Artist';
 import { Tag } from '../../interfaces/Tag';
+import { addArtistTag } from '../../store/artistSlice';
 
 function ArtistTagList(props: { 
   artistTags: Tag[];
-  artistInfo: Artist;
+  artistDetails: Artist;
   artistList: Artist[];
-  setArtistInfo: (artistInfo: Artist) => void;
-  setArtistTags: (newList: Tag[]) => void;
   setArtistList: (newList: Artist[]) => void;
   username: string;
 }) {
@@ -25,7 +24,7 @@ function ArtistTagList(props: {
 
   function renderTags(tags: Tag[]) {
     if (tags && tags.length > 0) {
-      return tags
+      return [...tags]
         .sort(function(a,b) {
           return (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1;
         })
@@ -34,9 +33,7 @@ function ArtistTagList(props: {
             tag={tag}
             key={tag.name}
             artistTags={props.artistTags}
-            artistInfo={props.artistInfo}
-            setArtistInfo={props.setArtistInfo}
-            setArtistTags={props.setArtistTags}
+            artistDetails={props.artistDetails}
             artistList={props.artistList}
             setArtistList={props.setArtistList}
             username={props.username}
@@ -71,13 +68,10 @@ function ArtistTagList(props: {
         alert("The tag already exists on profile")
       }
       else {
-        const newArtistTags = [...props.artistInfo.artistTags, {name: input}];
         // Update DB and update artist tag list
-        tagArtist(props.artistInfo.id, input, props.username);
-        props.setArtistTags(newArtistTags);
-        const artistInfoCopy = JSON.parse(JSON.stringify(props.artistInfo))
-        artistInfoCopy.artistTags = newArtistTags;
-        props.setArtistInfo(artistInfoCopy);
+        tagArtist(props.artistDetails.id, input, props.username);
+        dispatch(addArtistTag({name: input, status: 'inactive'}))
+        const artistInfoCopy = JSON.parse(JSON.stringify(props.artistDetails))
         // setting ArtistList need to recheck - should not be necessary
         const artistListCopy = JSON.parse(JSON.stringify(props.artistList));
         const index = artistListCopy.findIndex((artist: Artist) => artist.id === artistInfoCopy.id)

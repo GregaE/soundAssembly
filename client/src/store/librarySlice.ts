@@ -3,7 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { Artist } from "../interfaces/Artist";
 import { Tag } from "../interfaces/Tag";
 
-export const tagsSlice = createSlice({
+export const librarySlice = createSlice({
   name: 'library',
   initialState: {
     username: "",
@@ -24,6 +24,6 @@ export const tagsSlice = createSlice({
   },
 })
 
-export const { setArtists } = tagsSlice.actions
+export const { setArtists } = librarySlice.actions
 
-export default tagsSlice.reducer;
+export default librarySlice.reducer;

@@ -1,30 +1,37 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { getAlbums, getArtist } from '../../ApiService';
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import AlbumList from './AlbumList';
 import ArtistDetails from './ArtistDetails';
 import ArtistTagList from './ArtistTagList';
 import { Artist } from '../../interfaces/Artist';
+import {
+  setArtistDetails,
+  setArtistAlbums,
+  setArtistTags,
+} from '../../store/artistSlice';
 import { Album } from '../../interfaces/Album';
-import { Tag } from '../../interfaces/Tag';
 
 function ArtistPage(props: { username: string; artistList: Artist[]; setArtistList: (newList: Artist[]) => void }) {
 
-  const [albumList, setAlbumList] = useState([] as Album[]);
-  const [artistInfo, setArtistInfo] = useState({} as Artist);
-  const [artistTags, setArtistTags] = useState([] as Tag[]);
+  const dispatch = useAppDispatch();
 
-  const {artistId} = useParams();
+  const artistDetails = useAppSelector((state) => state.artist.details);
+  const albumList = useAppSelector((state) => state.artist.albums);
+  const artistTags = useAppSelector((state) => state.artist.tags);
+
+  const { artistId } = useParams();
 
   useEffect(() => {
     if (artistId) {
-      getAlbums(artistId).then(albums => {
-        console.log(albums);
-        setAlbumList([...albums.items])
+      getAlbums(artistId).then(discography => {
+        const albums = discography.items.filter((item: Album & { album_group: string }) => item.album_group === 'album')
+        dispatch(setArtistAlbums(albums));
       });
       getArtist(artistId, props.username).then(artist => {
-        setArtistInfo(artist)
-        setArtistTags(artist.artistTags)
+        dispatch(setArtistDetails(artist));
+        dispatch(setArtistTags(artist.artistTags));
       })
     }
   },[artistId, props.username])
@@ -32,12 +39,10 @@ function ArtistPage(props: { username: string; artistList: Artist[]; setArtistLi
   return (
     <div className="artistPage">
       <div className="artistInfo-container">
-        <ArtistDetails artistInfo={artistInfo} />
+        <ArtistDetails artistDetails={artistDetails} />
         <ArtistTagList
           artistTags={artistTags}
-          setArtistTags={setArtistTags}
-          artistInfo={artistInfo}
-          setArtistInfo={setArtistInfo}
+          artistDetails={artistDetails}
           artistList={props.artistList}
           setArtistList={props.setArtistList}
           username={props.username}

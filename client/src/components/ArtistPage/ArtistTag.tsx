@@ -1,28 +1,30 @@
+import { useAppDispatch } from "../../hooks/reduxHooks";
 import { untagArtist } from '../../ApiService';
 import { Tag } from '../../interfaces/Tag';
 import { Artist } from '../../interfaces/Artist';
+import { setArtistDetails, removeArtistTag } from '../../store/artistSlice';
 
 function ArtistTag(props: { 
   artistTags: Tag[];
   tag: Tag;
-  artistInfo: Artist;
+  artistDetails: Artist;
   artistList: Artist[];
   username: string;
-  setArtistTags: (newList: Tag[]) => void;
   setArtistList: (newList: Artist[]) => void;
-  setArtistInfo: (newList: Artist) => void;
 }) {
+  const dispatch = useAppDispatch();
+
   function removeTag() {
     const newList = props.artistTags
       .map(tag => {return {...tag}})
       .filter(tag => tag.name !== props.tag.name);
-    props.setArtistTags(newList);
-    if (props.artistInfo._id) {
-      untagArtist(props.artistInfo._id, props.tag.name, props.username)
+    dispatch(removeArtistTag(props.tag));
+    if (props.artistDetails._id) {
+      untagArtist(props.artistDetails._id, props.tag.name, props.username)
     }
-    const artistInfoCopy = JSON.parse(JSON.stringify(props.artistInfo))
+    const artistInfoCopy = JSON.parse(JSON.stringify(props.artistDetails))
     artistInfoCopy.artistTags = newList;
-    props.setArtistInfo(artistInfoCopy);
+    dispatch(setArtistDetails(artistInfoCopy));
 
     const artistListCopy = JSON.parse(JSON.stringify(props.artistList));
     const index = artistListCopy.findIndex((artist: Artist) => artist._id === artistInfoCopy.id)
