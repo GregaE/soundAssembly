@@ -1,7 +1,10 @@
 import Album from "./Album";
 import { Album as AlbumInferface } from "../../interfaces/Album";
+import { useAppSelector } from "../../hooks/reduxHooks";
 
-function AlbumList(props: { albumList: Array<AlbumInferface> }) {
+function AlbumList() {
+
+  const albumList = useAppSelector((state) => state.artist.albums);
 
   function renderAlbums(list: Array<AlbumInferface>) {
     return list
@@ -16,7 +19,7 @@ function AlbumList(props: { albumList: Array<AlbumInferface> }) {
 
   // Render buffer to left-align items in last row (flexbox)
   function renderBuffer(n: number) {
-    if(props.albumList && props.albumList.length > 2) {
+    if(albumList && albumList.length > 2) {
       const bufferList = []
       for (let i = 0; i < n; i++) {
         const el = <div className="item buffer" key={i} />;
@@ -28,7 +31,7 @@ function AlbumList(props: { albumList: Array<AlbumInferface> }) {
 
   return (
     <div className="album-container">
-      {renderAlbums(props.albumList)}
+      {renderAlbums(albumList)}
       {renderBuffer(7)}
     </div>
   );

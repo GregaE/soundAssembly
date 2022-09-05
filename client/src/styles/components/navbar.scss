@@ -75,6 +75,10 @@ nav {
           &:hover {
             color: $active;
           }
+
+          &:focus {
+            color: $action;
+          }
         }
       }
   

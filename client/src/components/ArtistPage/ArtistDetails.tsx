@@ -1,16 +1,18 @@
-import { Artist } from "../../interfaces/Artist";
+import { useAppSelector } from "../../hooks/reduxHooks";
 
-function ArtistDetails(props: { artistDetails: Artist }) {
+function ArtistDetails() {
+
+  const artistDetails = useAppSelector((state) => state.artist.details);
 
   const followersFormatted = function () {
-    if (props.artistDetails.followers) {
-      const followers = props.artistDetails.followers.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    if (artistDetails.followers) {
+      const followers = artistDetails.followers.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       return followers;
     }
   }
 
   const artistImage = function () {
-    return (props.artistDetails.images) ? props.artistDetails.images[0].url : "";
+    return (artistDetails.images) ? artistDetails.images[0].url : "";
   }
 
   return (
@@ -22,7 +24,7 @@ function ArtistDetails(props: { artistDetails: Artist }) {
           rgba(0, 0, 0, 0.6)
         ), url(${artistImage()})` }}
       >
-        <h2>{props.artistDetails.name}</h2>
+        <h2>{artistDetails.name}</h2>
         <div>Followers: {followersFormatted()}</div>
       </div>
     </div>

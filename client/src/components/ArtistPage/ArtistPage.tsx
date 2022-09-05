@@ -16,10 +16,7 @@ import { Album } from '../../interfaces/Album';
 function ArtistPage(props: { username: string; artistList: Artist[]; setArtistList: (newList: Artist[]) => void }) {
 
   const dispatch = useAppDispatch();
-
   const artistDetails = useAppSelector((state) => state.artist.details);
-  const albumList = useAppSelector((state) => state.artist.albums);
-  const artistTags = useAppSelector((state) => state.artist.tags);
 
   const { artistId } = useParams();
 
@@ -34,21 +31,20 @@ function ArtistPage(props: { username: string; artistList: Artist[]; setArtistLi
         dispatch(setArtistTags(artist.artistTags));
       })
     }
-  },[artistId, props.username])
+  },[artistId, dispatch, props.username])
 
   return (
     <div className="artistPage">
       <div className="artistInfo-container">
-        <ArtistDetails artistDetails={artistDetails} />
+        <ArtistDetails />
         <ArtistTagList
-          artistTags={artistTags}
           artistDetails={artistDetails}
           artistList={props.artistList}
           setArtistList={props.setArtistList}
           username={props.username}
         />
       </div>
-      <AlbumList albumList={albumList}></AlbumList>
+      <AlbumList />
     </div>
   );
 }

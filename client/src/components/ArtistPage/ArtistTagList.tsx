@@ -10,13 +10,13 @@ import { Tag } from '../../interfaces/Tag';
 import { addArtistTag } from '../../store/artistSlice';
 
 function ArtistTagList(props: { 
-  artistTags: Tag[];
   artistDetails: Artist;
   artistList: Artist[];
   setArtistList: (newList: Artist[]) => void;
   username: string;
 }) {
   const dispatch = useAppDispatch();
+  const artistTags = useAppSelector((state) => state.artist.tags);
   const tags = useAppSelector((state) => state.tags.tags);
 
   const [inputState, setInputClass] = useState("");
@@ -32,7 +32,7 @@ function ArtistTagList(props: {
           return <ArtistTag
             tag={tag}
             key={tag.name}
-            artistTags={props.artistTags}
+            artistTags={artistTags}
             artistDetails={props.artistDetails}
             artistList={props.artistList}
             setArtistList={props.setArtistList}
@@ -64,7 +64,7 @@ function ArtistTagList(props: {
     if (event.keyCode === 13) {
       const input = (event.target as HTMLInputElement).value;
       // Prevent tagging artist twice with same tag
-      if (props.artistTags.some(tag => tag.name === input.toLowerCase())) {
+      if (artistTags.some(tag => tag.name === input.toLowerCase())) {
         alert("The tag already exists on profile")
       }
       else {
@@ -103,7 +103,7 @@ function ArtistTagList(props: {
     <div className="artistTagList">
       <div className="tag-header">Current tags:</div>
       <div className="tag-container">
-        {renderTags(props.artistTags)}
+        {renderTags(artistTags)}
       </div>
       <div className="tag-input">
         <button className={buttonState} onClick={toggleExpand}>Tag Artist</button>
