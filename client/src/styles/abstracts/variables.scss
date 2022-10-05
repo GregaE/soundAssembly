@@ -22,8 +22,6 @@ $border-radius: 500px;
 
 // MIXINS
 
-// Button
-
 @mixin btn($bg: $action, $color: $light) {
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -51,8 +49,6 @@ $border-radius: 500px;
   }
 }
 
-// Tag components
-
 @mixin tag {
   background-color: $action;
   width: max-content;
@@ -65,16 +61,14 @@ $border-radius: 500px;
   text-transform: capitalize;
 }
 
-// Container
-
-@mixin itemContainer($bg: $action, $color: $light) {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  gap: 1.5rem;
+@mixin itemGrid($bg: $action, $color: $light) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, max(220px));
+  justify-content: space-around;
+  gap: 2rem;
   line-height: 2.2rem;
+  padding: 10px 25px;
 
-  // Remove link decoration
   a {
     text-decoration: none;
     color: $light;
@@ -116,11 +110,4 @@ $border-radius: 500px;
       width: 200px;
     }
   }
-
-  .buffer {
-    width: 200px;
-    height: 200px;
-    visibility: hidden;
-  }
-
 }

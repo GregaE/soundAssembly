@@ -114,7 +114,7 @@ option {
 }
 
 .album-container {
-  @include itemContainer;
+  @include itemGrid;
 
   padding-bottom: 0px !important;
 

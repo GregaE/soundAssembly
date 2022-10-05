@@ -7,7 +7,7 @@ import ArtistList from "./ArtistList";
 import ArtistPage from "../ArtistPage/ArtistPage";
 import { getLibrary, getUser } from '../../ApiService';
 import { login, refresh } from '../../ApiService';
-import { useAppSelector, useAppDispatch } from "../../hooks/reduxHooks";
+import { useAppDispatch } from "../../hooks/reduxHooks";
 import { setTags } from '../../store/tagsSlice';
 import { Tag } from '../../interfaces/Tag';
 import { Artist } from '../../interfaces/Artist';
@@ -15,8 +15,6 @@ import { Artist } from '../../interfaces/Artist';
 function Dashboard(props: { code: string; }) {
 
   const dispatch = useAppDispatch();
-
-  const tags = useAppSelector((state) => state.tags.tags);
 
   const [artistList, setArtistList] = useState([] as Artist[]);
   const [username, setUsername] = useState("");

@@ -20,6 +20,10 @@ body {
   font-size: 1.7rem;
 }
 
+main {
+  width: 100%;
+}
+
 button {
   @include btn($action, $light);
 }
