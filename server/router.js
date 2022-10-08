@@ -35,7 +35,7 @@ router.get('/tryme', async (req, res) => {
   try {
     res.send({
       "hello": "success"
-  });
+    });
   } catch (error) {
     console.error(error);
     res.status(500);

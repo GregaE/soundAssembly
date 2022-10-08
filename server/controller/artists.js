@@ -4,9 +4,12 @@ const Library = require('../model/librarySchema.js');
 
 exports.getFollowedArtists = async (req, res) => {
   try {
-    const {username} = req.body;
-    const artists = await Library.find({username: username});
-    res.send(artists);
+    const limit = parseInt(req.query.pageSize);
+    const slicePosition = parseInt(req.query.pageIndex) * limit;
+    const library = await Library
+      .find( {}, { artists: { $slice: [ slicePosition, limit ] } } )
+    console.log(library);
+    res.send(library[0].artists);
   } catch (error) {
     console.error(error);
     res.status(500);
