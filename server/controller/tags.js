@@ -1,7 +1,5 @@
 const Library = require('../model/librarySchema.js');
 
-// Get all tags in the account
-
 exports.getTags = async (req, res) => {
   try {
     const tagsData = await Library.find({username: req.params.username}, { tags: 1 });
@@ -11,8 +9,6 @@ exports.getTags = async (req, res) => {
     res.status(500);
   }
 }
-
-// Create a new tag
 
 exports.createTag = async (req, res) => {
   try {
@@ -29,8 +25,6 @@ exports.createTag = async (req, res) => {
     res.status(500);
   }
 }
-
-// Add new tag to artist
 
 exports.tagArtist = async (req, res) => {
   try {
@@ -60,8 +54,6 @@ exports.tagArtist = async (req, res) => {
     res.status(500);
   }
 }
-
-// Untag artist
 
 exports.untagArtist = async (req, res) => {
   try {

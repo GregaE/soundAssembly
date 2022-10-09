@@ -11,7 +11,7 @@ const router = Router();
 router.post('/login', authorize);
 router.get('/refresh', refreshToken);
 
-// Featch followed artists for account and create account instance in db
+// Fetch followed artists for account and create account instance in db
 router.post('/importLibrary/:username', importLibrary);
 
 // FROM DB
