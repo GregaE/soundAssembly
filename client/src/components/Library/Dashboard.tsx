@@ -7,17 +7,21 @@ import ArtistList from "./ArtistList";
 import ArtistPage from "../ArtistPage/ArtistPage";
 import { getLibrary, getUser } from '../../ApiService';
 import { login, refresh } from '../../ApiService';
-import { useAppDispatch } from "../../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { setTags } from '../../store/tagsSlice';
 import { Tag } from '../../interfaces/Tag';
 import { Artist } from '../../interfaces/Artist';
+import {
+  setUsername,
+  setDisplayName,
+} from '../../store/userSlice';
 
 function Dashboard(props: { code: string; }) {
 
   const dispatch = useAppDispatch();
+  const username = useAppSelector((state) => state.user.username);
 
   const [artistList, setArtistList] = useState([] as Artist[]);
-  const [username, setUsername] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
   const [expiresIn, setExpiresIn] = useState(0);
@@ -27,15 +31,19 @@ function Dashboard(props: { code: string; }) {
   useEffect(()=> {
     login(props.code)
       .then(res => {
+        console.log(res);
         setAccessToken(res.accessToken)
         setRefreshToken(res.refreshToken)
         setExpiresIn(res.expiresIn)
         sessionStorage.setItem('token', res.accessToken)
-        getUser().then(account => setUsername(account.display_name))
+        getUser().then(account => {
+          dispatch(setUsername(account.id));
+          dispatch(setDisplayName(account.display_name));
+        })
         window.history.pushState({}, "/")
       })
       .catch(() => {browserWindow.location = '/'})
-  },[browserWindow, props.code])
+  },[browserWindow, dispatch, props.code])
 
   useEffect(()=> {
     if(!refreshToken || !expiresIn) return
@@ -68,7 +76,7 @@ function Dashboard(props: { code: string; }) {
       }
     }
     fetchLibrary()
-  },[setArtistList, setUsername, username, dispatch])
+  },[setArtistList, username, dispatch])
 
   return (
     <div>
