@@ -4,31 +4,29 @@ const Library = require('../model/librarySchema.js');
 
 exports.getFollowedArtists = async (req, res) => {
   try {
-    const limit = parseInt(req.query.pageSize ?? 20) ;
+    const limit = parseInt(req.query.pageSize ?? 30) ;
     const offset = parseInt(req.query.pageIndex ?? 0);
-    const { tags } = req.body;
-    const library = await Library
-      .aggregate([
-        { $match: { username: req.params.username}},
-        { $unwind: '$artists'},
-        { $sort: { 'artists.name': 1}},
-        { $skip: offset * limit },
-        { $limit: limit },
-        { $match: {
-          "$or": [
-            { tags: [] },
-            { 'artists.artistTags.name': {$in: tags} }
-          ]}
-        },
-        {
-          $group: {
-            _id: "$_id",
-            artists: {
-              $push: "$artists"
-            }
-          }
+    const pipeline = [
+      { $match: { username: req.params.username}},
+      { $unwind: '$artists'},
+      { $sort: { 'artists.name': 1}},
+      { $skip: offset * limit },
+      { $limit: limit }
+    ];
+
+    if (req.body.tags && req.body.tags.length > 0) {
+      pipeline.push({ $match: { 'artists.artistTags.name': {$in: req.body.tags} }})
+    }
+    pipeline.push({
+      $group: {
+        _id: "$_id",
+        artists: {
+          $push: "$artists"
         }
-      ])
+      }
+    })
+    
+    const library = await Library.aggregate(pipeline);
     res.send(library);
   } catch (error) {
     console.error(error);
