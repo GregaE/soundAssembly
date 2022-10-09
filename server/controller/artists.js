@@ -4,12 +4,32 @@ const Library = require('../model/librarySchema.js');
 
 exports.getFollowedArtists = async (req, res) => {
   try {
-    const limit = parseInt(req.query.pageSize);
-    const slicePosition = parseInt(req.query.pageIndex) * limit;
+    const limit = parseInt(req.query.pageSize ?? 20) ;
+    const offset = parseInt(req.query.pageIndex ?? 0);
+    const { tags } = req.body;
     const library = await Library
-      .find( {}, { artists: { $slice: [ slicePosition, limit ] } } )
-    console.log(library);
-    res.send(library[0].artists);
+      .aggregate([
+        { $match: { username: req.params.username}},
+        { $unwind: '$artists'},
+        { $sort: { 'artists.name': 1}},
+        { $skip: offset * limit },
+        { $limit: limit },
+        { $match: {
+          "$or": [
+            { tags: [] },
+            { 'artists.artistTags.name': {$in: tags} }
+          ]}
+        },
+        {
+          $group: {
+            _id: "$_id",
+            artists: {
+              $push: "$artists"
+            }
+          }
+        }
+      ])
+    res.send(library);
   } catch (error) {
     console.error(error);
     res.status(500);
