@@ -48,6 +48,10 @@ const getLibrary = (username: string) => {
   return fetchRequest(`/getLibrary/${username}`)
 }
 
+const getArtists = (username: string) => {
+  return fetchRequest(`/artists/${username}`)
+}
+
 const getArtist = (artistId: string, username: string) => {
   return fetchRequest(`/artists/${artistId}/${username}`)
 }

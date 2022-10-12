@@ -15,16 +15,16 @@ export const userSlice = createSlice({
       state.username = action.payload;
     },
     setDisplayName(state, action: PayloadAction<string>) {
-      state.username = action.payload;
+      state.displayName = action.payload;
     },
     setAccessToken(state, action: PayloadAction<string>) {
-      state.username = action.payload;
+      state.accessToken = action.payload;
     },
     setRefreshToken(state, action: PayloadAction<string>) {
-      state.username = action.payload;
+      state.refreshToken = action.payload;
     },
-    setExpiresIn(state, action: PayloadAction<string>) {
-      state.username = action.payload;
+    setExpiresIn(state, action: PayloadAction<number>) {
+      state.expiresIn = action.payload as number;
     },
   },
 })

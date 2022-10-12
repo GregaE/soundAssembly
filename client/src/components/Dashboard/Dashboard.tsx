@@ -11,10 +11,8 @@ import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { setTags } from '../../store/tagsSlice';
 import { Tag } from '../../interfaces/Tag';
 import { Artist } from '../../interfaces/Artist';
-import {
-  setUsername,
-  setDisplayName,
-} from '../../store/userSlice';
+import { setUsername, setDisplayName } from '../../store/userSlice';
+import { setArtists } from '../../store/librarySlice';
 
 function Dashboard(props: { code: string; }) {
 
@@ -67,6 +65,7 @@ function Dashboard(props: { code: string; }) {
       if (username) {
         const userLibrary = await getLibrary(username);
         if (userLibrary && userLibrary.length > 0) {
+          // dispatch(setArtists())
           setArtistList(userLibrary[0].artists);
           userLibrary[0].tags.forEach((tag: Tag) => tag.status = "inactive");
           if (userLibrary[0]) {
@@ -82,8 +81,6 @@ function Dashboard(props: { code: string; }) {
     <div>
       <NavBar
         setArtistList={setArtistList}
-        setUsername={setUsername}
-        username={username}
         accessToken={accessToken}
       />
       <div className="dashboard">
