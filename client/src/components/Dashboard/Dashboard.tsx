@@ -5,7 +5,7 @@ import SideBar from '../SideBar/SideBar';
 import NavBar from '../NavBar/NavBar';
 import ArtistList from "./ArtistList";
 import ArtistPage from "../ArtistPage/ArtistPage";
-import { getLibrary, getUser } from '../../ApiService';
+import { getArtists, getLibrary, getUser, getTags } from '../../ApiService';
 import { login, refresh } from '../../ApiService';
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { setTags } from '../../store/tagsSlice';
@@ -18,6 +18,7 @@ function Dashboard(props: { code: string; }) {
 
   const dispatch = useAppDispatch();
   const username = useAppSelector((state) => state.user.username);
+  const artists = useAppSelector((state) => state.library.artists);
 
   const [artistList, setArtistList] = useState([] as Artist[]);
   const [accessToken, setAccessToken] = useState("");
@@ -63,19 +64,25 @@ function Dashboard(props: { code: string; }) {
     // if account has existing library
     async function fetchLibrary() {
       if (username) {
+        const tags = await getTags(username);
         const userLibrary = await getLibrary(username);
+        const artists = await getArtists(username);
+        if (tags && tags.length) {
+          dispatch(setTags(tags));
+        }
+        dispatch(setTags(userLibrary[0].tags));
+        if (artists.length) {
+          dispatch(setArtists(artists))
+        }
         if (userLibrary && userLibrary.length > 0) {
-          // dispatch(setArtists())
           setArtistList(userLibrary[0].artists);
-          userLibrary[0].tags.forEach((tag: Tag) => tag.status = "inactive");
-          if (userLibrary[0]) {
-            dispatch(setTags(userLibrary[0].tags))
-          }
         }
       }
     }
     fetchLibrary()
   },[setArtistList, username, dispatch])
+
+  console.log(artists);
 
   return (
     <div>
@@ -89,7 +96,6 @@ function Dashboard(props: { code: string; }) {
           <Routes>
             <Route path="/" element={
               <ArtistList
-                artistList={artistList}
                 username={username}
             />} />
             <Route path="/artist/:artistId" element={

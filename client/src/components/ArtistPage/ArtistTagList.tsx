@@ -70,7 +70,7 @@ function ArtistTagList(props: {
       else {
         // Update DB and update artist tag list
         tagArtist(props.artistDetails.id, input, props.username);
-        dispatch(addArtistTag({name: input, status: 'inactive'}))
+        dispatch(addArtistTag({ name: input }))
         const artistInfoCopy = JSON.parse(JSON.stringify(props.artistDetails))
         // setting ArtistList need to recheck - should not be necessary
         const artistListCopy = JSON.parse(JSON.stringify(props.artistList));
@@ -81,7 +81,7 @@ function ArtistTagList(props: {
         (event.target as HTMLInputElement).value = "";
         // Create new tag 'global' tag if it doesn't exist
         if (tags.every(tag => tag.name !== input.toLowerCase())) {
-          dispatch(addTag({name: input, status: 'inactive'}))
+          dispatch(addTag({ name: input }))
           createTag(input, props.username);
         }
       }

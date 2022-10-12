@@ -1,4 +1,7 @@
 import axios from "axios";
+import { Tag } from "./interfaces/Tag";
+import { Artist } from "./interfaces/Artist";
+import { Album } from "./interfaces/Album";
 // DB requests
 
 const base_url = process.env.REACT_APP_SERVER_URL
@@ -48,17 +51,21 @@ const getLibrary = (username: string) => {
   return fetchRequest(`/getLibrary/${username}`)
 }
 
-const getArtists = (username: string) => {
+const getArtists = (username: string): Promise<Array<Artist>> => {
   return fetchRequest(`/artists/${username}`)
 }
 
-const getArtist = (artistId: string, username: string) => {
+const getArtist = (artistId: string, username: string): Promise<Artist> => {
   return fetchRequest(`/artists/${artistId}/${username}`)
 }
 
 // Tag management
 
-const createTag = (tagName: string, username: string) => {
+const getTags = (username: string): Promise<Array<Tag>> => {
+  return fetchRequest(`/tags/${username}`)
+}
+
+const createTag = (tagName: string, username: string): Promise<void> => {
   return fetchRequest(`/tags/${username}`, {
     method: 'POST',
     headers: {
@@ -68,7 +75,7 @@ const createTag = (tagName: string, username: string) => {
   })
 }
 
-const tagArtist = (artistId: string, tagName: string, username: string) => {
+const tagArtist = (artistId: string, tagName: string, username: string): Promise<void> => {
   return fetchRequest(`/tags/add/${artistId}/${username}`, {
     method: 'PUT',
     headers: {
@@ -78,7 +85,7 @@ const tagArtist = (artistId: string, tagName: string, username: string) => {
   })
 }
 
-const untagArtist = (artistId: string, tagName: string, username: string) => {
+const untagArtist = (artistId: string, tagName: string, username: string): Promise<void> => {
   return fetchRequest(`/tags/remove/${artistId}/${username}`, {
     method: 'PUT',
     headers: {
@@ -112,4 +119,17 @@ async function getUser(req?: Request, res?: Response) {
   return albums;
 }
 
-export { login, refresh, importLibrary, getLibrary, getAlbums, getArtist, createTag, tagArtist, untagArtist, getUser };
+export {
+  login,
+  refresh,
+  importLibrary,
+  getLibrary,
+  getAlbums,
+  getArtists,
+  getArtist,
+  getTags,
+  createTag,
+  tagArtist,
+  untagArtist,
+  getUser,
+};

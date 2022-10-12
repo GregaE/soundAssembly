@@ -2,7 +2,18 @@ const Library = require('../model/librarySchema.js');
 
 exports.getTags = async (req, res) => {
   try {
-    const tagsData = await Library.find({username: req.params.username}, { tags: 1 });
+    const tagsData = await Library.aggregate([
+      { $match: { username: req.params.username}},
+      { $unwind: '$tags'},
+      { $sort: { 'tags.name': 1}},
+      { $group: {
+          _id: "$_id",
+          tags: {
+            $push: "$tags"
+          }
+        }
+      }
+    ])
     res.send(tagsData[0].tags);
   } catch (error) {
     console.error(error);

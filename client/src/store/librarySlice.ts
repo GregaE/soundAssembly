@@ -6,14 +6,14 @@ export const librarySlice = createSlice({
   name: 'library',
   initialState: {
     artists: [] as Array<Artist>,
-    artistCurrentPage: 1,
-    artistTotalPages: 1,
-    artistTotal: 0,
-    artistPageSize: 30,
+    artistsCurrentPage: 1,
+    artistsTotalPages: 1,
+    artistsTotal: 0,
+    artistsPageSize: 30,
   },
   reducers: {
     setArtists(state, action: PayloadAction<Array<Artist>>) {
-      state.artists = action.payload
+      state.artists.push(...action.payload)
     },
   },
 })

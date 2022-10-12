@@ -14,9 +14,23 @@ export const tagsSlice = createSlice({
     setTags(state, action: PayloadAction<Array<Tag>>) {
       state.tags = action.payload
     },
+    toggleTag(state, action: PayloadAction<string>) {
+      state.tags = state.tags.map((tag: Tag) => {
+        if (tag._id === action.payload) {
+          tag.active = !tag.active;
+          return tag;
+        }
+        return tag;
+      });
+      
+    },
   },
 })
 
-export const { addTag, setTags } = tagsSlice.actions
+export const {
+  addTag,
+  setTags,
+  toggleTag,
+} = tagsSlice.actions
 
 export default tagsSlice.reducer
