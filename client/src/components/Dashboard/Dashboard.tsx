@@ -9,10 +9,9 @@ import { getArtists, getLibrary, getUser, getTags } from '../../ApiService';
 import { login, refresh } from '../../ApiService';
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { setTags } from '../../store/tagsSlice';
-import { Tag } from '../../interfaces/Tag';
 import { Artist } from '../../interfaces/Artist';
 import { setUsername, setDisplayName } from '../../store/userSlice';
-import { setArtists } from '../../store/librarySlice';
+import { setArtists, fetchArtists } from '../../store/librarySlice';
 
 function Dashboard(props: { code: string; }) {
 
@@ -61,21 +60,12 @@ function Dashboard(props: { code: string; }) {
 
 
   useEffect(() => {
-    // if account has existing library
     async function fetchLibrary() {
       if (username) {
         const tags = await getTags(username);
-        const userLibrary = await getLibrary(username);
-        const artists = await getArtists(username);
+        dispatch(fetchArtists(username));
         if (tags && tags.length) {
           dispatch(setTags(tags));
-        }
-        dispatch(setTags(userLibrary[0].tags));
-        if (artists.length) {
-          dispatch(setArtists(artists))
-        }
-        if (userLibrary && userLibrary.length > 0) {
-          setArtistList(userLibrary[0].artists);
         }
       }
     }
