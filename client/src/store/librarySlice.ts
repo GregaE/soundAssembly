@@ -6,7 +6,7 @@ import { Tag } from "../interfaces/Tag";
 
 export const fetchArtists = createAsyncThunk(
   'artists',
-  async (username: string, { getState }) => {
+  async (_, { getState }) => {
     const { library, tags } = getState() as { 
       library: { artistsPageSize: number, artistsCurrentPage: number },
       tags: { tags: Array<Tag> }
@@ -16,7 +16,6 @@ export const fetchArtists = createAsyncThunk(
       return acc;
     }, [] as Array<string>);
     const response = await getArtists(
-      username,
       library.artistsPageSize,
       library.artistsCurrentPage,
       tagFilters

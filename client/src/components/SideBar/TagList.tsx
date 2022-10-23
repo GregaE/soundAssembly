@@ -4,7 +4,7 @@ import { addTag } from '../../store/tagsSlice';
 import SidebarTag from './SidebarTag'
 import { Tag } from '../../interfaces/Tag';
 
-function TagList(props: { username: string; }) {
+function TagList() {
   const dispatch = useAppDispatch();
   const tags = useAppSelector((state) => state.tags.tags);
 
@@ -26,7 +26,7 @@ function TagList(props: { username: string; }) {
   async function submitTag(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.keyCode === 13) {
       const input = (event.target as HTMLInputElement).value;
-      await createTag(input, props.username);
+      await createTag(input);
       dispatch(addTag({name: input, status: 'inactive'} as Tag));
       (event.target as HTMLInputElement).value = "";
     }

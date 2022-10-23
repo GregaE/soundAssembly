@@ -26,12 +26,12 @@ function ArtistPage(props: { username: string; artistList: Artist[]; setArtistLi
         const albums = discography.items.filter((item: Album & { album_group: string }) => item.album_group === 'album')
         dispatch(setArtistAlbums(albums));
       });
-      getArtist(artistId, props.username).then(artist => {
+      getArtist(artistId).then(artist => {
         dispatch(setArtistDetails(artist));
         dispatch(setArtistTags(artist.artistTags));
       })
     }
-  },[artistId, dispatch, props.username])
+  },[artistId, dispatch])
 
   return (
     <div className="artistPage">
@@ -41,7 +41,6 @@ function ArtistPage(props: { username: string; artistList: Artist[]; setArtistLi
           artistDetails={artistDetails}
           artistList={props.artistList}
           setArtistList={props.setArtistList}
-          username={props.username}
         />
       </div>
       <AlbumList />

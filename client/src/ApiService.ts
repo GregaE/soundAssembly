@@ -1,6 +1,14 @@
 import axios from "axios";
 import { Tag } from "./interfaces/Tag";
 import { Artist } from "./interfaces/Artist";
+import { RootState } from "./store/storeConfig";
+import { EnhancedStore } from "@reduxjs/toolkit";
+
+let store: EnhancedStore<RootState>
+export const injectStore = (_store: EnhancedStore<RootState>) => {
+ store = _store
+}
+
 // DB requests
 
 const base_url = process.env.REACT_APP_SERVER_URL
@@ -34,8 +42,8 @@ async function refresh(refreshToken: string) {
 
 // Import/refresh library via Spotify
 
-const importLibrary = (accessToken: string, username: string) => {
-  return fetchRequest(`/importLibrary/${username}`, {
+const importLibrary = (accessToken: string) => {
+  return fetchRequest(`/importLibrary/${store.getState().user.username}`, {
     method: 'POST',
     headers: {
       "Content-Type": "application/json"
@@ -46,31 +54,30 @@ const importLibrary = (accessToken: string, username: string) => {
 
 // Fetch existing list of followed artists and tags from db
 
-const getLibrary = (username: string) => {
-  return fetchRequest(`/getLibrary/${username}`)
+const getLibrary = () => {
+  return fetchRequest(`/getLibrary/${store.getState().user.username}`)
 }
 
 const getArtists = (
-  username: string,
   pageSize?: number,
   pageIndex?: number,
   tags?: Array<string>,
 ): Promise<Array<Artist>> => {
-  return fetchRequest(`/artists/${username}?pageSize=${pageSize}&pageIndex=${pageIndex}&tags=${tags?.join()}`)
+  return fetchRequest(`/artists/${store.getState().user.username}?pageSize=${pageSize}&pageIndex=${pageIndex}&tags=${tags?.join()}`)
 }
 
-const getArtist = (artistId: string, username: string): Promise<Artist> => {
-  return fetchRequest(`/artists/${artistId}/${username}`)
+const getArtist = (artistId: string): Promise<Artist> => {
+  return fetchRequest(`/artists/${artistId}/${store.getState().user.username}`)
 }
 
 // Tag management
 
-const getTags = (username: string): Promise<Array<Tag>> => {
-  return fetchRequest(`/tags/${username}`)
+const getTags = (): Promise<Array<Tag>> => {
+  return fetchRequest(`/tags/${store.getState().user.username}`)
 }
 
-const createTag = (tagName: string, username: string): Promise<void> => {
-  return fetchRequest(`/tags/${username}`, {
+const createTag = (tagName: string): Promise<void> => {
+  return fetchRequest(`/tags/${store.getState().user.username}`, {
     method: 'POST',
     headers: {
       "Content-Type": "application/json"
@@ -79,8 +86,8 @@ const createTag = (tagName: string, username: string): Promise<void> => {
   })
 }
 
-const tagArtist = (artistId: string, tagName: string, username: string): Promise<void> => {
-  return fetchRequest(`/tags/add/${artistId}/${username}`, {
+const tagArtist = (artistId: string, tagName: string): Promise<void> => {
+  return fetchRequest(`/tags/add/${artistId}/${store.getState().user.username}`, {
     method: 'PUT',
     headers: {
       "Content-Type": "application/json"
@@ -89,8 +96,8 @@ const tagArtist = (artistId: string, tagName: string, username: string): Promise
   })
 }
 
-const untagArtist = (artistId: string, tagName: string, username: string): Promise<void> => {
-  return fetchRequest(`/tags/remove/${artistId}/${username}`, {
+const untagArtist = (artistId: string, tagName: string): Promise<void> => {
+  return fetchRequest(`/tags/remove/${artistId}/${store.getState().user.username}`, {
     method: 'PUT',
     headers: {
       "Content-Type": "application/json"

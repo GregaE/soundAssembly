@@ -2,11 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from "react-router-dom";
 import { store } from './store/storeConfig'
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 
 import './styles/abstracts/index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+import {injectStore} from "./ApiService";
+injectStore(store);
 
 ReactDOM.render(
   <React.StrictMode>

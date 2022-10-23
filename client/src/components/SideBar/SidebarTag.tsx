@@ -9,7 +9,7 @@ function SidebarTag(props: { tags: Tag[]; tag: Tag }) {
   const setTagFilter = () => {
     dispatch(toggleTag(props.tag._id as string));
     // TO DO: fix username
-    dispatch(fetchArtists('mavienajera'));
+    dispatch(fetchArtists());
   };
 
   return (

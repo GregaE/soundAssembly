@@ -9,7 +9,6 @@ function ArtistTag(props: {
   tag: Tag;
   artistDetails: Artist;
   artistList: Artist[];
-  username: string;
   setArtistList: (newList: Artist[]) => void;
 }) {
   const dispatch = useAppDispatch();
@@ -20,7 +19,7 @@ function ArtistTag(props: {
       .filter(tag => tag.name !== props.tag.name);
     dispatch(removeArtistTag(props.tag));
     if (props.artistDetails._id) {
-      untagArtist(props.artistDetails._id, props.tag.name, props.username)
+      untagArtist(props.artistDetails._id, props.tag.name)
     }
     const artistInfoCopy = JSON.parse(JSON.stringify(props.artistDetails))
     artistInfoCopy.artistTags = newList;

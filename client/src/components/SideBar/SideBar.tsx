@@ -6,9 +6,7 @@ function SideBar(props: { username: string; }) {
     <aside>
       <div className="sideBar">
         <div>
-          <TagList
-            username={props.username}
-          />
+          <TagList />
         </div>
       </div>
       <div className="sideBar extra">

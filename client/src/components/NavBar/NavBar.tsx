@@ -17,7 +17,7 @@ export default function NavBar(props: {
 
   const importArtists = async () => {
     console.log('start')
-    await importLibrary(props.accessToken, username).then(account => {
+    await importLibrary(props.accessToken).then(account => {
       props.setArtistList(account.artists);
       // Create the tag list and set the status the default inactive status
       const newTagList = account.tags.map(function(tag: Tag) {

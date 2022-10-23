@@ -13,7 +13,6 @@ function ArtistTagList(props: {
   artistDetails: Artist;
   artistList: Artist[];
   setArtistList: (newList: Artist[]) => void;
-  username: string;
 }) {
   const dispatch = useAppDispatch();
   const artistTags = useAppSelector((state) => state.artist.tags);
@@ -36,7 +35,6 @@ function ArtistTagList(props: {
             artistDetails={props.artistDetails}
             artistList={props.artistList}
             setArtistList={props.setArtistList}
-            username={props.username}
             />
       })
     }
@@ -69,7 +67,7 @@ function ArtistTagList(props: {
       }
       else {
         // Update DB and update artist tag list
-        tagArtist(props.artistDetails.id, input, props.username);
+        tagArtist(props.artistDetails.id, input);
         dispatch(addArtistTag({ name: input }))
         const artistInfoCopy = JSON.parse(JSON.stringify(props.artistDetails))
         // setting ArtistList need to recheck - should not be necessary
@@ -82,7 +80,7 @@ function ArtistTagList(props: {
         // Create new tag 'global' tag if it doesn't exist
         if (tags.every(tag => tag.name !== input.toLowerCase())) {
           dispatch(addTag({ name: input }))
-          createTag(input, props.username);
+          createTag(input);
         }
       }
     }

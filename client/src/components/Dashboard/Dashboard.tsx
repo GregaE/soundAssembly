@@ -61,11 +61,9 @@ function Dashboard(props: { code: string; }) {
 
   useEffect(() => {
     async function fetchLibrary() {
-      if (username) {
-        const tags = await getTags(username);
-        if (tags && tags.length) dispatch(setTags(tags));
-        dispatch(fetchArtists(username));
-      }
+      const tags = await getTags();
+      if (tags && tags.length) dispatch(setTags(tags));
+      dispatch(fetchArtists());
     }
     fetchLibrary()
   },[setArtistList, username, dispatch])
