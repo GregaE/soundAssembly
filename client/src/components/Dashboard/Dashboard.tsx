@@ -5,13 +5,13 @@ import SideBar from '../SideBar/SideBar';
 import NavBar from '../NavBar/NavBar';
 import ArtistList from "./ArtistList";
 import ArtistPage from "../ArtistPage/ArtistPage";
-import { getArtists, getLibrary, getUser, getTags } from '../../ApiService';
+import { getUser, getTags } from '../../ApiService';
 import { login, refresh } from '../../ApiService';
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { setTags } from '../../store/tagsSlice';
 import { Artist } from '../../interfaces/Artist';
 import { setUsername, setDisplayName } from '../../store/userSlice';
-import { setArtists, fetchArtists } from '../../store/librarySlice';
+import { fetchArtists } from '../../store/librarySlice';
 
 function Dashboard(props: { code: string; }) {
 
@@ -63,10 +63,8 @@ function Dashboard(props: { code: string; }) {
     async function fetchLibrary() {
       if (username) {
         const tags = await getTags(username);
+        if (tags && tags.length) dispatch(setTags(tags));
         dispatch(fetchArtists(username));
-        if (tags && tags.length) {
-          dispatch(setTags(tags));
-        }
       }
     }
     fetchLibrary()

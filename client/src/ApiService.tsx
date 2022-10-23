@@ -1,7 +1,6 @@
 import axios from "axios";
 import { Tag } from "./interfaces/Tag";
 import { Artist } from "./interfaces/Artist";
-import { Album } from "./interfaces/Album";
 // DB requests
 
 const base_url = process.env.REACT_APP_SERVER_URL
@@ -51,8 +50,13 @@ const getLibrary = (username: string) => {
   return fetchRequest(`/getLibrary/${username}`)
 }
 
-const getArtists = (username: string): Promise<Array<Artist>> => {
-  return fetchRequest(`/artists/${username}`)
+const getArtists = (
+  username: string,
+  pageSize?: number,
+  pageIndex?: number,
+  tags?: Array<string>,
+): Promise<Array<Artist>> => {
+  return fetchRequest(`/artists/${username}?pageSize=${pageSize}&pageIndex=${pageIndex}&tags=${tags?.join()}`)
 }
 
 const getArtist = (artistId: string, username: string): Promise<Artist> => {

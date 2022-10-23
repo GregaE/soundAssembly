@@ -6,25 +6,28 @@ exports.getFollowedArtists = async (req, res) => {
   try {
     const pageSize = parseInt(req.query.pageSize ?? 30) ;
     const pageNum = parseInt(req.query.pageIndex ?? 0);
+    const tags = req.query.tags ? req.query.tags.split(',') : [];
     const pipeline = [
       { $match: { username: req.params.username}},
       { $unwind: '$artists'},
       { $sort: { 'artists.name': 1}},
       { $skip: pageNum * pageSize },
-      { $limit: pageSize }
     ];
 
-    if (req.body.tags && req.body.tags.length > 0) {
-      pipeline.push({ $match: { 'artists.artistTags.name': {$in: req.body.tags} }})
+    if (tags && tags.length > 0) {
+      pipeline.push({ $match: { 'artists.artistTags.name': {$in: tags} }})
     }
-    pipeline.push({
-      $group: {
-        _id: "$_id",
-        artists: {
-          $push: "$artists"
+    pipeline.push(
+      { $limit: pageSize },
+      {
+        $group: {
+          _id: "$_id",
+          artists: {
+            $push: "$artists"
+          }
         }
-      }
-    });
+      },
+    );
     const library = await Library.aggregate(pipeline);
     res.send(library[0].artists);
   } catch (error) {
