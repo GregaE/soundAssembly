@@ -2,7 +2,7 @@ import { useAppSelector } from "../../hooks/reduxHooks";
 import { Artist as ArtistInterface } from "../../interfaces/Artist";
 import Artist from './Artist';
 
-function ArtistList(props: { username: any }) {
+function ArtistList() {
   const artists = useAppSelector((state) => state.library.artists);
 
   function renderArtists(list: ArtistInterface[]) {

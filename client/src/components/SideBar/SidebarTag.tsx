@@ -8,7 +8,6 @@ function SidebarTag(props: { tags: Tag[]; tag: Tag }) {
   const activeClass = () => props.tag.active ? 'active' : 'inactive';
   const setTagFilter = () => {
     dispatch(toggleTag(props.tag._id as string));
-    // TO DO: fix username
     dispatch(fetchArtists());
   };
 

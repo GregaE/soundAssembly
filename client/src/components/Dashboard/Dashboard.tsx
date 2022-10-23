@@ -77,18 +77,16 @@ function Dashboard(props: { code: string; }) {
         accessToken={accessToken}
       />
       <div className="dashboard">
-        <SideBar username={username} />
+        <SideBar />
         <main>
           <Routes>
             <Route path="/" element={
-              <ArtistList
-                username={username}
-            />} />
+              <ArtistList />
+            } />
             <Route path="/artist/:artistId" element={
               <ArtistPage
                 artistList={artistList}
                 setArtistList={setArtistList}
-                username={username}
               />}
             />
           </Routes>
