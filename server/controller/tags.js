@@ -37,6 +37,27 @@ exports.createTag = async (req, res) => {
   }
 }
 
+exports.deleteTag = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const tag = await Library.updateOne({
+      "username": req.params.username
+    },
+    {
+      "$pull": {
+        "tags": {
+          "_id": id
+        }
+      }
+    })
+    res.send(tag)
+    res.status(204);
+  } catch (error) {
+    console.error(error);
+    res.status(500);
+  }
+}
+
 exports.tagArtist = async (req, res) => {
   try {
     const id = req.params.artistId;

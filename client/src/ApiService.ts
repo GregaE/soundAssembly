@@ -88,7 +88,7 @@ const createTag = (tagName: string): Promise<void> => {
 
 const tagArtist = (artistId: string, tagName: string): Promise<void> => {
   return fetchRequest(`/tags/add/${artistId}/${store.getState().user.username}`, {
-    method: 'PUT',
+    method: 'PATCH',
     headers: {
       "Content-Type": "application/json"
     },
@@ -98,7 +98,7 @@ const tagArtist = (artistId: string, tagName: string): Promise<void> => {
 
 const untagArtist = (artistId: string, tagName: string): Promise<void> => {
   return fetchRequest(`/tags/remove/${artistId}/${store.getState().user.username}`, {
-    method: 'PUT',
+    method: 'PATCH',
     headers: {
       "Content-Type": "application/json"
     },
