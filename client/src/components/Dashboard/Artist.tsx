@@ -1,11 +1,19 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { Artist as ArtistProps } from "../../interfaces/Artist";
 
-function Artist(props: { artist: ArtistProps }) {
+function ArtistInner(
+  props: { artist: ArtistProps },
+  ref: React.ForwardedRef<HTMLDivElement>
+) {
   const backgroundUrl = props.artist.images.length ? props.artist.images[0].url : '#';
   
   return (
-    <div className="item" id={props.artist.id}>
+    <div 
+      ref={ref}
+      className="item"
+      id={props.artist.id}
+    >
       <Link to={{ pathname: `/artist/${props.artist.id}` }}>
         <div>
           <div
@@ -21,4 +29,5 @@ function Artist(props: { artist: ArtistProps }) {
   );
 }
 
+const Artist = React.forwardRef(ArtistInner);
 export default Artist;

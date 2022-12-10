@@ -1,13 +1,15 @@
+import React from "react";
 import { useAppSelector } from "../../hooks/reduxHooks";
 import { Artist as ArtistInterface } from "../../interfaces/Artist";
 import Artist from './Artist';
 
-function ArtistList() {
+const ArtistList = React.forwardRef<HTMLDivElement>((props, ref) => {
   const artists = useAppSelector((state) => state.library.artists);
 
   function renderArtists(list: ArtistInterface[]) {
     if (list.length) {
-      return list.map(artist => <Artist artist={artist} key={artist._id} />);
+      return list.map((artist, index) => (list.length === index + 1) ?
+        <Artist ref={ref} artist={artist} key={artist._id} /> : <Artist artist={artist} key={artist._id} />);
     } else {
       return <p>Your library is empty. Click on "Update Library" to import your followed artists.</p>
     }
@@ -22,6 +24,6 @@ function ArtistList() {
       </div>
     </div>
   );
-}
+});
 
 export default ArtistList;

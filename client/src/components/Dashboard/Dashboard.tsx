@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Routes, Route } from "react-router-dom";
 import { Outlet } from 'react-router';
 import SideBar from '../SideBar/SideBar';
@@ -17,7 +17,6 @@ function Dashboard(props: { code: string; }) {
 
   const dispatch = useAppDispatch();
   const username = useAppSelector((state) => state.user.username);
-  const artists = useAppSelector((state) => state.library.artists);
 
   const [artistList, setArtistList] = useState<Artist[]>([]);
   const [accessToken, setAccessToken] = useState("");
@@ -70,12 +69,22 @@ function Dashboard(props: { code: string; }) {
     }
   },[setArtistList, username, dispatch])
 
-  console.log(artists);
-
-  const fetchMore = async () => {
-    dispatch(incrementCurrentPage());
-    dispatch(fetchArtists())
-  };
+  const observer = useRef<IntersectionObserver | null>(null);
+  const lastPostRef = useCallback(
+    (node: HTMLDivElement) => {
+      // if (loading) return;
+      console.log('yes')
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries, options) => {
+        if (entries[0].isIntersecting) {
+          dispatch(incrementCurrentPage());
+          dispatch(fetchArtists())
+        }
+      }, { rootMargin: "0px" });
+      if (node) observer.current.observe(node);
+    },
+    [dispatch]
+  );
 
   return (
     <div>
@@ -88,7 +97,7 @@ function Dashboard(props: { code: string; }) {
         <main>
           <Routes>
             <Route path="/" element={
-              <ArtistList />
+              <ArtistList ref={lastPostRef} />
             } />
             <Route path="/artist/:artistId" element={
               <ArtistPage
@@ -97,7 +106,6 @@ function Dashboard(props: { code: string; }) {
               />}
             />
           </Routes>
-          <button onClick={fetchMore}>fetch more</button>
           <Outlet></Outlet>
         </main>
       </div>
