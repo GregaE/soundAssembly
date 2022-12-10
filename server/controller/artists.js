@@ -10,14 +10,14 @@ exports.getFollowedArtists = async (req, res) => {
     const pipeline = [
       { $match: { username: req.params.username}},
       { $unwind: '$artists'},
-      { $sort: { 'artists.name': 1}},
-      { $skip: pageNum * pageSize },
     ];
 
     if (tags && tags.length > 0) {
       pipeline.push({ $match: { 'artists.artistTags.name': {$in: tags} }})
     }
     pipeline.push(
+      { $sort: { 'artists.name': 1}},
+      { $skip: pageNum * pageSize },
       { $limit: pageSize },
       {
         $group: {
