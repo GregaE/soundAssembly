@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { setTags } from '../../store/tagsSlice';
 import { Artist } from '../../interfaces/Artist';
 import { setUsername, setDisplayName } from '../../store/userSlice';
-import { fetchArtists } from '../../store/librarySlice';
+import { fetchArtists, incrementCurrentPage } from '../../store/librarySlice';
 
 function Dashboard(props: { code: string; }) {
 
@@ -19,7 +19,7 @@ function Dashboard(props: { code: string; }) {
   const username = useAppSelector((state) => state.user.username);
   const artists = useAppSelector((state) => state.library.artists);
 
-  const [artistList, setArtistList] = useState([] as Artist[]);
+  const [artistList, setArtistList] = useState<Artist[]>([]);
   const [accessToken, setAccessToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
   const [expiresIn, setExpiresIn] = useState(0);
@@ -70,6 +70,11 @@ function Dashboard(props: { code: string; }) {
 
   console.log(artists);
 
+  const fetchMore = async () => {
+    dispatch(incrementCurrentPage());
+    dispatch(fetchArtists())
+  };
+
   return (
     <div>
       <NavBar
@@ -90,6 +95,7 @@ function Dashboard(props: { code: string; }) {
               />}
             />
           </Routes>
+          <button onClick={fetchMore}>fetch more</button>
           <Outlet></Outlet>
         </main>
       </div>

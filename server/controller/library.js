@@ -96,7 +96,7 @@ function populateTags(artistList) {
     const artistTags = [];
 
     // List of genres for filtering
-    const genreList = ["rock","metal","punk","jazz","ska","reggae","hip hop","EDM","indie"]
+    const genreList = ["rock","metal","punk","jazz","ska","reggae","hip hop","EDM","indie", "country"]
 
     genreList.forEach(item => {
       if (artistList[artist].genres.some(genre => genre.includes(item))) {

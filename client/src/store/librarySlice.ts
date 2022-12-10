@@ -37,16 +37,31 @@ export const librarySlice = createSlice({
     setArtists(state, action: PayloadAction<Array<Artist>>) {
       state.artists.push(...action.payload)
     },
+    incrementCurrentPage(state) {
+      state.artistsCurrentPage++
+    },
+    setTotalPages(state, action: PayloadAction<number>) {
+      state.artistsTotalPages = action.payload;
+    },
+    resetArtists(state) {
+      state.artists = [];
+      state.artistsCurrentPage = 0;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(fetchArtists.fulfilled, (state, action) => {
       if (action.payload && action.payload.length) {
-        state.artists = action.payload;
+        state.artists.push(...action.payload);
       }
     })
   },
 })
 
-export const { setArtists } = librarySlice.actions
+export const {
+  setArtists,
+  incrementCurrentPage,
+  setTotalPages,
+  resetArtists,
+} = librarySlice.actions
 
 export default librarySlice.reducer;

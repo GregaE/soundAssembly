@@ -1,6 +1,9 @@
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { toggleTag } from '../../store/tagsSlice';
-import { fetchArtists } from '../../store/librarySlice';
+import {
+  fetchArtists,
+  resetArtists,
+} from '../../store/librarySlice';
 import { Tag } from "../../interfaces/Tag";
 
 function SidebarTag(props: { tags: Tag[]; tag: Tag }) {
@@ -8,6 +11,7 @@ function SidebarTag(props: { tags: Tag[]; tag: Tag }) {
   const activeClass = () => props.tag.active ? 'active' : 'inactive';
   const setTagFilter = () => {
     dispatch(toggleTag(props.tag._id as string));
+    dispatch(resetArtists());
     dispatch(fetchArtists());
   };
 
