@@ -60,12 +60,14 @@ function Dashboard(props: { code: string; }) {
 
 
   useEffect(() => {
-    async function fetchLibrary() {
-      const tags = await getTags();
-      if (tags && tags.length) dispatch(setTags(tags));
-      dispatch(fetchArtists());
+    if (username) {
+      const fetchLibrary = async function() {
+        const tags = await getTags();
+        if (tags && tags.length) dispatch(setTags(tags));
+        dispatch(fetchArtists());
+      }
+      fetchLibrary()
     }
-    fetchLibrary()
   },[setArtistList, username, dispatch])
 
   console.log(artists);

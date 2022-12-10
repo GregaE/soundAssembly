@@ -16,14 +16,16 @@ exports.getFollowedArtists = async (req, res) => {
       pipeline.push({ $match: { 'artists.artistTags.name': {$in: tags} }})
     }
     pipeline.push(
-      { $sort: { 'artists.name': 1}},
+      { $sort:
+        { 'artists.name': 1 }
+      },
       { $skip: pageNum * pageSize },
       { $limit: pageSize },
       {
         $group: {
-          _id: "$_id",
+          _id: '$_id',
           artists: {
-            $push: "$artists"
+            $push: '$artists'
           }
         }
       },

@@ -35,8 +35,8 @@ const UserLibrarySchema = new Schema({
     },
   ]
 },
-// Necessary for mongoose not to try to convert object type into string
-  { typeKey: '$type' }
+  // Necessary for mongoose not to try to convert object type into string
+  { typeKey: '$type' },
 );
 
 module.exports = mongoose.model('UserLibrary', UserLibrarySchema)
