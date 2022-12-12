@@ -21,8 +21,7 @@ export const tagsSlice = createSlice({
           return tag;
         }
         return tag;
-      });
-      
+      });    
     },
   },
 })

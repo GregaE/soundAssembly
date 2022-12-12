@@ -17,7 +17,6 @@ function Dashboard(props: { code: string; }) {
 
   const dispatch = useAppDispatch();
   const username = useAppSelector((state) => state.user.username);
-
   const [artistList, setArtistList] = useState<Artist[]>([]);
   const [accessToken, setAccessToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
@@ -73,14 +72,13 @@ function Dashboard(props: { code: string; }) {
   const lastPostRef = useCallback(
     (node: HTMLDivElement) => {
       // if (loading) return;
-      console.log('yes')
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries, options) => {
         if (entries[0].isIntersecting) {
           dispatch(incrementCurrentPage());
           dispatch(fetchArtists())
         }
-      }, { rootMargin: "0px" });
+      }, { rootMargin: "100px" });
       if (node) observer.current.observe(node);
     },
     [dispatch]

@@ -13,7 +13,10 @@ import {
 } from '../../store/artistSlice';
 import { Album } from '../../interfaces/Album';
 
-function ArtistPage(props: { artistList: Artist[]; setArtistList: (newList: Artist[]) => void }) {
+function ArtistPage(props: {
+  artistList: Artist[],
+  setArtistList: (newList: Artist[]) => void,
+}) {
 
   const dispatch = useAppDispatch();
   const artistDetails = useAppSelector((state) => state.artist.details);

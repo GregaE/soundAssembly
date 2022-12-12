@@ -13,7 +13,6 @@ export default function NavBar(props: {
 }) {
   const dispatch = useAppDispatch();
   const displayName = useAppSelector((state) => state.user.displayName);
-  const username = useAppSelector((state) => state.user.username);
 
   const importArtists = async () => {
     console.log('start')

@@ -28,6 +28,8 @@ export const librarySlice = createSlice({
   name: 'library',
   initialState: {
     artists: [] as Array<Artist>,
+    status: 'idle',
+    error: null as string | null | undefined,
     artistsCurrentPage: 0,
     artistsTotalPages: 1,
     artistsTotal: 0,
@@ -49,11 +51,21 @@ export const librarySlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchArtists.fulfilled, (state, action) => {
-      if (action.payload && action.payload.length) {
-        state.artists.push(...action.payload);
-      }
-    })
+    builder
+      .addCase(fetchArtists.pending, (state, action) => {
+        state.status = 'loading'
+      })
+      .addCase(fetchArtists.fulfilled, (state, action) => {
+        state.status = 'succeeded'
+        if (action.payload && action.payload.length) {
+          state.artists.push(...action.payload);
+        }
+        console.log('hey')
+      })
+      .addCase(fetchArtists.rejected, (state, action) => {
+        state.status = 'failed'
+        state.error = action.error.message
+      })
   },
 })
 
