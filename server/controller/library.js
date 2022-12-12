@@ -37,7 +37,7 @@ exports.importLibrary = async (req, res) => {
         .filter(artist => !account[0].artists
           .some(existingArtist => existingArtist.id === artist.id));
       // add tags array to each artist pre-populating specific tags based on the genre
-      const taggedNewArtists = await populateTags(newArtists);
+      const taggedNewArtists = populateTags(newArtists);
       // update account with new followed artists in the DB
       const event = await Library.findOneAndUpdate({username: req.params.username}, {
           $push: {

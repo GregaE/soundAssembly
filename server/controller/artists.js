@@ -31,7 +31,7 @@ exports.getFollowedArtists = async (req, res) => {
       },
     );
     const library = await Library.aggregate(pipeline);
-    res.send(library[0].artists);
+    res.send(library[0] ? library[0].artists : []);
   } catch (error) {
     console.error(error);
     res.status(500);
