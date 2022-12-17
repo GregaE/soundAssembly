@@ -10,17 +10,25 @@ import { login, refresh } from '../../ApiService';
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { setTags } from '../../store/tagsSlice';
 import { Artist } from '../../interfaces/Artist';
-import { setUsername, setDisplayName } from '../../store/userSlice';
+import { 
+  setUsername,
+  setDisplayName,
+  setAccessToken,
+  setRefreshToken,
+  setExpiresIn,
+} from '../../store/userSlice';
 import { fetchArtists, incrementCurrentPage } from '../../store/librarySlice';
+import useImportArtists from '../../hooks/importLibrary';
 
 function Dashboard(props: { code: string; }) {
 
   const dispatch = useAppDispatch();
   const username = useAppSelector((state) => state.user.username);
   const [artistList, setArtistList] = useState<Artist[]>([]);
-  const [accessToken, setAccessToken] = useState("");
-  const [refreshToken, setRefreshToken] = useState("");
-  const [expiresIn, setExpiresIn] = useState(0);
+  const refreshToken = useAppSelector((state) => state.user.refreshToken);
+  const expiresIn = useAppSelector((state) => state.user.expiresIn);
+
+  const { importArtists, isLoading, error } = useImportArtists();
 
   const browserWindow: Window = window;
 
@@ -28,9 +36,9 @@ function Dashboard(props: { code: string; }) {
     login(props.code)
       .then(res => {
         console.log(res);
-        setAccessToken(res.accessToken)
-        setRefreshToken(res.refreshToken)
-        setExpiresIn(res.expiresIn)
+        dispatch(setAccessToken(res.accessToken))
+        dispatch(setRefreshToken(res.refreshToken))
+        dispatch(setExpiresIn(res.expiresIn))
         sessionStorage.setItem('token', res.accessToken)
         getUser().then(account => {
           dispatch(setUsername(account.id));
@@ -46,15 +54,15 @@ function Dashboard(props: { code: string; }) {
     const interval = setInterval(() => {
       refresh(refreshToken)
         .then(res => {
-          setAccessToken(res.accessToken)
-          setExpiresIn(res.expiresIn)
+          dispatch(setAccessToken(res.accessToken))
+          dispatch(setExpiresIn(res.expiresIn))
           sessionStorage.setItem('token', res.accessToken)
         })
         .catch(() => {browserWindow.location = '/'})
     }, (expiresIn - 60) * 1000)
 
     return () => clearInterval(interval)
-  },[refreshToken, expiresIn, browserWindow])
+  })
 
 
   useEffect(() => {
@@ -66,7 +74,7 @@ function Dashboard(props: { code: string; }) {
       }
       fetchLibrary()
     }
-  },[setArtistList, username, dispatch])
+  },[username, dispatch])
 
   const observer = useRef<IntersectionObserver | null>(null);
   const lastPostRef = useCallback(
@@ -87,12 +95,12 @@ function Dashboard(props: { code: string; }) {
   return (
     <div>
       <NavBar
-        setArtistList={setArtistList}
-        accessToken={accessToken}
+        importArtists={importArtists}
       />
       <div className="dashboard">
         <SideBar />
         <main>
+        { isLoading ? 'isLoading' :  
           <Routes>
             <Route path="/" element={
               <ArtistList ref={lastPostRef} />
@@ -104,6 +112,7 @@ function Dashboard(props: { code: string; }) {
               />}
             />
           </Routes>
+          }
           <Outlet></Outlet>
         </main>
       </div>

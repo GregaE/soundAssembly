@@ -1,31 +1,12 @@
-import { importLibrary } from '../../ApiService';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-import { setTags } from '../../store/tagsSlice';
+import { useAppSelector } from "../../hooks/reduxHooks";
 import logo from '../../assets/logoWhite.png';
-import { Artist } from '../../interfaces/Artist';
-import { Tag } from '../../interfaces/Tag';
 
-export default function NavBar(props: { 
-  accessToken: string;
-  setArtistList: (newList: Artist[]) => void;
-}) {
-  const dispatch = useAppDispatch();
+export default function NavBar(props: {
+  importArtists: () => void,
+}){
   const displayName = useAppSelector((state) => state.user.displayName);
-
-  const importArtists = async () => {
-    console.log('start')
-    await importLibrary(props.accessToken).then(account => {
-      props.setArtistList(account.artists);
-      // Create the tag list and set the status the default inactive status
-      const newTagList = account.tags.map(function(tag: Tag) {
-        return {name:tag.name, status: "inactive"}
-      })
-      dispatch(setTags(newTagList));
-    })
-    console.log('finish')
-  }
 
   function logout () {
     sessionStorage.removeItem('token')
@@ -46,7 +27,7 @@ export default function NavBar(props: {
           <button className="navigate" id="forward-btn" onClick={() => navigate(+1)}><i className="fa fa-arrow-right"/></button>
         </div>
         <div className="right-btn-group">
-          <button onClick={ importArtists }>Update library</button>
+          <button onClick={ props.importArtists }>Update library</button>
           <button id="user">Username: <span>{ displayName }</span>
             <div onClick={logout} className="user-dropdown-content">
               <a href="/login">Logout</a>
