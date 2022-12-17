@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Routes, Route } from "react-router-dom";
 import { Outlet } from 'react-router';
 import SideBar from '../SideBar/SideBar';
@@ -19,6 +19,7 @@ import {
 } from '../../store/userSlice';
 import { fetchArtists, incrementCurrentPage } from '../../store/librarySlice';
 import useImportArtists from '../../hooks/importLibrary';
+import Loader from '../Loader/Loader';
 
 function Dashboard(props: { code: string; }) {
 
@@ -79,7 +80,6 @@ function Dashboard(props: { code: string; }) {
   const observer = useRef<IntersectionObserver | null>(null);
   const lastPostRef = useCallback(
     (node: HTMLDivElement) => {
-      // if (loading) return;
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries, options) => {
         if (entries[0].isIntersecting) {
@@ -100,7 +100,7 @@ function Dashboard(props: { code: string; }) {
       <div className="dashboard">
         <SideBar />
         <main>
-        { isLoading ? 'isLoading' :  
+        { isLoading ? <Loader /> :  
           <Routes>
             <Route path="/" element={
               <ArtistList ref={lastPostRef} />

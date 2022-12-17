@@ -5,9 +5,6 @@ $Poppins: 'Poppins', sans-serif;
 
 // colors
 
-// Purple alts: #601ED7, #3a1282, rgba(96,30,215,0.8),
-// Action green: #1ed760
-
 $dark: #000000;
 $light: #ffffff;
 $bg: #2f2f2f;
@@ -15,6 +12,16 @@ $bg-dark: #000000;
 $bg-opaque: rgba(47,47,47,0.8);
 $action: #2cd8a4;
 $active: #d82c60;
+
+:root {
+  --dark: #000000;
+  --light: #ffffff;
+  --bg: #2f2f2f;
+  --bg-dark: #000000;
+  --bg-opaque: rgba(47,47,47,0.8);
+  --action: #2cd8a4;
+  --active: #d82c60;
+}
 
 // border-radius
 
