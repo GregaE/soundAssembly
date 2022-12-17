@@ -6,7 +6,10 @@ export default function Loader(){
     <div className={styles.container}>
       <span className={styles.record} />
       <p>
-        Fetching followed artists from Spotify...
+        Fetching followed artists from Spotify
+        <span>.</span>
+        <span>.</span>
+        <span>.</span>
       </p>
     </div>
   );

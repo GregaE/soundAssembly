@@ -1,4 +1,4 @@
-@keyframes vinyl-spin {
+@keyframes spin {
   0% {
     transform: rotate(0deg);
   }
@@ -7,41 +7,66 @@
   }
 }
 
+@keyframes blink1 {
+  0% {visibility: visible}
+  60% {visibility: hidden}
+}
+
+@keyframes blink2 {
+  0% {visibility: visible}
+  30% {visibility: hidden}
+}
+
 .container {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2.5rem;
   margin-top: 8%;
   p {
     font-size: 2.2rem;
+    span {
+      animation-duration: 3s;
+      animation-direction: reverse;
+      animation-iteration-count: infinite;
+      visibility: hidden;
+    }
+    :nth-child(1) {
+      visibility: visible;
+    }
+    :nth-child(2) {
+      animation-name: blink1;
+    }
+    :nth-child(3) {
+      animation-name: blink2;
+    }
   }
-}
 
-.record {
-  position: relative;
-  display: inline-block;
-  margin: 19px auto;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  border: 1px solid var(--action);
-  background: 
-    linear-gradient(30deg, transparent 40%, rgba(42, 41, 40, .85) 40%) no-repeat 100% 0,
-    linear-gradient(60deg, rgba(42, 41, 40, .85) 60%, transparent 60%) no-repeat 0 100%,
-    repeating-radial-gradient(#2a2928, #2a2928 4px, #ada9a0 5px, #2a2928 6px);
-  background-size: 50% 100%, 100% 50%, 100% 100%;
-  animation: vinyl-spin 1.2s linear infinite;
-
-  &:before {
-    content: '';
+  .record {
     position: relative;
     display: inline-block;
-    background-color: #ffffff;
-    border-radius: 100%;
-    border: 45px solid var(--action);
-    width: 10px;
-    height: 10px;
-    z-index: 1;
-    transform: translateY(100px)
+    margin: 0 auto;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 1px solid var(--action);
+    background: 
+      linear-gradient(30deg, transparent 40%, rgba(42, 41, 40, .85) 40%) no-repeat 100% 0,
+      linear-gradient(60deg, rgba(42, 41, 40, .85) 60%, transparent 60%) no-repeat 0 100%,
+      repeating-radial-gradient(#2a2928, #2a2928 4px, #ada9a0 5px, #2a2928 6px);
+    background-size: 50% 100%, 100% 50%, 100% 100%;
+    animation: spin 1.2s linear infinite;
+  
+    &:before {
+      content: '';
+      position: relative;
+      display: inline-block;
+      background-color: #ffffff;
+      border-radius: 100%;
+      border: 45px solid var(--action);
+      width: 10px;
+      height: 10px;
+      z-index: 1;
+      transform: translateY(100px)
+    }
   }
 }
