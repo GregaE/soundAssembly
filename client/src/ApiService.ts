@@ -3,6 +3,7 @@ import { Tag } from "./interfaces/Tag";
 import { Artist } from "./interfaces/Artist";
 import { RootState } from "./store/storeConfig";
 import { EnhancedStore } from "@reduxjs/toolkit";
+import { Account } from "./interfaces/Account";
 
 let store: EnhancedStore<RootState>
 export const injectStore = (_store: EnhancedStore<RootState>) => {
@@ -42,7 +43,7 @@ async function refresh(refreshToken: string) {
 
 // Import/refresh library via Spotify
 
-const importLibrary = (accessToken: string) => {
+const importLibrary = (accessToken: string): Promise<Account> => {
   return fetchRequest(`/importLibrary/${store.getState().user.username}`, {
     method: 'POST',
     headers: {

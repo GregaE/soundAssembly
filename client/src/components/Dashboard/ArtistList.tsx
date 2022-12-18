@@ -25,7 +25,7 @@ const ArtistList = React.forwardRef<HTMLDivElement>((props, ref) => {
       <div className="artist-list">
         {renderArtists(artists)}
       </div>
-      { status === 'loading' ? 'Fetching followed artists...' : ''}
+      { status === 'loading' ? 'Fetching artists...' : ''}
     </div>
   );
 });

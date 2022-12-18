@@ -60,7 +60,6 @@ export const librarySlice = createSlice({
         if (action.payload && action.payload.length) {
           state.artists.push(...action.payload);
         }
-        console.log('hey')
       })
       .addCase(fetchArtists.rejected, (state, action) => {
         state.status = 'failed'

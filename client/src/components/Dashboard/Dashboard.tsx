@@ -18,7 +18,7 @@ import {
   setExpiresIn,
 } from '../../store/userSlice';
 import { fetchArtists, incrementCurrentPage } from '../../store/librarySlice';
-import useImportArtists from '../../hooks/importLibrary';
+import useImportArtists from '../../hooks/useImportArtists';
 import Loader from '../Loader/Loader';
 
 function Dashboard(props: { code: string; }) {
@@ -29,7 +29,7 @@ function Dashboard(props: { code: string; }) {
   const refreshToken = useAppSelector((state) => state.user.refreshToken);
   const expiresIn = useAppSelector((state) => state.user.expiresIn);
 
-  const { importArtists, isLoading, error } = useImportArtists();
+  const { importArtists, isLoadingImport, error } = useImportArtists();
 
   const browserWindow: Window = window;
 
@@ -100,7 +100,7 @@ function Dashboard(props: { code: string; }) {
       <div className="dashboard">
         <SideBar />
         <main>
-        { isLoading ? <Loader /> :  
+        { isLoadingImport ? <Loader /> :  
           <Routes>
             <Route path="/" element={
               <ArtistList ref={lastPostRef} />
