@@ -14,7 +14,7 @@ function UseAuth(code: string) {
         setAccessToken(res.accessToken)
         setRefreshToken(res.refreshToken)
         setExpiresIn(res.expiresIn)
-        sessionStorage.setItem('token', res.accessToken)
+        localStorage.setItem('token', res.accessToken)
         browserWindow.history.pushState({}, "/")
       })
       .catch(() => {browserWindow.location = '/'})
@@ -27,7 +27,7 @@ function UseAuth(code: string) {
         .then(res => {
           setAccessToken(res.accessToken)
           setExpiresIn(res.expiresIn)
-          sessionStorage.setItem('token', res.accessToken)
+          localStorage.setItem('token', res.accessToken)
         })
         .catch(() => {browserWindow.location = '/'})
     }, (expiresIn - 60) * 1000)

@@ -40,7 +40,7 @@ function Dashboard(props: { code: string; }) {
         dispatch(setAccessToken(res.accessToken))
         dispatch(setRefreshToken(res.refreshToken))
         dispatch(setExpiresIn(res.expiresIn))
-        sessionStorage.setItem('token', res.accessToken)
+        localStorage.setItem('token', res.accessToken)
         getUser().then(account => {
           dispatch(setUsername(account.id));
           dispatch(setDisplayName(account.display_name));
@@ -57,7 +57,7 @@ function Dashboard(props: { code: string; }) {
         .then(res => {
           dispatch(setAccessToken(res.accessToken))
           dispatch(setExpiresIn(res.expiresIn))
-          sessionStorage.setItem('token', res.accessToken)
+          localStorage.setItem('token', res.accessToken)
         })
         .catch(() => {browserWindow.location = '/'})
     }, (expiresIn - 60) * 1000)

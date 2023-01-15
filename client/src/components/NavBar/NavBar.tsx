@@ -9,7 +9,7 @@ export default function NavBar(props: {
   const displayName = useAppSelector((state) => state.user.displayName);
 
   function logout () {
-    sessionStorage.removeItem('token')
+    localStorage.removeItem('token')
   }
 
   const navigate = useNavigate();

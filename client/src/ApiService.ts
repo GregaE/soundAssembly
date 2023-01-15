@@ -113,7 +113,7 @@ async function getAlbums(artistId: string, req?: Request, res?: Response) {
   const response = await fetch(`https://api.spotify.com/v1/artists/${artistId}/albums`, {
       method: 'get',
       headers: {
-        'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
       }
   });
   const albums = await response.json();
@@ -124,7 +124,7 @@ async function getUser(req?: Request, res?: Response) {
   const response = await fetch(`https://api.spotify.com/v1/me`, {
       method: 'get',
       headers: {
-        'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
       }
   });
   const albums = await response.json();
