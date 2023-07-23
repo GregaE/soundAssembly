@@ -9,7 +9,7 @@ const ArtistList = React.forwardRef<HTMLDivElement>((props, ref) => {
   const tags = useAppSelector((state) => state.tags.tags);
 
   function renderArtists(list: ArtistInterface[]) {
-    if (status === 'succeeded' && !list.length) {
+    if (!list.length) {
       if (tags.some(tag => tag.active)) {
         return <p>No artists match the selected criteria.</p>
       }

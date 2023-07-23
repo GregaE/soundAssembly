@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { importLibrary } from "../ApiService";
+import { importLibrary, getTags } from "../ApiService";
 import { useAppDispatch, useAppSelector } from "./reduxHooks";
-import { fetchArtists } from "../store/librarySlice";
+import { fetchArtists, resetArtists } from "../store/librarySlice";
+import { setTags } from '../store/tagsSlice';
 
 function useImportArtists() {
   const [isLoadingImport, setIsLoadingImport] = useState(false);
@@ -13,10 +14,11 @@ function useImportArtists() {
     setError(false);
     setIsLoadingImport(true);
     try {
-      const account = await importLibrary(accessToken);
-      // make sure the artists are refreshed, but don't push new artists
-      // dispatch(fetchArtists())
-      console.log(account)
+      await importLibrary(accessToken);
+      dispatch(resetArtists());
+      dispatch(fetchArtists());
+      const tags = await getTags();
+      if (tags && tags.length) dispatch(setTags(tags));
     } catch (error) {
       setError(true);
     }

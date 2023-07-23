@@ -29,14 +29,13 @@ function Dashboard(props: { code: string; }) {
   const refreshToken = useAppSelector((state) => state.user.refreshToken);
   const expiresIn = useAppSelector((state) => state.user.expiresIn);
 
-  const { importArtists, isLoadingImport, error } = useImportArtists();
+  const { importArtists, isLoadingImport } = useImportArtists();
 
   const browserWindow: Window = window;
 
   useEffect(()=> {
     login(props.code)
       .then(res => {
-        console.log(res);
         dispatch(setAccessToken(res.accessToken))
         dispatch(setRefreshToken(res.refreshToken))
         dispatch(setExpiresIn(res.expiresIn))
