@@ -28,7 +28,7 @@ export default function NavBar(props: {
         </div>
         <div className="right-btn-group">
           <button onClick={ props.importArtists }>Update library</button>
-          <button id="user">Username: <span>{ displayName }</span>
+          <button id="user">Name: <span>{ displayName }</span>
             <div onClick={logout} className="user-dropdown-content">
               <a href="/login">Logout</a>
             </div>

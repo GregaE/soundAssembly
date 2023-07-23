@@ -6,7 +6,6 @@ const Library = require('../model/librarySchema.js');
 exports.getLibrary = async (req, res) => {
   try {
     const library = await Library.find({username: req.params.username});
-    console.log(library);
     res.send(library);
   } catch (error) {
     console.error(error);
@@ -19,29 +18,29 @@ exports.getLibrary = async (req, res) => {
 exports.importLibrary = async (req, res) => {
   try {
     const {accessToken} = req.body;
-    // fetch followed artists for the specific account
     const library = await fetchFollowedArtists(accessToken, 'https://api.spotify.com/v1/me/following?type=artist');
     const total = library.data.artists.total;
     let start = library.data.artists.next
     let loadedArtists = library.data.artists.items;
-    // if the number of followed artists exceeds 50 continuously call the api to take into account pagination
     while (loadedArtists.length < total) {
       const artists = await fetchFollowedArtists(accessToken, start);
       start = artists.data.artists.next;
       loadedArtists.push(...artists.data.artists.items)
     }
     const account = await Library.find({username: req.params.username});
-    // for existing accounts just add artists that were followed on Spotify since last load
-    if (account.length > 0) {
+    if (account.length) {
       const newArtists = loadedArtists
         .filter(artist => !account[0].artists
           .some(existingArtist => existingArtist.id === artist.id));
-      // add tags array to each artist pre-populating specific tags based on the genre
-      const taggedNewArtists = populateTags(newArtists);
-      // update account with new followed artists in the DB
+      const { artistList, tags} = populateTags(newArtists);
+      const existingTags = account[0].tags.map((tag) => tag.name);
+      const newTags = tags.filter(tag => !existingTags.includes(tag.name));
       const event = await Library.findOneAndUpdate({username: req.params.username}, {
           $push: {
-            "artists": {$each: [...taggedNewArtists.artistList]}
+            "artists": {$each: artistList}
+          },
+          $addToSet: {
+            "tags": {$each: newTags}
           },
         },
         {
@@ -49,11 +48,8 @@ exports.importLibrary = async (req, res) => {
         }
       )
       res.send(event);
-    }
-    else {
-      // add tags array to each artist pre-populating specific tags based on the genre
+    } else {
       const taggedArtists = await populateTags(loadedArtists);
-      // create account with followed artists in the DB
       const event = await Library.create({username: req.params.username, tags: taggedArtists.tags, artists: taggedArtists.artistList})
       res.send(event);
     }
@@ -88,14 +84,10 @@ function fetchProfile (req, res) {
 // Helper functions
 
 function populateTags(artistList) {
-  // All existing tags on account
   const tags = [];
-
   for (const artist in artistList) {
-    // All tags on the specific artist
     const artistTags = [];
 
-    // List of genres for filtering
     const genreList = ["rock","metal","punk","jazz","ska","reggae","hip hop","EDM","indie", "country"]
 
     genreList.forEach(item => {
