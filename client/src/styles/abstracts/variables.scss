@@ -70,8 +70,7 @@ $border-radius: 500px;
 
 @mixin itemGrid($bg: $action, $color: $light) {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  justify-content: space-around;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 2rem;
   line-height: 2.2rem;
   padding: 10px 25px;
