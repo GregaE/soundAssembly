@@ -70,7 +70,7 @@ $border-radius: 500px;
 
 @mixin itemGrid($bg: $action, $color: $light) {
   display: grid;
-  grid-template-columns: repeat(auto-fit, max(220px));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   justify-content: space-around;
   gap: 2rem;
   line-height: 2.2rem;
@@ -86,13 +86,13 @@ $border-radius: 500px;
     padding: 10px 10px;
     border-radius: 5px;
     transition: 0.2s;
+    max-width: 200px;
 
     &:hover {
       box-shadow: 0 0 20px $action;
     }
 
     .item-image {
-      width: 200px;
       height: 200px;
       display: flex;
       align-items: center;
